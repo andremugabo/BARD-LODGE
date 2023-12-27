@@ -1,0 +1,73 @@
+-- Room_Type Table
+CREATE TABLE ROOM_TYPE (
+    ROOMTYPEID INT PRIMARY KEY,
+    TYPENAME VARCHAR(50) UNIQUE NOT NULL
+ -- Add other relevant columns
+);
+
+-- Room Table
+CREATE TABLE ROOM (
+    ROOMID INT PRIMARY KEY,
+    ROOMNUMBER INT UNIQUE NOT NULL,
+    ROOMTYPEID INT,
+    FOREIGN KEY (ROOMTYPEID) REFERENCES ROOM_TYPE(ROOMTYPEID)
+ -- Add other relevant columns
+);
+
+-- Customer Table
+CREATE TABLE CUSTOMER (
+    CUSTOMERID INT PRIMARY KEY,
+    FIRSTNAME VARCHAR(50),
+    LASTNAME VARCHAR(50),
+    ISCOUPLE BOOLEAN,
+ -- Add other relevant columns
+);
+
+-- Reservation Table
+CREATE TABLE RESERVATION (
+    RESERVATIONID INT PRIMARY KEY,
+    CUSTOMERID INT,
+    ROOMID INT,
+    CHECKINDATE DATE,
+    CHECKOUTDATE DATE,
+ -- Add other relevant columns
+    FOREIGN KEY (CUSTOMERID) REFERENCES CUSTOMER(CUSTOMERID),
+    FOREIGN KEY (ROOMID) REFERENCES ROOM(ROOMID)
+);
+
+-- Employee Table
+CREATE TABLE EMPLOYEE (
+    EMPLOYEEID INT PRIMARY KEY,
+    FIRSTNAME VARCHAR(50),
+    LASTNAME VARCHAR(50),
+    POSITION VARCHAR(50),
+ -- Add other relevant columns
+);
+
+-- CheckIn Table
+CREATE TABLE CHECKIN (
+    CHECKINID INT PRIMARY KEY,
+    RESERVATIONID INT,
+    CHECKINDATE DATETIME,
+    EMPLOYEEID INT,
+ -- Add other relevant columns
+    FOREIGN KEY (RESERVATIONID) REFERENCES RESERVATION(RESERVATIONID),
+    FOREIGN KEY (EMPLOYEEID) REFERENCES EMPLOYEE(EMPLOYEEID)
+);
+
+-- CheckOut Table
+CREATE TABLE CHECKOUT (
+    CHECKOUTID INT PRIMARY KEY,
+    RESERVATIONID INT,
+    CHECKOUTDATE DATETIME,
+    EMPLOYEEID INT,
+ -- Add other relevant columns
+    FOREIGN KEY (RESERVATIONID) REFERENCES RESERVATION(RESERVATIONID),
+    FOREIGN KEY (EMPLOYEEID) REFERENCES EMPLOYEE(EMPLOYEEID)
+);
+
+/*This schema includes tables for room types, 
+rooms, customers, reservations, employees, check-ins, 
+and check-outs. Adjustments can be made based on additional 
+requirements and specific constraints for your
+ lodge management system.*/
