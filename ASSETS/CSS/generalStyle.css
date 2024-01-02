@@ -1,0 +1,16 @@
+.error-msg h5{
+    color: red;
+    font-size: 20px;
+    padding: 4px;
+    background: #ff330069;
+    text-align: center;
+  }
+  .success-msg h5{
+    color: #fdfdfd;
+    font-size: 20px;
+    font-weight: bold;
+    padding: 4px;
+    background: #0080007d;
+    text-align: center;
+  }
+  

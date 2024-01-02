@@ -6,14 +6,18 @@ class Users {
     private $u_name;
     private $u_password;
     private $u_status;
+    
+   public  function  __construct(){}
+    
 
     // Constructor
-    public function __construct($e_id, $u_name, $u_password, $u_status) {
-        $this->e_id = $e_id;
-        $this->u_name = $u_name;
-        $this->u_password = $u_password;
-        $this->u_status = $u_status;
-    }
+    // public function __construct($e_id, $u_name, $u_password, $u_status) {
+    //     $this->e_id = $e_id;
+    //     $this->u_name = $u_name;
+    //     $this->u_password = $u_password;
+    //     $this->u_status = $u_status;
+    // }
+
 
     // Getter methods
     public function getUId() {

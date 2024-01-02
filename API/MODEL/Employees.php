@@ -11,16 +11,16 @@ class Employees {
     private $e_status;
 
     // Constructor
-    public function __construct($e_id, $e_regNumber, $firstname, $lastname, $e_role, $e_phone, $e_idNumber, $e_status) {
-        $this->e_id = $e_id;
-        $this->e_regNumber = $e_regNumber;
-        $this->firstname = $firstname;
-        $this->lastname = $lastname;
-        $this->e_role = $e_role;
-        $this->e_phone = $e_phone;
-        $this->e_idNumber = $e_idNumber;
-        $this->e_status = $e_status;
-    }
+    // public function __construct($e_id, $e_regNumber, $firstname, $lastname, $e_role, $e_phone, $e_idNumber, $e_status) {
+    //     $this->e_id = $e_id;
+    //     $this->e_regNumber = $e_regNumber;
+    //     $this->firstname = $firstname;
+    //     $this->lastname = $lastname;
+    //     $this->e_role = $e_role;
+    //     $this->e_phone = $e_phone;
+    //     $this->e_idNumber = $e_idNumber;
+    //     $this->e_status = $e_status;
+    // }
 
     // Getter methods
     public function getEId() {

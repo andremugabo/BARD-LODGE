@@ -1,0 +1,93 @@
+@import url('https://fonts.googleapis.com/css?family=Numans');
+@import "bootstrap.css";
+*{
+    padding: 0;
+    margin: 0;
+    /* font-family: sans-serif; */
+    font-family: Poppins-Bold sans-serif;
+    box-sizing: border-box;
+}
+a,h1,h2,h3,h4,h5,h6{
+    color: black;
+}
+	/* LOGIN CSS START  */
+
+    html,body{
+    background-image: url('../SIMAGES/indexbg.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 100%;
+    font-family: 'Numans', sans-serif;
+    }
+    
+    .fluid-container{
+    height: 100%;
+    align-content: center;
+    }
+    
+    .card{
+    height: 370px;
+    margin-top: auto;
+    margin-bottom: auto;
+    width: 400px;
+    /* background-color: rgba(0,0,0,0.5) !important; */
+    background-color: #094b0380 !important;
+
+    }
+    
+    .social_icon span{
+    font-size: 60px;
+    margin-left: 10px;
+    color: #FFC312;
+    }
+    
+    .social_icon span:hover{
+    color: white;
+    cursor: pointer;
+    }
+    
+    .card-header h3{
+    color: white;
+    }
+    
+    .social_icon{
+    position: absolute;
+    right: 20px;
+    top: -45px;
+    }
+
+ 
+/*==============================
+		RESPONSIVE START
+================================*/
+@media (min-width: 992px) and (max-width: 1200px) { 
+
+    
+
+}
+
+@media (min-width: 768px ) and (max-width: 991px){
+
+    
+
+}
+
+
+@media (min-width: 576px) and (max-width: 767px){
+
+
+    
+
+}
+
+@media (max-width: 575px){
+
+
+    
+
+}	
+
+
+/*==============================
+		RESPONSIVE END
+================================*/

@@ -26,7 +26,19 @@ class EmployeesDao extends db
         return $result;
     }
 
+    public function getEmployeeById(Employees $employee) {
+        $e_id = $employee->getEId();
+       
+        
 
+        $query = "SELECT * FROM employees WHERE employees.e_id = ?";
+        $statement = $this->connect()->prepare($query);
+        $statement->execute(array(
+            $e_id            
+        ));
+        $result =  $statement->fetch();
+        return $result;
+    }
 
 
 
