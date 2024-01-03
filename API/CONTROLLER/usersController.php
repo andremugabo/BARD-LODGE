@@ -1,17 +1,9 @@
 <?php
-// function base(){
-//     echo str_replace("index.php","",$_SERVER['PHP_SELF']);
-// }
 
-if (session_status() == PHP_SESSION_NONE) {
-    session_start();
-}
-define('BASE_PATH', __DIR__);
-require_once BASE_PATH . '/UsersDao.php';
-
-// require_once 'localhost/RBARD&RODGE/API/DAO/UsersDao.php';
+require_once '../DAO/UsersDao.php';
 require_once '../DAO/MetricDao.php';
 require_once '../DAO/EmployeesDao.php';
+
 $action = $_GET['action'];
 $userDaoObj = new UsersDao();
 $userObj = new Users();
@@ -50,7 +42,7 @@ switch($action){
 
                 print_r($_SESSION['logged']);
                 $_SESSION['success_msg'] = $_SESSION['logged']['FIRSTNAME']." LOGIN SUCCESSFULLY !! ";
-                header("location:../../".base()."home");
+                // header('location:../../PAGES/DASHBOARD/dashboard.php');
             }
             else
             {

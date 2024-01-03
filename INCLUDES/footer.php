@@ -23,10 +23,10 @@
 
 
 
-<script type="text/javascript" src="ASSETS/JS/bootstrap.js"></script>
-<script type="text/javascript" src="ASSETS/JS/app.js"></script>
-<script type="text/javascript" src="ASSETS/JS/products.js"></script>
-<script type="text/javascript" src="ASSETS/JS/price.js"></script>
+<script type="text/javascript" src="../ASSETS/JS/bootstrap.js"></script>
+<script type="text/javascript" src="../ASSETS/JS/app.js"></script>
+<script type="text/javascript" src="../ASSETS/JS/products.js"></script>
+<script type="text/javascript" src="../ASSETS/JS/price.js"></script>
 
 </body>
 

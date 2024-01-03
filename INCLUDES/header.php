@@ -1,35 +1,18 @@
 <?php
 session_start();
-
-
-
-
 $employee_fnames = $_SESSION['logged']['FIRSTNAME'];
 $employee_lnames = $_SESSION['logged']['LASTNAME'];
 $employee_names = $employee_fnames." ".$employee_lnames;
 $employee_role = $_SESSION['logged']['E_ROLE'];
 $employee_phone = $_SESSION['logged']['E_PHONE'];
-// // echo $employee_role;
+echo $employee_role;
 
 if ($employee_fnames == null || $employee_role == null) {
     header("location:./");
     session_destroy();
 }
 
-// Get the full URL
-$currentUrl = "https://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
-
-// Parse the URL to get the query string
-$urlParts = parse_url($currentUrl);
-$queryString = isset($urlParts['query']) ? $urlParts['query'] : '';
-
-// Parse the query string into an associative array
-parse_str($queryString, $queryParams);
-
-// Access specific query parameters
-$logoutValue = isset($queryParams['logout']) ? $queryParams['logout'] : '';
-
-if ($logoutValue) {
+if (isset($_GET['logout'])) {
     header("location:./");
     session_destroy();
 }
@@ -43,8 +26,8 @@ if ($logoutValue) {
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="icon" type="image/png" href="ASSETS/SIMAGES/greenog.png">
-    <link href="ASSETS/CSS/general.css" rel="stylesheet">
+    <link rel="icon" type="image/png" href="../ASSETS/SIMAGES/greenog.png">
+    <link href="../ASSETS/CSS/general.css" rel="stylesheet">
 
     <title>GREEN STONE LTD</title>
 
