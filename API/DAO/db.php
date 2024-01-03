@@ -1,11 +1,14 @@
 <?php 
+// function base(){
+//     echo str_replace("index.php","",$_SERVER['PHP_SELF']);
+// }
 
 class db{
 	
 	private $host = "localhost";
 	private $user = "root";
 	private $pswd = "";
-	private $dbName = "fxlounge";
+	private $dbName = "bardrodge";
 
 	public function connect()
 	{
