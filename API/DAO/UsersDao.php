@@ -24,7 +24,7 @@ class UsersDao extends db{
     {
         $username = $users->getUName();
         $password = $users->getUPassword();
-        $query = "SELECT  *  FROM users WHERE users.u_name = ? and users.u_password = ? and users.u_status = 1";
+        $query = "SELECT  *  FROM users WHERE users.u_name = ? and users.u_password = ?";
         $statement = $this->connect()->prepare($query);
         $statement->execute(array(
             $username,

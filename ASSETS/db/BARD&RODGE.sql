@@ -56,7 +56,7 @@ CREATE TABLE METRIC (
 -- Product_Type Table
 CREATE TABLE PRODUCT_TYPE (
     PT_ID INT PRIMARY KEY AUTO_INCREMENT,
-    PT_NAME VARCHAR(50)
+    PT_NAME VARCHAR(50) UNIQUE
  -- Add other relevant columns
 );
 
@@ -64,7 +64,7 @@ CREATE TABLE PRODUCT_TYPE (
 CREATE TABLE PRODUCT_CATEGORY (
     PC_ID INT PRIMARY KEY AUTO_INCREMENT,
     PT_ID INT,
-    PC_NAME VARCHAR(50),
+    PC_NAME VARCHAR(50) UNIQUE,
     FOREIGN KEY (PT_ID) REFERENCES PRODUCT_TYPE(PT_ID)
  -- Add other relevant columns
 );
@@ -96,4 +96,104 @@ CREATE TABLE PRICES (
     PRICE_STATUS ENUM('1', '0') DEFAULT '1',
  -- Add other relevant columns
     FOREIGN KEY (P_ID) REFERENCES PRODUCTS(P_ID)
+);
+
+# -----------------------------------------------------------------------------
+
+INSERT INTO `PRODUCT_CATEGORY`(
+    `PT_ID`,
+    `PC_NAME`
+) VALUES (
+    1,
+    'SOFT & ENERGY DRINKS'
+);
+
+INSERT INTO `PRODUCT_CATEGORY`(
+    `PT_ID`,
+    `PC_NAME`
+) VALUES (
+    1,
+    'HOT DRINKS'
+);
+
+INSERT INTO `PRODUCT_CATEGORY`(
+    `PT_ID`,
+    `PC_NAME`
+) VALUES (
+    1,
+    'WINES & MIXED DRINKS'
+);
+
+INSERT INTO `PRODUCT_CATEGORY`(
+    `PT_ID`,
+    `PC_NAME`
+) VALUES (
+    1,
+    'LIQUORS'
+);
+
+INSERT INTO `PRODUCT_CATEGORY`(
+    `PT_ID`,
+    `PC_NAME`
+) VALUES (
+    1,
+    'BEERS'
+);
+
+#--------------------------------------------------
+
+INSERT INTO `PRODUCT_CATEGORY`(
+    `PT_ID`,
+    `PC_NAME`
+) VALUES (
+    2,
+    'SOUPS - POTAGES'
+);
+
+INSERT INTO `PRODUCT_CATEGORY`(
+    `PT_ID`,
+    `PC_NAME`
+) VALUES (
+    2,
+    'OMOLETTES'
+);
+
+INSERT INTO `PRODUCT_CATEGORY`(
+    `PT_ID`,
+    `PC_NAME`
+) VALUES (
+    2,
+    'SALADS - SALADES'
+);
+
+INSERT INTO `PRODUCT_CATEGORY`(
+    `PT_ID`,
+    `PC_NAME`
+) VALUES (
+    2,
+    'SIDE DISHES - ACCOMPAGNEMENTS'
+);
+
+INSERT INTO `PRODUCT_CATEGORY`(
+    `PT_ID`,
+    `PC_NAME`
+) VALUES (
+    2,
+    'SNACKS – AMUSE-BOUCHE'
+);
+
+INSERT INTO `PRODUCT_CATEGORY`(
+    `PT_ID`,
+    `PC_NAME`
+) VALUES (
+    2,
+    'HOT DISHES'
+);
+
+INSERT INTO `PRODUCT_CATEGORY`(
+    `PT_ID`,
+    `PC_NAME`
+) VALUES (
+    2,
+    'FRESH FROM THE GRILL - GRILLADES'
 );

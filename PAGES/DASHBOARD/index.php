@@ -37,7 +37,7 @@
 
 
 
-    <?php //if($employee_role =="ADMIN" || $employee_role == "MANAGER"){ ?>
+    <?php if($employee_role =="MD" || $employee_role == "MANAGER" || $employee_role == "IT"): ?>
 
     <div class="card-principal card bg-success m-2">
         <a href="../EMPLOYEES/employees.php" style="text-decoration:none;">
@@ -54,13 +54,13 @@
                     </div>
                 </div>
                 <?php 
-								//$users = new usersModel();
-								//$count = $users->countUsers();
+								$employees = new EmployeesDao();
+								$count = $employees->countEmployee();
 
 
 								 ?>
-                <h3 class="mt-1 mb-3 text-black">
-                    <?//=$count?>&nbsp;Employees
+                <h3 class="mt-1 mb-3 text-black" style="font-size: 18px;">
+                    <?=$count?>&nbsp;Employees
                 </h3>
                 <div class="mb-0">
                     <span class="text-white"> <i class="mdi mdi-arrow-bottom-right"></i> PUB-SM
@@ -71,7 +71,7 @@
         </a>
     </div>
 
-    <?php //} ?>
+    <?php endif ?>
 
 
 
