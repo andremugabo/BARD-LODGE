@@ -1,27 +1,21 @@
-<?php  // Get the full URL
-$currentUrl = "https://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+<?php  require_once '../../INCLUDES/header.php' ?>
+<?php
+$employeesDao = new EmployeesDao();
+require_once '../../API/MODEL/Employees.php';
+$employees = new Employees();
+$e_id = $_GET['edit'];
+$employees->setEId($e_id);
+// echo $e_id;
+$selectById = $employeesDao->getEmployeeById($employees);
+// print_r($selectById['E_ID']);
 
-// Parse the URL to get the query string
-$urlParts = parse_url($currentUrl);
-$queryString = isset($urlParts['query']) ? $urlParts['query'] : '';
-
-// Parse the query string into an associative array
-parse_str($queryString, $queryParams);
-
-// Access specific query parameters
-$logoutValue = isset($queryParams['edit']) ? $queryParams['edit'] : '';
-// echo $logoutValue;
-// echo "Query String: $queryString<br>";
-// echo "Logout Value: $logoutValue";
 ?>
-
 <div class="container-fluid section-title d-flex mb-2">
     <div class="s-title text-start col-5">
         <h2>Edit Employee</h2>
     </div>
     <div class="s-btn text-end col-7">
-        <button type="button" class="btn btn-success w-50"
-            onclick="window.location.href='<?=base()?>home'">Back</button>
+        <button type="button" class="btn btn-danger w-50" onclick="window.location.href='employees.php'">Back</button>
     </div>
 </div>
 <div class="b-example-divider"></div>
@@ -35,21 +29,26 @@ $logoutValue = isset($queryParams['edit']) ? $queryParams['edit'] : '';
             </div>
 
             <div class="modal-body p-5 pt-0">
-                <form class="" action="<?=base();?>usersController?action=edit" method="post">
+                <form class="" action="../../API/CONTROLLER/EmployeesController.php?action=edit" method="post">
                     <div class="form-floating mb-3" style="display:none;">
-                        <input type="text" class="form-control rounded-4" value="<?=$e_id?>" name="e_id"
+                        <input type="text" class="form-control rounded-4" value="<?=$selectById['E_ID']?>" name="e_id"
                             placeholder="e_id">
                         <label for="floatingInput">e_id</label>
                     </div>
                     <div class="form-floating mb-3">
-                        <input type="text" class="form-control rounded-4" name="e_names"
-                            value="<?=$editEmployee['e_names']?>" placeholder="Enter Names" required>
-                        <label for="floatingInput">Enter Employee Names</label>
+                        <input type="text" class="form-control rounded-4" name="Lastname"
+                            value="<?=$selectById['LASTNAME']?>" placeholder="Enter Lastname" required>
+                        <label for="floatingInput">Lastname</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control rounded-4" name="Firstname"
+                            value="<?=$selectById['FIRSTNAME']?>" placeholder="Enter Firstname" required>
+                        <label for="floatingInput">Firstname</label>
                     </div>
                     <div class="form-floating mb-3">
                         <select class="form-select form-select mb-3" name="e_role" aria-label=".form-select-lg"
                             required>
-                            <option selected disabled value=""><?=$editEmployee['e_role']?></option>
+                            <option selected disabled value=""><?=$selectById['E_ROLE']?></option>
                             <option value="MANAGER">MANAGER</option>
                             <option value="CASHIER">CASHIER</option>
                             <option value="CHEF">CHEF</option>
@@ -57,15 +56,16 @@ $logoutValue = isset($queryParams['edit']) ? $queryParams['edit'] : '';
                         </select>
                         <label for="floatingInput">Employee Role</label>
                     </div>
-                    <div class="form-floating mb-3">
-                        <input type="email" class="form-control rounded-4" name="e_email"
-                            value="<?=$editEmployee['e_email']?>" placeholder="Enter a Valid Email" required>
-                        <label for="floatingInput">Employee Email address</label>
-                    </div>
+
                     <div class="form-floating mb-3">
                         <input type="text" class="form-control rounded-4" name="e_phone"
-                            value="<?=$editEmployee['e_phone']?>" placeholder="Enter Employee Phone" required>
+                            value="<?=$selectById['E_PHONE']?>" placeholder="Enter Employee Phone" required>
                         <label for="floatingPassword">Employee Phone</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control rounded-4" name="e_idnumber"
+                            value="<?=$selectById['E_IDNUMBER']?>" placeholder="Enter Employee Phone" required>
+                        <label for="floatingPassword">Employee ID Number</label>
                     </div>
                     <button class="w-100 mb-2 btn btn-lg rounded-4 btn-primary" type="submit"
                         name="editEmployee">Edit&nbsp;Employee</button>
@@ -74,3 +74,4 @@ $logoutValue = isset($queryParams['edit']) ? $queryParams['edit'] : '';
         </div>
     </div>
 </div>
+<?php require_once '../../INCLUDES/footer.php' ?>

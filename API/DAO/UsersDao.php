@@ -1,17 +1,19 @@
 <?php
-require_once"db.php";
-require_once"../MODEL/Users.php";
+require_once 'db.php';
+require_once(__DIR__ . '/../MODEL/Users.php');
 
 
 class UsersDao extends db{
 
     public function createUser(Users $users) {
+        $e_id = $users->getEId();
         $u_name = $users->getUName();
         $u_password = $users->getUPassword();
 
-        $query = "INSERT INTO users (u_name,u_password) VALUES (?,?)";
+        $query = "INSERT INTO users (e_id,u_name,u_password) VALUES (?,?,?)";
         $statement = $this->connect()->prepare($query);
         $result  = $statement->execute(array(
+            $e_id,
             $u_name,
             $u_password            
         ));
@@ -44,6 +46,44 @@ class UsersDao extends db{
             $password
         ));
         $result = $statement->fetch();
+        return $result;
+    }
+
+
+    public function checkIfUserExistById(Users $users)
+    {
+        $e_id = $users->getEId();
+        $query = "SELECT  *  FROM users WHERE users.e_id = ?";
+        $statement = $this->connect()->prepare($query);
+        $statement->execute(array(
+            $e_id,
+        ));
+        $result = $statement->rowCount();
+        return $result;
+    }
+
+
+    public function selectUsers() {
+        $query = "SELECT employees.*,users.* FROM users JOIN employees ON users.e_id = employees.e_id   WHERE users.u_status = 1";
+        $statement = $this->connect()->prepare($query);
+        $statement->execute();
+        while($result = $statement->fetchAll(PDO::FETCH_ASSOC))
+        {
+            return $result;
+        }
+        
+        
+    }
+
+    public function disableUser(Users $users)
+    {
+        $e_id = $users->getEId();
+        $query = "UPDATE users SET users.u_status = '0' WHERE users.e_id = ?";
+        $statement = $this->connect()->prepare($query);
+        $statement->execute(array(
+            $e_id,
+        ));
+        $result = $statement->rowCount();
         return $result;
     }
 

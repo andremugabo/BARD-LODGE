@@ -1,6 +1,8 @@
 <?php
 require_once 'db.php';
-require_once '../MODEL/Metric.php';
+require_once(__DIR__ . '/../MODEL/Metric.php');
+
+
 
 class MetricDao extends db{
     

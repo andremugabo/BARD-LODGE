@@ -1,7 +1,5 @@
 <?php 
-// function base(){
-//     echo str_replace("index.php","",$_SERVER['PHP_SELF']);
-// }
+
 
 class db{
 	

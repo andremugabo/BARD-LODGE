@@ -1,3 +1,19 @@
+<?php 
+spl_autoload_register("autoload");
+
+function autoload($className){
+    $path = '../../API/DAO/';
+    $ext = '.php';
+    $fileName =$path . $className .$ext;
+
+    if(!file_exists($fileName)){
+        return false;
+    }
+    include_once $fileName;
+}
+
+
+?>
 <?php
 session_start();
 $employee_fnames = $_SESSION['logged']['FIRSTNAME'];
@@ -5,15 +21,15 @@ $employee_lnames = $_SESSION['logged']['LASTNAME'];
 $employee_names = $employee_fnames." ".$employee_lnames;
 $employee_role = $_SESSION['logged']['E_ROLE'];
 $employee_phone = $_SESSION['logged']['E_PHONE'];
-echo $employee_role;
+// echo $employee_names;
 
 if ($employee_fnames == null || $employee_role == null) {
-    header("location:./");
+    header("location:../../");
     session_destroy();
 }
 
 if (isset($_GET['logout'])) {
-    header("location:./");
+    header("location:../../");
     session_destroy();
 }
 
@@ -25,9 +41,9 @@ if (isset($_GET['logout'])) {
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="icon" type="image/png" href="../ASSETS/SIMAGES/greenog.png">
-    <link href="../ASSETS/CSS/general.css" rel="stylesheet">
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> -->
+    <link rel="icon" type="image/png" href="../../ASSETS/SIMAGES/greenog.png">
+    <link href="../../ASSETS/CSS/general.css" rel="stylesheet">
 
     <title>GREEN STONE LTD</title>
 
@@ -42,7 +58,7 @@ if (isset($_GET['logout'])) {
 
                     <li class="nav-item d-flex ">
                         <h6>
-                            <?=$employee_names?>
+                            <?= $employee_names ?>
                         </h6>
                     </li>
                     <li class="nav-item"><button class="btn " onclick="window.location.href='?logout=1'">Logout</button>
@@ -54,3 +70,15 @@ if (isset($_GET['logout'])) {
                 <div class="container-fluid p-0">
 
                     <div class="w-100">
+
+                        <div class="msg">
+                            <?php 
+				if (isset($_SESSION['success_msg']) && !empty($_SESSION['success_msg'])) {?>
+                            <h3 style="background: #0fdd1d7a;padding: 5px;width: 100%;text-align: center;">
+                                <?= $_SESSION['success_msg'] ?></h3>
+                            <?php  $_SESSION['success_msg']="";  }else if(isset($_SESSION['fail_msg']) && !empty($_SESSION['fail_msg'])){?>
+                            <h3 style="background: #b71c1c8f;padding: 5px;width: 100%;text-align: center;">
+                                <?= $_SESSION['fail_msg'] ?></h3>
+                            <?php $_SESSION['fail_msg']="";	}			
+			 ?>
+                        </div>
