@@ -71,14 +71,14 @@ CREATE TABLE PRODUCT_CATEGORY (
 
 CREATE TABLE UNITY(
     UNITY_ID INT PRIMARY KEY AUTO_INCREMENT,
-    UNITY_NAME VARCHAR(50) NOT NULL
+    UNITY_NAME VARCHAR(50) NOT NULL UNIQUE
 );
 
 CREATE TABLE PRODUCTS (
     P_ID INT PRIMARY KEY,
     P_CODE VARCHAR(255) NOT NULL,
     PC_ID INT,
-    P_NAME VARCHAR(100),
+    P_NAME VARCHAR(100) UNIQUE,
     UNITY_ID INT NOT NULL,
     P_STATUS ENUM('1', '0') DEFAULT '1',
  -- Add other relevant columns
@@ -95,6 +95,13 @@ CREATE TABLE PRICES (
     ENDDATE DATE,
     PRICE_STATUS ENUM('1', '0') DEFAULT '1',
  -- Add other relevant columns
+    FOREIGN KEY (P_ID) REFERENCES PRODUCTS(P_ID)
+);
+
+CREATE TABLE PRODUCT_IMAGE(
+    PI_ID INT PRIMARY KEY AUTO_INCREMENT,
+    P_ID INT,
+    PI_NAME VARCHAR2(255) UNIQUE,
     FOREIGN KEY (P_ID) REFERENCES PRODUCTS(P_ID)
 );
 
@@ -196,4 +203,77 @@ INSERT INTO `PRODUCT_CATEGORY`(
 ) VALUES (
     2,
     'FRESH FROM THE GRILL - GRILLADES'
+);
+
+# --------------------------------------------------------------------------------------
+INSERT INTO `UNITY`(
+`UNITY_NAME`
+) VALUES (
+'NONE'
+);
+
+INSERT INTO `UNITY`(
+    `UNITY_NAME`
+) VALUES (
+    'Btl'
+);
+
+INSERT INTO `UNITY`(
+    `UNITY_NAME`
+) VALUES (
+    'Glss'
+);
+
+INSERT INTO `UNITY`(
+    `UNITY_NAME`
+) VALUES (
+    'Can'
+);
+
+INSERT INTO `UNITY`(
+    `UNITY_NAME`
+) VALUES (
+    'Carton'
+);
+
+INSERT INTO `UNITY`(
+    `UNITY_NAME`
+) VALUES (
+    '200ml'
+);
+
+INSERT INTO `UNITY`(
+    `UNITY_NAME`
+) VALUES (
+    'Shot'
+);
+
+INSERT INTO `UNITY`(
+    `UNITY_NAME`
+) VALUES (
+    '1L Btl'
+);
+
+INSERT INTO `UNITY`(
+    `UNITY_NAME`
+) VALUES (
+    '200ml/Btl'
+);
+
+INSERT INTO `UNITY`(
+    `UNITY_NAME`
+) VALUES (
+    'Shot/200ml/Btl'
+);
+
+INSERT INTO `UNITY`(
+    `UNITY_NAME`
+) VALUES (
+    'Shot/Btl'
+);
+
+INSERT INTO `UNITY`(
+    `UNITY_NAME`
+) VALUES (
+    '200ml/Btl/Carton'
 );

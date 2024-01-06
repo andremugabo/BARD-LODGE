@@ -26,7 +26,7 @@
                 </div>
                 <h3 class="mt-1 mb-3 text-black text-black" style="font-size: 18px;">GSL-MIS&nbsp;Dashboard</h3>
                 <div class="mb-0">
-                    <span class="text-black"> <i class="mdi mdi-arrow-bottom-right"></i> PUB-SM
+                    <span class="text-black"> <i class="mdi mdi-arrow-bottom-right"></i> GSL-MIS
                     </span>
                     <!-- <span class="text-black">Since last week</span> -->
                 </div>
@@ -63,7 +63,7 @@
                     <?=$count?>&nbsp;Employees
                 </h3>
                 <div class="mb-0">
-                    <span class="text-white"> <i class="mdi mdi-arrow-bottom-right"></i> PUB-SM
+                    <span class="text-white"> <i class="mdi mdi-arrow-bottom-right"></i> GSL-MIS
                     </span>
                     <!-- <span class="text-black">Since last week</span> -->
                 </div>
@@ -78,14 +78,14 @@
 
 
 
-    <?php //if($employee_role =="ADMIN"){ ?>
+    <?php if($employee_role =="MD" || $employee_role == "MANAGER" || $employee_role == "IT"): ?>
 
     <div class="card-principal card bg-danger m-2">
         <a href="category" style="text-decoration:none;">
             <div class="card-body">
                 <div class="row">
                     <div class="col mt-0">
-                        <h6 class="card-title text-black">CATEGORIES</h6>
+                        <h6 class="card-title text-black">LODGE</h6>
                     </div>
 
                     <div class="col-auto">
@@ -100,11 +100,10 @@
 								//$countCategory = $categories->countCategory();	
 
 								?>
-                <h3 class="mt-1 mb-3 text-black fs-2">
-                    <?//= $countCategory ." "."Categories"?>
+                <h3 class="mt-1 mb-3 text-black text-black" style="font-size: 18px;">Lodge&nbsp;Dashboard
                 </h3>
                 <div class="mb-0">
-                    <span class="text-white"> <i class="mdi mdi-arrow-bottom-right"></i> PUB-SM
+                    <span class="text-white"> <i class="mdi mdi-arrow-bottom-right"></i> GSL-MIS
                     </span>
                     <!-- <span class="text-black">Since last week</span> -->
                 </div>
@@ -112,7 +111,7 @@
         </a>
     </div>
 
-    <?php //} ?>
+    <?php endif ?>
 
 
     <div class="card-principal card bg-warning m-2">
@@ -151,7 +150,7 @@
     <?php ///if($employee_role =="ADMIN"){ ?>
 
     <div class="card-principal card bg-info m-2">
-        <a href="products" style="text-decoration:none;">
+        <a href="../PRODUCTS/products.php" style="text-decoration:none;">
             <div class="card-body">
                 <div class="row">
                     <div class="col mt-0">

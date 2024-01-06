@@ -5,7 +5,6 @@ require_once (__DIR__.'/../MODEL/ProductCategory.php');
 
 class ProductCategoryDao extends db{
     public function createCategory(ProductCategory $productCategory) {
-        $pc_id = $productCategory->getPcId();
         $pt_id = $productCategory->getPtId();
         $pc_name = $productCategory->getPcName();
 
@@ -43,6 +42,19 @@ class ProductCategoryDao extends db{
         return $result;
     }
 
+    public function checkIfCategoryExistByPId(ProductCategory $productCategory)
+    {
+        $pt_id = $productCategory->getPtId();
+        $query = "SELECT  *  FROM product_category WHERE product_category.pt_id = ?";
+        $statement = $this->connect()->prepare($query);
+        $statement->execute(array(
+            $pt_id,
+        ));
+        $result = $statement->rowCount();
+        return $result;
+    }
+
+
     public function selectProductCategory() {
         $query = "SELECT * FROM product_category ";
         $statement = $this->connect()->prepare($query);
@@ -70,6 +82,19 @@ class ProductCategoryDao extends db{
         
         
     }
+
+    public function selectOneType(ProductCategory $productCategory){
+        $pt_id = $productCategory->getPtId();
+		$sql = "SELECT * FROM product_category WHERE product_category.pt_id =? ";
+		$statement = $this->connect()->prepare($sql);
+		$statement->execute(array(
+			$pt_id
+		));
+
+		while($result = $statement->fetchAll(PDO::FETCH_ASSOC)){
+			return $result;
+		}
+	}
 
 
 
