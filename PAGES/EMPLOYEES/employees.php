@@ -102,9 +102,14 @@
                             aria-label=".form-select-lg example" required>
                             <option selected disabled value="">Choose&nbsp;Employee&nbsp;Role</option>
                             <option value="MANAGER">MANAGER</option>
-                            <option value="CASHIER">CASHIER</option>
+                            <option value="ACCOUNTANT">ACCOUNTANT</option>
+                            <option value="BARMAN">BARMAN</option>
                             <option value="CHEF">CHEF</option>
                             <option value="WAITER">WAITER</option>
+                            <option value="CLEANER">CLEANER</option>
+                            <option value="SECURITY GUARD">SECURITY&nbsp;GUARD</option>
+                            <option value="RECEPTIONIST">RECEPTIONIST</option>
+                            <option value="TOKENMAN">TOKEN&nbsp;MAN</option>
                         </select>
                     </div>
 

@@ -81,7 +81,7 @@ switch($action){
             $employeeObj->setERole($_POST['e_role']);
             $employeeObj->setEIdNumber($_POST['e_idnumber']);
             $employeeObj->setEId($_POST['e_id']);
-
+            //check if employee exist
             $feedback = $employeeDaoObj->checkIfEmployeeExist($employeeObj);
             echo $feedback;
             if($feedback > 0)

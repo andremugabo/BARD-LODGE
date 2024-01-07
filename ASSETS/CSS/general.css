@@ -15,6 +15,10 @@ a,h1,h2,h3,h4,h5,h6{
 a{
 	text-decoration: none;
 }
+td{
+	font-size: 15px;
+}
+
 body {
 	-webkit-text-size-adjust: 100%;
 	-webkit-tap-highlight-color: rgba(0,0,0,0);
@@ -286,11 +290,12 @@ footer.footer{
     
 }
 .table-btn{
-    width: 50px;
-    padding: 2px 10px;
+    width: 25px;
+	height: 25px;
+    padding: 0px 5px;
 }
 .table-img , .title-img{
-    width: 20px;
+    width: 10px;
 	
 }
 

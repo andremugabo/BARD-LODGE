@@ -22,24 +22,26 @@ if (isset($_GET['cat'])) {
 
 }
 
-// $products = new ProductsDao();
+$products = new ProductsDao();
+$productsObj = new Products();
 
-// if (isset($_GET['prod'])) {
-//    $cat_id = $_GET['prod'];
+if (isset($_GET['prod'])) {
+   $pc_id = $_GET['prod'];
+   $productsObj->setPcId($pc_id);
     
-//    if ($products->checkIfproductExistCat_id($cat_id)!= 0) {
-//        echo'<option selected disabled value="">Choose&nbsp;Product</option>';
-//        foreach ($products->selectOneCat($cat_id) as $product) {
-//            echo "<option value=".$product['p_id'].">".$product['p_name']."</option>";
-//        }
-//    } else {
-//        echo "<option selected disabled value='' >THE PRODUCT IS NOT GIVEN</option>";
-//    }
+   if ($products->checkIfCategoryExistByPcId($productsObj)!= 0) {
+       echo'<option selected disabled value="">Choose&nbsp;Product</option>';
+       foreach ($products->selectProductsByCategory($productsObj) as $product) {
+           echo "<option value=".$product['P_ID'].">".$product['P_NAME']."</option>";
+       }
+   } else {
+       echo "<option selected disabled value='' >THE PRODUCT IS NOT GIVEN</option>";
+   }
    
 
 
 
-// }
+}
 
 
 require_once "../../INCLUDES/footer.php";
