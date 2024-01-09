@@ -101,7 +101,7 @@ switch($action){
             //to review after sessions
             $metricObj->setSId(null);
             $_SESSION['success_msg'] =" PRODUCT UPGRADED TO REQUIRED A SIDE DISHES SUCCESSFULLY!!!";
-            $result = $metricDaoObj->createMetric($metricObj);
+            $metricDaoObj->createMetric($metricObj);
             $productDaoObj->productsWithSideDishes($productObj);
             header("location:{$_SERVER['HTTP_REFERER']}");
         }
@@ -117,7 +117,7 @@ switch($action){
         $productObj->setPId($p_id);
 
         $metricObj->setEId($_SESSION['logged']['E_ID']);
-        $mDesc = " PRODUCT DISABLED TO REQUIRED A SIDE DISHES ";
+        $mDesc = " PRODUCT DISABLED FROM THOSE REQUIRED A SIDE DISHES ";
         $metricObj->setMDesc($mDesc);
         //to review after sessions
         $metricObj->setSId(null);

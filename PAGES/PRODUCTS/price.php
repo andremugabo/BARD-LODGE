@@ -44,6 +44,7 @@ require_once '../../INCLUDES/header.php';?>
                     $price = new PricesDao();
                     $selectPrice =$price->selectPrice();
                     $num = 0;
+                    // print_r($selectPrice);
                     if ($selectPrice != null):
                     foreach ($selectPrice as $item) {  $num++;?>
 
@@ -52,9 +53,9 @@ require_once '../../INCLUDES/header.php';?>
                         <td style="text-align: center;"><?=$num?></td>
                         <td style="text-align: center;"><?=$item['P_CODE']?></td>
                         <td style="text-align: center;"><?=$item['P_NAME']?></td>
+                        <td style="text-align: center;"><?=$item['PPRICE']?></td>
                         <td style="text-align: center;"><?=$item['SPRICE']?></td>
                         <td style="text-align: center;"><?=$item['EPRICE']?></td>
-                        <td style="text-align: center;"><?=$item['PPRICE']?></td>
                         <td style="text-align: center;"><?=$item['UNITY_NAME']?></td>
                         <td style="text-align: center;"><button type="button btn-sm" title="Edit Product Info"
                                 class="btn btn-primary table-btn"

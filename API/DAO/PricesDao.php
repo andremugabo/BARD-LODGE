@@ -34,7 +34,7 @@ class PricesDao extends db{
     }
 
     public function selectPrice(){
-        $query = "SELECT products.*,unity.* FROM prices JOIN products 
+        $query = "SELECT products.*,unity.*,prices.* FROM prices JOIN products 
         ON products.p_id = prices.p_id JOIN unity 
         ON unity.unity_id = prices.unity_id  WHERE prices.price_status = '1'";
 
