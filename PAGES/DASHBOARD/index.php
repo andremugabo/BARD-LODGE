@@ -78,10 +78,10 @@
 
 
 
-    <?php if($employee_role =="MD" || $employee_role == "MANAGER" || $employee_role == "IT"): ?>
+    <?php if($employee_role =="MD" || $employee_role == "MANAGER" || $employee_role == "IT" || $employee_role == "ACCOUNTANT"): ?>
 
     <div class="card-principal card bg-danger m-2">
-        <a href="category" style="text-decoration:none;">
+        <a href="#" style="text-decoration:none;">
             <div class="card-body">
                 <div class="row">
                     <div class="col mt-0">
@@ -115,11 +115,11 @@
 
 
     <div class="card-principal card bg-warning m-2">
-        <a href="types" style="text-decoration:none;">
+        <a href="#" style="text-decoration:none;">
             <div class="card-body">
                 <div class="row">
                     <div class="col mt-0">
-                        <h6 class="card-title text-black">TYPES</h6>
+                        <h6 class="card-title text-black">LIQUOR&nbsp;STORE</h6>
                     </div>
 
                     <div class="col-auto">
@@ -134,11 +134,10 @@
 								//$countType  = $types->countType();
 
 								?>
-                <h3 class="mt-1 mb-3 text-black fs-2">
-                    <?//= $countType." "."Types"?>
+                <h3 class="mt-1 mb-3 text-black text-black" style="font-size: 15px;">Liquor&nbsp;Store&nbsp;Dashboard
                 </h3>
                 <div class="mb-0">
-                    <span class="text-white"> <i class="mdi mdi-arrow-bottom-right"></i>PUB-SM
+                    <span class="text-white"> <i class="mdi mdi-arrow-bottom-right"></i>GSL-MIS
                     </span>
                     <!-- <span class="text-black fw-bold3">SM</span> -->
                 </div>
@@ -163,16 +162,17 @@
                         </div>
                     </div>
                 </div>
-                <?php
-								//$productsActiveNumbers = new productsModel();
-								//$number = $productsActiveNumbers->countProductsActive();
+                <?php 
+								$products = new ProductsDao();
+								$count = $products->countProduct();
 
-								?>
-                <h3 class="mt-1 mb-3 text-black fs-2">
-                    <? //=$number." "."Items"?>
+
+								 ?>
+                <h3 class="mt-1 mb-3 text-black" style="font-size: 18px;">
+                    <?=$count?>&nbsp;Products
                 </h3>
                 <div class="mb-0">
-                    <span class="text-white"> <i class="mdi mdi-arrow-bottom-right"></i>PUB-SM
+                    <span class="text-white"> <i class="mdi mdi-arrow-bottom-right"></i>GSL-MIS
                     </span>
                     <!-- <span class="text-black">Since last week</span> -->
                 </div>

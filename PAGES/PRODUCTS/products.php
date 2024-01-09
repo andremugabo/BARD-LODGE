@@ -20,12 +20,12 @@ require_once '../../INCLUDES/header.php';?>
     </div>
 </div>
 
-<div class="col">
+<div class="col" style="min-height: 100vh;">
     <div class="card">
         <div class="card-header">
             <strong class="card-title">Products Table</strong>
         </div>
-        <div class="card-body overflow-auto">
+        <div class="card-body overflow-auto" style="min-height: 40vh; overflow:auto;">
             <table class="table table-striped">
                 <thead>
                     <tr>
