@@ -32,7 +32,7 @@ if (isset($_GET['prod'])) {
    if ($products->checkIfCategoryExistByPcId($productsObj)!= 0) {
        echo'<option selected disabled value="">Choose&nbsp;Product</option>';
        foreach ($products->selectProductsByCategory($productsObj) as $product) {
-           echo "<option value=".$product['P_ID'].">".$product['P_NAME']."</option>";
+           echo "<option value=".$product['P_ID'].">".$product['P_NAME']." ".$product['UNITY_NAME']."</option>";
        }
    } else {
        echo "<option selected disabled value='' >THE PRODUCT IS NOT GIVEN</option>";

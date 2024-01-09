@@ -16,17 +16,26 @@ function autoload($className){
 ?>
 <?php
 session_start();
-$employee_fnames = $_SESSION['logged']['FIRSTNAME'];
-$employee_lnames = $_SESSION['logged']['LASTNAME'];
-$employee_names = $employee_fnames." ".$employee_lnames;
-$employee_role = $_SESSION['logged']['E_ROLE'];
-$employee_phone = $_SESSION['logged']['E_PHONE'];
-// echo $employee_names;
+if(isset($_SESSION['logged']))
+{
+    $userData = $_SESSION['logged'];
+    // print_r($userData['FIRSTNAME']);
+    $employee_fnames = $userData['FIRSTNAME'];
+    $employee_lnames = $userData['LASTNAME'];
+    $employee_names = $employee_fnames." ".$employee_lnames;
+    $employee_role = $userData['E_ROLE'];
+    $employee_phone = $userData['E_PHONE'];
 
-if ($employee_fnames == null || $employee_role == null) {
-    header("location:../../");
-    session_destroy();
+
+    if ($employee_fnames == null || $employee_role == null) {
+        header("location:../../");
+        session_destroy();
+    }
 }
+else{
+    header("location:../../");
+}
+
 
 if (isset($_GET['logout'])) {
     header("location:../../");

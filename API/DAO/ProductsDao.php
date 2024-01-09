@@ -147,6 +147,38 @@ class ProductsDao extends db{
         return $result;
     }
 
+
+    public function checkIfExistProductsWithSideDishes(Products $products) {
+        $p_id = $products->getPId();
+        $query = "SELECT * FROM products   WHERE p_sidedishes = '1' AND products.P_ID = ?";
+        $statement = $this->connect()->prepare($query);
+        $statement->execute(array(
+            $p_id
+        ));
+        $result = $statement->rowCount();
+        return $result;
+    }
+
+    public function productsWithSideDishes(Products $products) {
+        $p_id = $products->getPId();
+        $query = "UPDATE products SET  p_sidedishes = '1' WHERE products.P_ID = ?";
+        $statement = $this->connect()->prepare($query);
+        $result  = $statement->execute(array(
+            $p_id
+        ));
+        return $result;
+    }
+
+    public function disableProductsWithSideDishes(Products $products) {
+        $p_id = $products->getPId();
+        $query = "UPDATE products SET  p_sidedishes = '0' WHERE products.P_ID = ?";
+        $statement = $this->connect()->prepare($query);
+        $result  = $statement->execute(array(
+            $p_id
+        ));
+        return $result;
+    }
+
     
 
 

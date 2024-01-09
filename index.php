@@ -1,4 +1,4 @@
-<?php session_start(); ?>
+<?php session_start(); if(isset($_SESSION['logged'])){echo "hello";}?>
 <!DOCTYPE html>
 <html lang="en">
 

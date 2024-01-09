@@ -78,7 +78,7 @@ require_once '../../INCLUDES/header.php';?>
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Create&nbsp;Side&nbsp;Dishes</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Create&nbsp;Food&nbsp;with&nbsp;Side&nbsp;Dishes</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
             <div class="modal-body">

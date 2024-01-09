@@ -84,7 +84,49 @@ switch($action){
         $productDaoObj->updateProducts($productObj);
         header("location:{$_SERVER['HTTP_REFERER']}");
 
-        break;  
+        break; 
+    case 'sideDishes':
+        echo "sidedish";
+        $p_id = $_POST['p_id'];
+        echo " <br>";
+        echo $p_id;
+        $productObj->setPId($p_id);
+
+        $feedback = $productDaoObj->checkIfExistProductsWithSideDishes($productObj);
+        if($feedback == 0)
+        {
+            $metricObj->setEId($_SESSION['logged']['E_ID']);
+            $mDesc = " PRODUCT UPGRADED TO REQUIRED A SIDE DISHES SUCCESSFULLY!!! ";
+            $metricObj->setMDesc($mDesc);
+            //to review after sessions
+            $metricObj->setSId(null);
+            $_SESSION['success_msg'] =" PRODUCT UPGRADED TO REQUIRED A SIDE DISHES SUCCESSFULLY!!!";
+            $result = $metricDaoObj->createMetric($metricObj);
+            $productDaoObj->productsWithSideDishes($productObj);
+            header("location:{$_SERVER['HTTP_REFERER']}");
+        }
+        else
+        {
+            $_SESSION['fail_msg']="PRODUCT ALREADY IS SET TO REQUIRE A SIDE DISH";
+            header("location:{$_SERVER['HTTP_REFERER']}");   
+        }
+        break;   
+    case 'disable':
+        $p_id = $_GET['id'];
+        echo $p_id;
+        $productObj->setPId($p_id);
+
+        $metricObj->setEId($_SESSION['logged']['E_ID']);
+        $mDesc = " PRODUCT DISABLED TO REQUIRED A SIDE DISHES ";
+        $metricObj->setMDesc($mDesc);
+        //to review after sessions
+        $metricObj->setSId(null);
+        $_SESSION['success_msg'] =" PRODUCT DISABLED TO REQUIRED A SIDE DISHES SUCCESSFULLY!!!";
+        $result = $metricDaoObj->createMetric($metricObj);
+        $productDaoObj->disableProductsWithSideDishes($productObj);
+        header("location:{$_SERVER['HTTP_REFERER']}");
+
+    break;      
 }
 
 
