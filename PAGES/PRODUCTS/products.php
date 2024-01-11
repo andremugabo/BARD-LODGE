@@ -1,5 +1,20 @@
-<?php
-require_once '../../INCLUDES/header.php';?>
+<?php 
+require_once '../../INCLUDES/header.php';
+
+$productF = "";
+
+if (isset($_POST['filter'])) {
+  
+  $product = $_POST['productF'];
+  $productF = "AND products.p_id = '".$product."' ";
+
+
+
+}
+
+
+
+?>
 
 
 <div class="container-fluid section-title d-flex mb-2">
@@ -17,6 +32,68 @@ require_once '../../INCLUDES/header.php';?>
         &nbsp;
         <button type="button" class="btn btn-sm btn-danger "
             onclick="window.location.href='../DASHBOARD/'">Back</button>
+    </div>
+</div>
+
+<div class="container-fluid section-title d-flex mb-3">
+    <div class="s-title text-start col-8 p-2 " style="background: #222e3c;">
+        <form class="row row-cols-lg-auto g-3 align-items-center justify-content-between" action="" method="POST">
+
+
+            <div class="col-12">
+                <!-- <label class="visually-hidden" for="p_type">Products&nbsp;Types</label> -->
+                <select class="form-select" id="p_typeF" name="p_typeF" onchange="getCategoryF(this.value)" required>
+                    <option selected disabled value="">Choose&nbsp;Product&nbsp;Type</option>
+                    <?php 
+                                $typeDaoObj = new ProductTypeDao();
+                                $selectType = $typeDaoObj->selectProductType();
+                                if($selectType != null):
+                                    foreach($selectType as $item){ ?>
+                    <option value="<?=$item['PT_ID']?>"><?=$item['PT_NAME'];?></option>
+
+                    <?php }?>
+                    <?php endif?>
+                </select>
+            </div>
+
+            <div class="col-12">
+                <!-- <label class="visually-hidden" for="productF">Preference</label> -->
+                <select class="form-select form-select mb-3" id="category" name="pc_id"
+                    aria-label=".form-select-lg example" required>
+                    <option selected disabled value="">Choose&nbsp;Product&nbsp;Category</option>
+
+                </select>
+            </div>
+
+            <div class="col-12">
+                <!-- <label class="visually-hidden" for="">Preference</label> -->
+                <select class="form-select" id="productF" name="productF">
+                    <option selected>Choose&nbsp;Product</option>
+
+                </select>
+            </div>
+
+
+
+            <div class="col-12">
+                <button type="submit" class="btn btn-warning btn-sm" name="filter">Filter&nbsp;Products</button>
+            </div>
+        </form>
+        <!-- <div class="period_diplay">   SALES REPORT ON <?=date("d-m-y");?>    </div> -->
+    </div>
+
+    <div class="s-btn text-end col-4">
+        <button type="button" class="btn btn-warning btn-sm"
+            onclick="window.location.href='../../PDF/pdf_products.php'"><img src="../../ASSETS/SIMAGES/PDF.png"
+                class="align-middle table-img" alt=""></button>
+        <button type="button" class="btn btn-success btn-sm"
+            onclick="window.location.href='category.php'">Category</button>
+        <button type="button" class="btn btn-secondary btn-sm"
+            onclick="window.location.href='description.php'">Description</button>
+        <!-- <button type="button" class="btn btn-info" onclick="window.location.href='price.php'">Prices</button> -->
+        <!-- <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#productModal"><img src="../../../ASSETS/IMAGES/Productp.png" class="align-middle title-img" alt=""></button> -->
+        <!-- <button type="button" class="btn btn-danger" onclick="window.location.href='./'">BACK</button> -->
+
     </div>
 </div>
 

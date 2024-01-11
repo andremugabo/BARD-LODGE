@@ -6,10 +6,12 @@ require_once(__DIR__.'/../MODEL/Price.php');
 class PricesDao extends db{
     public function checkProductPriceExists(Price $price){
         $p_id = $price->getPId();
-        $query = "SELECT * FROM prices WHERE prices.p_id = ? AND prices.price_status = '1'";
+        $unity_id = $price->getUnityId();
+        $query = "SELECT * FROM prices WHERE prices.p_id = ? AND prices.unity_id = ? AND prices.price_status = '1'";
         $statement = $this->connect()->prepare($query);
         $statement->execute(array(
-            $p_id
+            $p_id,
+            $unity_id
         ));
         $result = $statement->rowCount();
         return $result;
@@ -36,7 +38,7 @@ class PricesDao extends db{
     public function selectPrice(){
         $query = "SELECT products.*,unity.*,prices.* FROM prices JOIN products 
         ON products.p_id = prices.p_id JOIN unity 
-        ON unity.unity_id = prices.unity_id  WHERE prices.price_status = '1'";
+        ON unity.unity_id = prices.unity_id  WHERE prices.price_status = '1' AND products.p_status = '1'";
 
         $statement = $this->connect()->prepare($query);
         $statement->execute();
