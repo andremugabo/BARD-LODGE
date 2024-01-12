@@ -57,15 +57,17 @@ require_once '../../INCLUDES/header.php';?>
                         <td style="text-align: center;"><?=$item['SPRICE']?></td>
                         <td style="text-align: center;"><?=$item['EPRICE']?></td>
                         <td style="text-align: center;"><?=$item['UNITY_NAME']?></td>
-                        <td style="text-align: center;"><button type="button btn-sm" title="Edit Product Info"
+                        <td style="text-align: center;"><button type="button btn-sm" title="Edit Price Info"
                                 class="btn btn-success table-btn"
                                 onclick="window.location.href='editPrices.php?edit=<?=$item['PRICE_ID']?>'"><img
                                     src="../../ASSETS/SIMAGES/Edit_20px.png" class="align-middle table-img"
-                                    alt=""></button>&nbsp;<button type="button btn-sm" title="Edit Product Info"
+                                    alt=""></button>
+                            <!-- &nbsp;<button type="button btn-sm" title="Disable Price Info"
                                 class="btn btn-primary table-btn"
                                 onclick="window.location.href='../../API/CONTROLLER/pricesController.php?action=disable&id=<?=$item['PRICE_ID']?>'"><img
                                     src="../../ASSETS/SIMAGES/Cancel 2_20px_1.png" class="align-middle table-img"
-                                    alt=""></button></td>
+                                    alt=""></button> -->
+                        </td>
                     </tr>
 
 

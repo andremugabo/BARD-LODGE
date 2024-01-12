@@ -50,7 +50,7 @@ class EmployeesDao extends db
     }
 
     public function selectEmployee() {
-        $query = "SELECT * FROM employees";
+        $query = "SELECT * FROM employees WHERE employees.e_status = '1' AND employees.e_role <> 'IT' AND employees.e_role <> 'MD'";
         $statement = $this->connect()->prepare($query);
         $statement->execute();
         while($result = $statement->fetchAll(PDO::FETCH_ASSOC))
@@ -62,7 +62,7 @@ class EmployeesDao extends db
     }
 
     public function countEmployee(){
-        $query = "SELECT * FROM employees";
+        $query = "SELECT * FROM employees ";
         $statement = $this->connect()->prepare($query);
         $statement->execute();
         $result =  $statement->rowCount();

@@ -1,14 +1,12 @@
 <?php 
 require_once '../../INCLUDES/header.php';
 
-$productF = "";
+$productByFilter = "";
 
 if (isset($_POST['filter'])) {
   
-  $product = $_POST['productF'];
-  $productF = "AND products.p_id = '".$product."' ";
-
-
+  $product = $_POST['p_id'];
+  $productByFilter = "AND products.p_id = '".$product."' ";
 
 }
 
@@ -18,83 +16,102 @@ if (isset($_POST['filter'])) {
 
 
 <div class="container-fluid section-title d-flex mb-2">
-    <div class="s-title text-start col-5">
+    <div class="s-title text-start col-6">
         <h2>Products</h2>
     </div>
-    <div class="s-btn text-end col-7">
-        <button type="button" class="btn btn-sm btn-secondary"
+    <div class="s-btn text-end col-6">
+        <!-- <button type="button" class="btn btn-sm btn-secondary m-1"
             onclick="window.location.href='sideDishes.php'">Products&nbsp;with&nbsp;Sides&nbsp;Dishes</button>
         &nbsp;
-        <button type="button" class="btn btn-sm btn-success" onclick="window.location.href='Price.php'">Price</button>
+        <button type="button" class="btn btn-sm btn-success m-1"
+            onclick="window.location.href='Price.php'">Price</button>
         &nbsp;
-        <button type="button" class="btn btn-sm btn-warning text-white" data-bs-toggle="modal"
+        <button type="button" class="btn btn-sm btn-warning text-white m-1" data-bs-toggle="modal"
             data-bs-target="#employeeModal">Create&nbsp;Product</button>
-        &nbsp;
+        &nbsp; -->
         <button type="button" class="btn btn-sm btn-danger "
             onclick="window.location.href='../DASHBOARD/'">Back</button>
     </div>
 </div>
 
-<div class="container-fluid section-title d-flex mb-3">
-    <div class="s-title text-start col-8 p-2 " style="background: #222e3c;">
-        <form class="row row-cols-lg-auto g-3 align-items-center justify-content-between" action="" method="POST">
+<div class="container-fluid row section-title d-flex mb-3">
+    <div class="s-title text-start col-lg-6 p-2 ">
+        <div class="card">
+            <div class="card-header">
+                <strong>Filter&nbsp;Products</strong>
+            </div>
+            <div class="card-body card-block">
+                <form class="row row-cols-lg-auto g-3 align-items-center justify-content-between" action=""
+                    method="POST">
 
 
-            <div class="col-12">
-                <!-- <label class="visually-hidden" for="p_type">Products&nbsp;Types</label> -->
-                <select class="form-select" id="p_typeF" name="p_typeF" onchange="getCategoryF(this.value)" required>
-                    <option selected disabled value="">Choose&nbsp;Product&nbsp;Type</option>
-                    <?php 
+                    <div class="col-12">
+                        <!-- <label class="visually-hidden" for="p_type">Products&nbsp;Types</label> -->
+                        <select class="form-select" id="type" name="p_type" aria-label=".form-select-lg example"
+                            onchange="getCategory(this.value)" required>
+                            <option selected disabled value="">Choose&nbsp;Product&nbsp;Type</option>
+                            <?php 
                                 $typeDaoObj = new ProductTypeDao();
                                 $selectType = $typeDaoObj->selectProductType();
                                 if($selectType != null):
                                     foreach($selectType as $item){ ?>
-                    <option value="<?=$item['PT_ID']?>"><?=$item['PT_NAME'];?></option>
+                            <option value="<?=$item['PT_ID']?>"><?=$item['PT_NAME'];?></option>
 
-                    <?php }?>
-                    <?php endif?>
-                </select>
+                            <?php }?>
+                            <?php endif?>
+                        </select>
+                    </div>
+
+                    <div class="col-12">
+                        <!-- <label class="visually-hidden" for="productF">Preference</label> -->
+                        <select class="form-select" id="category" onchange="getProduct(this.value)" name="pc_id"
+                            required>
+                            <option selected disabled value="">Choose&nbsp;Category</option>
+
+                        </select>
+                    </div>
+
+                    <div class="col-12">
+                        <!-- <label class="visually-hidden" for="">Preference</label> -->
+                        <select class="form-select" id="product" name="p_id" required>
+                            <option selected>Choose&nbsp;Product</option>
+
+                        </select>
+                    </div>
+
+
+
+                    <div class="col-12">
+                        <button type="submit" class="btn btn-warning btn-sm" name="filter">Filter&nbsp;Products</button>
+                    </div>
+                </form>
             </div>
-
-            <div class="col-12">
-                <!-- <label class="visually-hidden" for="productF">Preference</label> -->
-                <select class="form-select form-select mb-3" id="category" name="pc_id"
-                    aria-label=".form-select-lg example" required>
-                    <option selected disabled value="">Choose&nbsp;Product&nbsp;Category</option>
-
-                </select>
-            </div>
-
-            <div class="col-12">
-                <!-- <label class="visually-hidden" for="">Preference</label> -->
-                <select class="form-select" id="productF" name="productF">
-                    <option selected>Choose&nbsp;Product</option>
-
-                </select>
-            </div>
-
-
-
-            <div class="col-12">
-                <button type="submit" class="btn btn-warning btn-sm" name="filter">Filter&nbsp;Products</button>
-            </div>
-        </form>
-        <!-- <div class="period_diplay">   SALES REPORT ON <?=date("d-m-y");?>    </div> -->
-    </div>
-
-    <div class="s-btn text-end col-4">
-        <button type="button" class="btn btn-warning btn-sm"
-            onclick="window.location.href='../../PDF/pdf_products.php'"><img src="../../ASSETS/SIMAGES/PDF.png"
-                class="align-middle table-img" alt=""></button>
-        <button type="button" class="btn btn-success btn-sm"
-            onclick="window.location.href='category.php'">Category</button>
-        <button type="button" class="btn btn-secondary btn-sm"
-            onclick="window.location.href='description.php'">Description</button>
-        <!-- <button type="button" class="btn btn-info" onclick="window.location.href='price.php'">Prices</button> -->
-        <!-- <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#productModal"><img src="../../../ASSETS/IMAGES/Productp.png" class="align-middle title-img" alt=""></button> -->
-        <!-- <button type="button" class="btn btn-danger" onclick="window.location.href='./'">BACK</button> -->
+        </div>
 
     </div>
+    <div class="s-title text-start col-lg-6 p-2 ">
+        <div class="card">
+            <div class="card-header">
+                <strong>Product Description </strong>
+            </div>
+            <div class="card-body">
+                <button type="button" class="btn btn-outline-primary btn-sm m-1"
+                    onclick="window.location.href='productsType.php'">Type</button>
+                <button type="button" class="btn btn-outline-success btn-sm m-1"
+                    onclick="window.location.href='category.php'">Category</button>
+                <button type="button" class="btn btn-outline-secondary btn-sm m-1"
+                    onclick="window.location.href='sideDishes.php'">Products&nbsp;with&nbsp;Sides&nbsp;Dishes</button>
+                <button type="button" class="btn btn-outline-success btn-sm m-1"
+                    onclick="window.location.href='Price.php'">Price</button>
+                <button type="button" class="btn btn-warning btn-sm m-1" data-bs-toggle="modal"
+                    data-bs-target="#employeeModal">Create&nbsp;Product</button>
+                <!-- <button type="button" class="btn btn-outline-danger btn-sm">Danger</button> -->
+            </div>
+        </div>
+    </div>
+
+
+
 </div>
 
 <div class="col" style="min-height: 100vh;">
@@ -118,9 +135,9 @@ if (isset($_POST['filter'])) {
                 <tbody>
                     <?php 
                     $product = new ProductsDao();
-                    $selectProduct =$product->selectProducts();
+                    $selectProduct =$product->selectProductsByFilter($productByFilter);
                     $num = 0;
-                    if ($selectProduct != null):
+                    if ($selectProduct):
                     foreach ($selectProduct as $item) {  $num++;?>
 
 
@@ -160,7 +177,7 @@ if (isset($_POST['filter'])) {
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
             <div class="modal-body">
-                <form action="../../API/CONTROLLER/productsController.php?action=insert" method="POST">
+                <form action="../../API/CONTROLLER/ProductsController.php?action=insert" method="POST">
                     <div class="mb-3">
                         <label for="p_type" class="col-form-label">Products&nbsp;Type:</label>
                         <select class="form-select form-select mb-3" id="type" name="p_type"

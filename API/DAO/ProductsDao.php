@@ -90,6 +90,20 @@ class ProductsDao extends db{
         }
     }
 
+
+    public function selectProductsByFilter($productByFilter) {
+        $query = "SELECT product_category.*,unity.*,products.* FROM products JOIN product_category 
+        ON products.pc_id = product_category.pc_id  JOIN unity 
+        ON products.unity_id = unity.unity_id WHERE products.p_status = '1' $productByFilter ";
+        
+        $statement = $this->connect()->prepare($query);
+        $statement->execute();
+        while($result = $statement->fetchAll(PDO::FETCH_ASSOC))
+        {
+            return $result;
+        }
+    }
+
     public function selectProductsByCategory(Products $products) {
         $pc_id = $products->getPcId();
         $query = "SELECT product_category.*,unity.*,products.* FROM products JOIN product_category 

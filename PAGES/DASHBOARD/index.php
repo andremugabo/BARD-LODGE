@@ -186,7 +186,7 @@
     <?php //if($employee_role =="ADMIN"){ ?>
 
     <div class="card-principal card bg-danger m-2">
-        <a href="price" style="text-decoration:none;">
+        <a href="#" style="text-decoration:none;">
             <div class="card-body">
                 <div class="row">
                     <div class="col mt-0">
@@ -214,7 +214,7 @@
 
 
     <div class="card-principal card bg-info m-2">
-        <a href="sessions" style="text-decoration:none;">
+        <a href="#" style="text-decoration:none;">
             <div class="card-body">
                 <div class="row">
                     <div class="col mt-0">
@@ -272,7 +272,7 @@
     <?php //if($employee_role =="ADMIN"){ ?>
 
     <div class="card-principal card bg-success m-2">
-        <a href="stock" style="text-decoration:none;">
+        <a href="#" style="text-decoration:none;">
             <div class="card-body">
                 <div class="row">
                     <div class="col mt-0">
@@ -300,7 +300,7 @@
 
 
     <div class="card-principal card bg-primary m-2">
-        <a href="expense" style="text-decoration:none;">
+        <a href="#" style="text-decoration:none;">
             <div class="card-body">
                 <div class="row">
                     <div class="col mt-0">
@@ -328,7 +328,7 @@
     <?php //if($employee_role =="ADMIN"){ ?>
 
     <div class="card-principal card bg-secondary m-2">
-        <a href="metric" style="text-decoration:none;">
+        <a href="#" style="text-decoration:none;">
             <div class="card-body">
                 <div class="row">
                     <div class="col mt-0">
@@ -385,7 +385,7 @@
 
 
     <div class="card-principal card bg-danger m-2">
-        <a href="settings" style="text-decoration:none;">
+        <a href="#" style="text-decoration:none;">
             <div class="card-body">
                 <div class="row">
                     <div class="col mt-0">
@@ -415,7 +415,7 @@
 
 
     <div class="card-principal card bg-info m-2">
-        <a href="reports" style="text-decoration:none;">
+        <a href="#" style="text-decoration:none;">
             <div class="card-body">
                 <div class="row">
                     <div class="col mt-0">

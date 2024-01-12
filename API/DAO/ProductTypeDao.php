@@ -54,6 +54,23 @@ class ProductTypeDao extends db{
     }
 
 
+    public function selectProductTypeById(ProductType $productType) {
+        $pt_id = $productType->getPtId();
+        $query = "SELECT * FROM product_type WHERE product_type.pt_id = ?";
+        $statement = $this->connect()->prepare($query);
+        $statement->execute(array(
+            $pt_id
+        ));
+        
+        $result = $statement->fetch();
+        
+            return $result;
+        
+        
+        
+    }
+
+
 
 }
 

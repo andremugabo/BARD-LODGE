@@ -35,6 +35,27 @@ class PricesDao extends db{
         return $result;
     }
 
+
+    public function updatePrice(Price $price){
+        $p_id = $price->getPId();
+        $sPrice = $price->getSPrice();
+        $ePrice = $price->getEPrice();
+        $pPrice = $price->getPPrice();
+        $unity_id = $price->getUnityId();
+        $price_id = $price->getPriceId();
+        $query = "UPDATE prices SET p_id = ?,sprice = ?,eprice = ?,pprice = ?,unity_id = ? WHERE prices.price_id = ?";
+        $statement = $this->connect()->prepare($query);
+        $result = $statement->execute(array(
+            $p_id,
+            $sPrice,
+            $ePrice,
+            $pPrice,
+            $unity_id,
+            $price_id
+        ));
+        return $result;
+    }
+
     public function selectPrice(){
         $query = "SELECT products.*,unity.*,prices.* FROM prices JOIN products 
         ON products.p_id = prices.p_id JOIN unity 
@@ -46,6 +67,24 @@ class PricesDao extends db{
         while($result = $statement->fetchAll(PDO::FETCH_ASSOC)){
             return $result;
         }
+
+    }
+
+
+    public function selectPriceById(Price $price){
+        $price_id = $price->getPriceId();
+        $query = "SELECT products.*,unity.*,prices.* FROM prices JOIN products 
+        ON products.p_id = prices.p_id JOIN unity 
+        ON unity.unity_id = prices.unity_id  WHERE prices.price_id = ?";
+
+        $statement = $this->connect()->prepare($query);
+        $statement->execute(array(
+            $price_id
+        ));
+
+        $result = $statement->fetch();
+            return $result;
+      
 
     }
 

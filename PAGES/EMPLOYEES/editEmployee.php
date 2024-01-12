@@ -20,7 +20,8 @@ $selectById = $employeesDao->getEmployeeById($employees);
 </div>
 <div class="b-example-divider"></div>
 
-<div class="modal modal-signin position-static d-block bg-dark " tabindex="-1" role="dialog" id="modalSignin">
+<div class="modal modal-signin position-static d-block  " style="background-color: rgba(0, 0, 0, 0.03);" tabindex="-1"
+    role="dialog" id="modalSignin">
     <div class="modal-dialog" role="document">
         <div class="modal-content rounded-5 shadow">
             <div class="modal-header p-5 pb-4 border-bottom-0">

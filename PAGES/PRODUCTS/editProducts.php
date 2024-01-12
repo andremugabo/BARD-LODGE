@@ -20,7 +20,8 @@ $selectById = $productsDao->getProductsById($products);
 </div>
 <div class="b-example-divider"></div>
 
-<div class="modal modal-signin position-static d-block bg-dark " tabindex="-1" role="dialog" id="modalSignin">
+<div class="modal modal-signin position-static d-block  " style="background-color: rgba(0, 0, 0, 0.03);" tabindex="-1"
+    role="dialog" id="modalSignin">
     <div class="modal-dialog" role="document">
         <div class="modal-content rounded-5 shadow">
             <div class="modal-header p-5 pb-4 border-bottom-0">
@@ -29,7 +30,7 @@ $selectById = $productsDao->getProductsById($products);
             </div>
 
             <div class="modal-body p-5 pt-0">
-                <form class="" action="../../API/CONTROLLER/productsController.php?action=edit" method="post">
+                <form class="" action="../../API/CONTROLLER/ProductsController.php?action=edit" method="post">
                     <div class="form-floating mb-3" style="display:none;">
                         <input type="text" class="form-control rounded-4" value="<?=$selectById['P_ID']?>" name="p_id"
                             placeholder="e_id">
