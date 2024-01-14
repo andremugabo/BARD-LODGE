@@ -42,7 +42,7 @@ switch($action){
 
                 // print_r($_SESSION['logged']);
                 $employee_name = $_SESSION['logged']['LASTNAME']." ".$_SESSION['logged']['FIRSTNAME'];
-                $_SESSION['success_msg'] = $employee_name." YOU LOGGED SUCCESSFULLY !! ";
+                $_SESSION['success_msg'] = $employee_name." WELCOME TO GSL-MIS ";
                 header('location:../../PAGES/DASHBOARD/');
             }
             else
@@ -119,6 +119,13 @@ switch($action){
 
 
         }
+        break; 
+        
+        
+        
+        default:
+        header('location:../../');
+        session_destroy();    
         break;          
 
 }

@@ -94,7 +94,7 @@ switch($action){
                 $_SESSION['success_msg'] = $employee_fname." ".$employee_lname." INFORMATION UPDATED SUCCESSFULLY!!!";
                 $result = $metricDaoObj->createMetric($metricObj);
                 $employeeDaoObj->updateEmployee($employeeObj);
-                header("location:{$_SERVER['HTTP_REFERER']}");
+                header("location:../../PAGES/EMPLOYEES/employees.php");
             }
 
 
@@ -102,7 +102,32 @@ switch($action){
 
 
         }
+        break;
+
+
+
+    default:
+        header('location:../../');
+        session_destroy();    
         break;    
+        
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
 
 ?>

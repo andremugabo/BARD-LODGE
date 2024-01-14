@@ -17,6 +17,20 @@ class ProductCategoryDao extends db{
         return $result;
     }
 
+    public function updateCategory(ProductCategory $productCategory) {
+        $pc_id = $productCategory->getPcId();
+        $pc_name = $productCategory->getPcName();
+
+        $query = "UPDATE  product_category  SET  pc_name = ? WHERE pc_id = ?";
+        $statement = $this->connect()->prepare($query);
+        $result  = $statement->execute(array(
+            $pc_name,
+            $pc_id            
+        ));
+        return $result;
+    }
+    
+    
 
     public function checkIfCategoryExist(ProductCategory $productCategory)
     {
@@ -56,7 +70,8 @@ class ProductCategoryDao extends db{
 
 
     public function selectProductCategory() {
-        $query = "SELECT * FROM product_category ";
+        $query = "SELECT product_type.*,product_category.* FROM product_category JOIN product_type 
+        ON product_type.pt_id = product_category.pt_id ";
         $statement = $this->connect()->prepare($query);
         $statement->execute();
         while($result = $statement->fetchAll(PDO::FETCH_ASSOC))
@@ -68,19 +83,15 @@ class ProductCategoryDao extends db{
     }
 
 
-    public function selectProductCategoryByPtId(ProductCategory $productCategory) {
-        $pt_id = $productCategory->getPtId();
-        $query = "SELECT * FROM product_category ";
+    public function selectProductCategoryByPcId(ProductCategory $productCategory) {
+        $pc_id = $productCategory->getPcId();
+        $query = "SELECT * FROM product_category WHERE product_category.pc_id = ?";
         $statement = $this->connect()->prepare($query);
         $statement->execute(array(
-            $pt_id,
+            $pc_id,
         ));
-        while($result = $statement->fetchAll(PDO::FETCH_ASSOC))
-        {
+       $result = $statement->fetch();
             return $result;
-        }
-        
-        
     }
 
     public function selectOneType(ProductCategory $productCategory){

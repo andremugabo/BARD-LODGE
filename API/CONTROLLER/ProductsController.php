@@ -82,7 +82,7 @@ switch($action){
         $_SESSION['success_msg'] = $_POST['p_name']." INFORMATION UPDATED SUCCESSFULLY!!!";
         $result = $metricDaoObj->createMetric($metricObj);
         $productDaoObj->updateProducts($productObj);
-        header("location:{$_SERVER['HTTP_REFERER']}");
+        header("location:../../PAGES/PRODUCTS/products.php");
 
         break; 
     case 'sideDishes':
@@ -126,7 +126,15 @@ switch($action){
         $productDaoObj->disableProductsWithSideDishes($productObj);
         header("location:{$_SERVER['HTTP_REFERER']}");
 
-    break;      
+    break;   
+    
+    
+
+
+    default:
+    header('location:../../');
+    session_destroy();    
+    break;    
 }
 
 

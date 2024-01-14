@@ -1,22 +1,21 @@
 <?php  require_once '../../INCLUDES/header.php' ?>
 <?php
-$productTypeDao = new ProductTypeDao();
+$productCategoryDao = new ProductCategoryDao();
 // require_once '../../API/MODEL/Prices.php';
-$productType = new ProductType();
-$pt_id = $_GET['edit'];
-$productType->setPtId($pt_id);
+$productCategory = new ProductCategory;
+$pc_id = $_GET['edit'];
+$productCategory->setPcId($pc_id);
 // echo $e_id;
-$selectById = $productTypeDao->selectProductTypeById($productType);
+$selectById = $productCategoryDao->selectProductCategoryByPcId($productCategory);
 // print_r($selectById);
 
 ?>
 <div class="container-fluid section-title d-flex mb-2">
     <div class="s-title text-start col-5">
-        <h2>Edit Type</h2>
+        <h2>Edit Category</h2>
     </div>
     <div class="s-btn text-end col-7">
-        <button type="button" class="btn btn-danger w-50"
-            onclick="window.location.href='productsType.php'">Back</button>
+        <button type="button" class="btn btn-danger w-50" onclick="window.location.href='category.php'">Back</button>
     </div>
 </div>
 <div class="b-example-divider"></div>
@@ -27,15 +26,15 @@ $selectById = $productTypeDao->selectProductTypeById($productType);
         <div class="modal-content rounded-5 shadow">
             <div class="modal-header p-5 pb-4 border-bottom-0">
                 <!-- <h5 class="modal-title">Modal title</h5> -->
-                <h2 class="fw-bold mb-0">Edit Type</h2>
+                <h2 class="fw-bold mb-0">Edit Category</h2>
             </div>
 
             <div class="modal-body p-5 pt-0">
-                <form class="" action="../../API/CONTROLLER/ProductTypeController.php?action=edit" method="post">
+                <form class="" action="../../API/CONTROLLER/productCategoryController.php?action=edit" method="post">
                     <div class="form-floating mb-3" style="display:none;">
-                        <input type="text" class="form-control rounded-4" value="<?=$selectById['PT_ID']?>" name="pt_id"
-                            placeholder="PT_ID">
-                        <label for="floatingInput">pt_id</label>
+                        <input type="text" class="form-control rounded-4" value="<?=$selectById['PC_ID']?>" name="pc_id"
+                            placeholder="PC_ID">
+                        <label for="floatingInput">pc_id</label>
                     </div>
 
                     <!-- <div class="form-floating mb-3" style="display:none;">
@@ -50,8 +49,8 @@ $selectById = $productTypeDao->selectProductTypeById($productType);
                             aria-label=".form-select-lg example" onchange="getCategory(this.value)" required>
                             <option selected disabled value="">Choose&nbsp;Product&nbsp;Type</option>
                             <?php 
-                                $typeDaoObj = new ProductTypeDao();
-                                $selectType = $typeDaoObj->selectProductType();
+                                $typeDaoObj = new productCategoryDao();
+                                $selectType = $typeDaoObj->selectproductCategory();
                                 if($selectType != null):
                                     foreach($selectType as $item){ ?>
                             <option value="<?=$item['PT_ID']?>"><?=$item['PT_NAME'];?></option>
@@ -72,9 +71,9 @@ $selectById = $productTypeDao->selectProductTypeById($productType);
                     </div> -->
 
                     <div class="mb-3">
-                        <label for="p_name" class="col-form-label">Type&nbsp;Name:</label>
-                        <input type="text" class="form-control" name="pt_name" id="pt_name"
-                            value="<?=$selectById['PT_NAME']?>" placeholder="Enter Product" required>
+                        <label for="p_name" class="col-form-label">Category&nbsp;Name:</label>
+                        <input type="text" class="form-control" name="pc_name" id="pc_name"
+                            value="<?=$selectById['PC_NAME']?>" placeholder="Enter Product" required>
                     </div>
 
                     <!-- <div class="mb-3">
@@ -119,7 +118,7 @@ $selectById = $productTypeDao->selectProductTypeById($productType);
 
 
                     <button class="w-100 mb-2 btn btn-lg rounded-4 btn-primary" type="submit"
-                        name="editType">Edit&nbsp;Type</button>
+                        name="editCategory">Edit&nbsp;Category</button>
                 </form>
             </div>
         </div>

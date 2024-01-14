@@ -4,7 +4,7 @@ require_once '../../INCLUDES/header.php';?>
 
 <div class="container-fluid section-title d-flex mb-2">
     <div class="s-title text-start col-5">
-        <h2>Products Category</h2>
+        <h2>Products Images</h2>
     </div>
     <div class="s-btn text-end col-7">
         <!-- <button type="button" class="btn btn-sm btn-secondary" onclick="window.location.href='sideDishes.php'">Sides
@@ -13,7 +13,7 @@ require_once '../../INCLUDES/header.php';?>
         <button type="button" class="btn btn-sm btn-success" onclick="window.location.href='Price.php'">Price</button>
         &nbsp; -->
         <button type="button" class="btn btn-sm btn-warning text-white" data-bs-toggle="modal"
-            data-bs-target="#employeeModal">Insert&nbsp;Products&nbsp;Category</button>
+            data-bs-target="#employeeModal">Insert&nbsp;Products&nbsp;Images</button>
         &nbsp;
         <button type="button" class="btn btn-sm btn-danger " onclick="window.location.href='products.php'">Back</button>
     </div>
@@ -22,60 +22,88 @@ require_once '../../INCLUDES/header.php';?>
 <div class="col">
     <div class="card">
         <div class="card-header">
-            <strong class="card-title">Products Category Table</strong>
+            <strong class="card-title">Products Images Table</strong>
         </div>
         <div class="card-body overflow-auto">
-            <table class="table table-striped">
-                <thead>
+            <table class="table align-middle mb-0 bg-white table-striped">
+                <thead class="bg-light">
                     <tr>
-                        <th scope="col" style="text-align: center;">#</th>
-                        <th scope="col" style="text-align: center;">Type&nbsp;Name</th>
-                        <th scope="col" style="text-align: center;">Category&nbsp;Name</th>
-                        <!-- <th scope="col" style="text-align: center;">Products</th>
-                        <th scope="col" style="text-align: center;">Purchasing&nbsp;Price</th>
-                        <th scope="col" style="text-align: center;">Selling&nbsp;Price</th>
-                        <th scope="col" style="text-align: center;">Special&nbsp;Price</th>
-                        <th scope="col" style="text-align: center;">Unity</th> -->
-                        <th scope="col" style="text-align: center;">Action</th>
-                    </tr>
+                        <th>#</th>
+                        <th>Image</th>
+                        <th>Product</th>
+                        <th>Title</th>
+                        <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <?php 
-                    $category = new ProductCategoryDao();
-                    $selectCategory =$category->selectProductCategory();
-                    $num = 0;
-                    // print_r($selectCategory);
-                    if ($selectCategory != null):
-                    foreach ($selectCategory as $item) {  $num++;?>
-
-
                     <tr>
-                        <td style="text-align: center;"><?=$num?></td>
-                        <td style="text-align: center;"><?=$item['PT_NAME']?></td>
-                        <td style="text-align: center;"><?=$item['PC_NAME']?></td>
-                        <!-- <td style="text-align: center;"><?=$item['PPRICE']?></td>
-                        <td style="text-align: center;"><?=$item['SPRICE']?></td>
-                        <td style="text-align: center;"><?=$item['EPRICE']?></td>
-                        <td style="text-align: center;"><?=$item['UNITY_NAME']?></td> -->
-                        <td style="text-align: center;"><button type="button btn-sm" title="Edit Price Info"
-                                class="btn btn-success table-btn"
-                                onclick="window.location.href='editCategory.php?edit=<?=$item['PC_ID']?>'"><img
-                                    src="../../ASSETS/SIMAGES/Edit_20px.png" class="align-middle table-img"
-                                    alt=""></button>
-                            <!-- &nbsp;<button type="button btn-sm" title="Disable Price Info"
-                                class="btn btn-primary table-btn"
-                                onclick="window.location.href='../../API/CONTROLLER/pricesController.php?action=disable&id=<?=$item['PRICE_ID']?>'"><img
-                                    src="../../ASSETS/SIMAGES/Cancel 2_20px_1.png" class="align-middle table-img"
-                                    alt=""></button> -->
+                        <td>
+                            <div class="d-flex align-items-center">
+                                <img src="https://mdbootstrap.com/img/new/avatars/8.jpg" alt=""
+                                    style="width: 45px; height: 45px" class="rounded-circle" />
+
+                            </div>
+                        </td>
+                        <td>
+                            <p class="fw-normal mb-1">Software engineer</p>
+                            <p class="text-muted mb-0">IT department</p>
+                        </td>
+                        <td>
+                            <span class="badge badge-success rounded-pill d-inline">Active</span>
+                        </td>
+                        <td>Senior</td>
+                        <td>
+                            <button type="button" class="btn btn-primary btn-sm btn-rounded">
+                                Edit
+                            </button>
                         </td>
                     </tr>
+                    <tr>
+                        <td>
+                            <div class="d-flex align-items-center">
+                                <img src="https://mdbootstrap.com/img/new/avatars/6.jpg" class="rounded-circle" alt=""
+                                    style="width: 45px; height: 45px" />
 
+                            </div>
+                        </td>
+                        <td>
+                            <p class="fw-normal mb-1">Consultant</p>
+                            <p class="text-muted mb-0">Finance</p>
+                        </td>
+                        <td>
+                            <span class="badge badge-primary rounded-pill d-inline">Onboarding</span>
+                        </td>
+                        <td>Junior</td>
+                        <td>
+                            <button type="button" class="btn btn-primary btn-rounded btn-sm "
+                                data-mdb-ripple-color="dark">
+                                Edit
+                            </button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="d-flex align-items-center">
+                                <img src="https://mdbootstrap.com/img/new/avatars/7.jpg" class="rounded-circle" alt=""
+                                    style="width: 45px; height: 45px" />
 
-                    <?php 
-                            }
-                        endif;
-                     ?>
+                            </div>
+                        </td>
+                        <td>
+                            <p class="fw-normal mb-1">Designer</p>
+                            <p class="text-muted mb-0">UI/UX</p>
+                        </td>
+                        <td>
+                            <span class="badge badge-warning rounded-pill d-inline">Awaiting</span>
+                        </td>
+                        <td>Senior</td>
+                        <td>
+                            <button type="button" class="btn btn-primary btn-rounded btn-sm "
+                                data-mdb-ripple-color="dark">
+                                Edit
+                            </button>
+                        </td>
+                    </tr>
                 </tbody>
             </table>
         </div>
@@ -90,11 +118,11 @@ require_once '../../INCLUDES/header.php';?>
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Insert&nbsp;Products&nbsp;Category</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Insert&nbsp;Products&nbsp;Type</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
             <div class="modal-body">
-                <form action="../../API/CONTROLLER/ProductCategoryController.php?action=insert" method="POST">
+                <form action="../../API/CONTROLLER/ProductTypeController.php?action=insert" method="POST">
 
                     <div class="mb-3">
                         <label for="p_type" class="col-form-label">Products&nbsp;Type:</label>
@@ -114,23 +142,23 @@ require_once '../../INCLUDES/header.php';?>
                         </select>
                     </div>
 
-                    <!-- <div class="mb-3">
+                    <div class="mb-3">
                         <label for="role" class="col-form-label">Products&nbsp;Category:</label>
                         <select class="form-select form-select mb-3" id="category" onchange="getProduct(this.value)"
                             name="pc_id" aria-label=".form-select-lg example" required>
                             <option selected disabled value="">Choose&nbsp;Product&nbsp;Category</option>
 
                         </select>
-                    </div> -->
+                    </div>
 
-                    <!-- <div class="mb-3">
+                    <div class="mb-3">
                         <label for="product" class="col-form-label">Product:</label>
                         <select class="form-select form-select mb-3" id="product" name="p_id" required
                             aria-label=".form-select-lg example">
                             <option selected disabled value=" ">Choose&nbsp;Product</option>
 
                         </select>
-                    </div> -->
+                    </div>
 
                     <!-- <div class="mb-3">
                         <label for="role" class="col-form-label">Product&nbsp;Unity:</label>
@@ -162,14 +190,14 @@ require_once '../../INCLUDES/header.php';?>
                             placeholder="ENTER SELLING PRICE" required>
                     </div> -->
                     <div class="mb-3">
-                        <label for="pc_name" class="col-form-label">Product&nbsp;Category:</label>
-                        <input type="text" class="form-control" name="pc_name" id="pc_name"
-                            placeholder="ENTER PRODUCT CATEGORY NAME" required>
+                        <label for="p_name" class="col-form-label">Product&nbsp;Image:</label>
+                        <input type="file" class="form-control" name="pi_name" id="pi_name"
+                            placeholder="ENTER PRODUCT IMAGE" required>
                     </div>
 
 
 
-                    <button type="submit" name="addCategory" class="btn btn-primary">Add&nbsp;Category</button>
+                    <button type="submit" name="addImage" class="btn btn-primary">Add&nbsp;Image</button>
 
                 </form>
             </div>

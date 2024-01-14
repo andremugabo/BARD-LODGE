@@ -14,9 +14,66 @@ $metricObj = new Metric();
 
 switch($action){
     case 'insert':
-        echo $_POST['pt_name'];
+        if(isset($_POST['addType']))
+        {
+            $productTypeObj->setPtName(strtoupper($_POST['pt_name']));
+            $feedback = $productTypeDaoObj->checkIfProductTypeExist($productTypeObj);
+            // echo $feedback;
+            if($feedback == 0)
+            {
+                //create metric 
+                //set user id for metric 
+                $metricObj->setEId($_SESSION['logged']['E_ID']);
+                $mDesc = " CREATED A NEW TYPE  NAMED ".$_POST['pt_name'];
+                $metricObj->setMDesc($mDesc);
+                //to review after sessions
+                $metricObj->setSId(null);
+                $_SESSION['success_msg'] = $_POST['pt_name']." REGISTERED SUCCESSFULLY!!!";
+                $productTypeDaoObj->createProductType($productTypeObj);
+                header("location:{$_SERVER['HTTP_REFERER']}");
+
+            }
+            else
+            {
+                $_SESSION['fail_msg']="TYPE EXIST !!";
+                header("location:{$_SERVER['HTTP_REFERER']}");
+            }
+            
+        }
         break;
     case 'edit':
+       
+        if(isset($_POST['editType']))
+        {
+            //  echo $_POST['pt_id'];
+             $productTypeObj->setPtId($_POST['pt_id']);
+             $productTypeObj->setPtName(strtoupper($_POST['pt_name']));
+
+             //create metric 
+            //set user id for metric 
+            $metricObj->setEId($_SESSION['logged']['E_ID']);
+            $mDesc = " UPDATED TYPE  NAMED ".$_POST['pt_name'];
+            $metricObj->setMDesc($mDesc);
+            //to review after sessions
+            $metricObj->setSId(null);
+            $_SESSION['success_msg'] = $_POST['pt_name']." TYPE UPDATED SUCCESSFULLY!!!";
+            $productTypeDaoObj->updateProductType($productTypeObj);
+            header("location:../../PAGES/PRODUCTS/productsType.php");
+
+
+        }
+        else
+        {
+            $_SESSION['fail_msg']="FAILED TO UPDATE !!";
+            header("location:{$_SERVER['HTTP_REFERER']}");
+        }
+        break;  
+        
+        
+
+        default:
+        header('location:../../');
+        session_destroy();    
         break;    
 }
 

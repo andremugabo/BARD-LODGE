@@ -68,7 +68,7 @@ switch($action){
                 $_SESSION['success_msg'] ="PRICE UPDATED SUCCESSFULLY!!!";
                 $metricDaoObj->createMetric($metricObj);
                 $priceDaoObj->updatePrice($priceObj);
-                header("location:{$_SERVER['HTTP_REFERER']}");
+                header("location:../../PAGES/PRODUCTS/price.php");
 
 
 
@@ -87,7 +87,14 @@ switch($action){
 
         }
        
-        break;    
+        break; 
+        
+        
+
+    default:
+        header('location:../../');
+        session_destroy();    
+        break;        
 }
 
 

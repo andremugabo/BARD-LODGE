@@ -16,6 +16,19 @@ class ProductTypeDao extends db{
         return $result;
     }
 
+    public function updateProductType(ProductType $productType) {
+        $pt_name = $productType->getPtName();
+        $pt_id = $productType->getPtId();       
+
+        $query = "UPDATE product_type SET pt_name = ? WHERE  product_type.pt_id = ?";
+        $statement = $this->connect()->prepare($query);
+        $result  = $statement->execute(array(
+            $pt_name,
+            $pt_id
+        ));
+        return $result;
+    }
+
     public function checkIfProductTypeExist(ProductType $productType)
     {
         $ptName = $productType->getPtName();
