@@ -18,10 +18,12 @@ class ProductImagesDao extends db {
 
     public function checkIfImageExist(ProductImages $images){
         $p_id = $images->getPId();
-        $query = "SELECT * FROM product_image WHERE p_id = ?";
+        $pi_name = $images->getPiImage();
+        $query = "SELECT * FROM product_image WHERE p_id = ? OR pi_name = ?";
         $statement = $this->connect()->prepare($query);
         $statement->execute(array(
-            $p_id
+            $p_id,
+            $pi_name
         ));
         $result = $statement->rowCount();
         return $result;
@@ -42,6 +44,19 @@ class ProductImagesDao extends db {
     }
 
 
+    public function getImagesById(ProductImages $images){
+        $pi_id = $images->getPiId();
+        $query = "SELECT products.*,product_image.* FROM product_image JOIN products 
+        ON product_image.p_id = products.p_id WHERE product_image.pi_id = ?";
+        $statement = $this->connect()->prepare($query);
+        $statement->execute(array(
+            $pi_id
+        ));
+        $result = $statement->fetch();
+            return $result;
+        
+    }
+
     public function selectImages(){
         $query = "SELECT products.*,product_image.* FROM product_image JOIN products 
         ON product_image.p_id = products.p_id WHERE products.p_status = '1'";
@@ -51,6 +66,7 @@ class ProductImagesDao extends db {
             return $result;
         }
     }
+
 
 
     

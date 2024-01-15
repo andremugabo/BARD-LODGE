@@ -58,7 +58,7 @@ require_once '../../INCLUDES/header.php';?>
                         <td style="text-align: center;"><?=$item['SPRICE']?></td>
                         <td style="text-align: center;"><?=$item['EPRICE']?></td>
                         <td style="text-align: center;"><?=$item['UNITY_NAME']?></td> -->
-                        <td style="text-align: center;"><button type="button btn-sm" title="Edit Price Info"
+                        <td style="text-align: center;"><button type="button btn-sm" title="Edit Category Info"
                                 class="btn btn-success table-btn"
                                 onclick="window.location.href='editCategory.php?edit=<?=$item['PC_ID']?>'"><img
                                     src="../../ASSETS/SIMAGES/Edit_20px.png" class="align-middle table-img"

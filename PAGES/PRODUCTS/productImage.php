@@ -28,82 +28,49 @@ require_once '../../INCLUDES/header.php';?>
             <table class="table align-middle mb-0 bg-white table-striped">
                 <thead class="bg-light">
                     <tr>
-                        <th>#</th>
-                        <th>Image</th>
-                        <th>Product</th>
-                        <th>Title</th>
-                        <th>Actions</th>
+                        <th scope="col" style="text-align: center;">#</th>
+                        <th scope="col">Image</th>
+                        <th scope="col" style="text-align: center;">Product</th>
+                        <th scope="col" style="text-align: center;">Actions</th>
                     </tr>
                 </thead>
+
+
                 <tbody>
+                    <?php 
+                 $image = new ProductImagesDao;
+                 $selectImage =$image->selectImages();
+                 $num = 0;
+                //  print_r($selectImage);
+                 if ($selectImage != null):
+                 foreach ($selectImage as $item) {  $num++;
+                
+                 ?>
                     <tr>
-                        <td>
+                        <td style="text-align: center;"><?=$num?></td>
+                        <td style="text-align: center;">
                             <div class="d-flex align-items-center">
-                                <img src="https://mdbootstrap.com/img/new/avatars/8.jpg" alt=""
+                                <img src="../../ASSETS/PIMAGES/<?=$item['PI_NAME']?>" alt=""
                                     style="width: 45px; height: 45px" class="rounded-circle" />
 
                             </div>
                         </td>
-                        <td>
-                            <p class="fw-normal mb-1">Software engineer</p>
-                            <p class="text-muted mb-0">IT department</p>
+                        <td style="text-align: center;">
+                            <?=$item['P_NAME']?>
                         </td>
-                        <td>
-                            <span class="badge badge-success rounded-pill d-inline">Active</span>
-                        </td>
-                        <td>Senior</td>
-                        <td>
-                            <button type="button" class="btn btn-primary btn-sm btn-rounded">
+                        <td style="text-align: center;">
+                            <button type="button" class="btn btn-primary btn-sm btn-rounded"
+                                onclick="window.location.href='editImage.php?edit=<?=$item['PI_ID']?>'">
                                 Edit
                             </button>
                         </td>
                     </tr>
-                    <tr>
-                        <td>
-                            <div class="d-flex align-items-center">
-                                <img src="https://mdbootstrap.com/img/new/avatars/6.jpg" class="rounded-circle" alt=""
-                                    style="width: 45px; height: 45px" />
+                    <?php
+                 }
+                endif;
+                
+                ?>
 
-                            </div>
-                        </td>
-                        <td>
-                            <p class="fw-normal mb-1">Consultant</p>
-                            <p class="text-muted mb-0">Finance</p>
-                        </td>
-                        <td>
-                            <span class="badge badge-primary rounded-pill d-inline">Onboarding</span>
-                        </td>
-                        <td>Junior</td>
-                        <td>
-                            <button type="button" class="btn btn-primary btn-rounded btn-sm "
-                                data-mdb-ripple-color="dark">
-                                Edit
-                            </button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <div class="d-flex align-items-center">
-                                <img src="https://mdbootstrap.com/img/new/avatars/7.jpg" class="rounded-circle" alt=""
-                                    style="width: 45px; height: 45px" />
-
-                            </div>
-                        </td>
-                        <td>
-                            <p class="fw-normal mb-1">Designer</p>
-                            <p class="text-muted mb-0">UI/UX</p>
-                        </td>
-                        <td>
-                            <span class="badge badge-warning rounded-pill d-inline">Awaiting</span>
-                        </td>
-                        <td>Senior</td>
-                        <td>
-                            <button type="button" class="btn btn-primary btn-rounded btn-sm "
-                                data-mdb-ripple-color="dark">
-                                Edit
-                            </button>
-                        </td>
-                    </tr>
                 </tbody>
             </table>
         </div>
@@ -122,12 +89,13 @@ require_once '../../INCLUDES/header.php';?>
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
             <div class="modal-body">
-                <form action="../../API/CONTROLLER/ProductTypeController.php?action=insert" method="POST">
+                <form action="../../API/CONTROLLER/ProductImageController.php?action=insert" method="POST"
+                    enctype="multipart/form-data">
 
                     <div class="mb-3">
                         <label for="p_type" class="col-form-label">Products&nbsp;Type:</label>
                         <select class="form-select form-select mb-3" id="type" name="p_type"
-                            aria-label=".form-select-lg example" onchange="getCategory(this.value)" required>
+                            aria-label=".form-select-lg example" onchange="getimage(this.value)" required>
                             <option selected disabled value="">Choose&nbsp;Product&nbsp;Type</option>
                             <?php 
                                 $typeDaoObj = new ProductTypeDao();
@@ -143,10 +111,10 @@ require_once '../../INCLUDES/header.php';?>
                     </div>
 
                     <div class="mb-3">
-                        <label for="role" class="col-form-label">Products&nbsp;Category:</label>
-                        <select class="form-select form-select mb-3" id="category" onchange="getProduct(this.value)"
+                        <label for="role" class="col-form-label">Products&nbsp;image:</label>
+                        <select class="form-select form-select mb-3" id="image" onchange="getProduct(this.value)"
                             name="pc_id" aria-label=".form-select-lg example" required>
-                            <option selected disabled value="">Choose&nbsp;Product&nbsp;Category</option>
+                            <option selected disabled value="">Choose&nbsp;Product&nbsp;image</option>
 
                         </select>
                     </div>

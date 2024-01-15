@@ -37,7 +37,7 @@
 
 
 
-    <?php if($employee_role =="MD" || $employee_role == "MANAGER" || $employee_role == "IT"): ?>
+    <?php if($employee_role =="MD" || $employee_role == "MANAGER" || $employee_role == "IT" || $employee_role == "ACCOUNTANT"): ?>
 
     <div class="card-principal card bg-success m-2">
         <a href="../EMPLOYEES/employees.php" style="text-decoration:none;">
@@ -113,7 +113,7 @@
 
     <?php endif ?>
 
-
+    <?php if($employee_role =="MD" || $employee_role == "MANAGER" || $employee_role == "IT" || $employee_role == "ACCOUNTANT"): ?>
     <div class="card-principal card bg-warning m-2">
         <a href="#" style="text-decoration:none;">
             <div class="card-body">
@@ -144,9 +144,11 @@
             </div>
         </a>
     </div>
+    <?php endif; ?>
 
 
-    <?php ///if($employee_role =="ADMIN"){ ?>
+    <?php if($employee_role =="MD" || $employee_role == "MANAGER" || $employee_role == "IT" || $employee_role == "ACCOUNTANT"): ?>
+
 
     <div class="card-principal card bg-info m-2">
         <a href="../PRODUCTS/products.php" style="text-decoration:none;">
@@ -168,7 +170,7 @@
 
 
 								 ?>
-                <h3 class="mt-1 mb-3 text-black" style="font-size: 18px;">
+                <h3 class="mt-1 mb-3 text-black" style="font-size: 15px;">
                     <?=$count?>&nbsp;Products
                 </h3>
                 <div class="mb-0">
@@ -180,41 +182,13 @@
         </a>
     </div>
 
-    <?php //} ?>
+    <?php endif; ?>
 
 
-    <?php //if($employee_role =="ADMIN"){ ?>
+    <?php if($employee_role =="MD" || $employee_role == "MANAGER" || $employee_role == "IT" || $employee_role == "ACCOUNTANT"): ?>
 
     <div class="card-principal card bg-danger m-2">
-        <a href="#" style="text-decoration:none;">
-            <div class="card-body">
-                <div class="row">
-                    <div class="col mt-0">
-                        <h6 class="card-title text-black">PRICE</h6>
-                    </div>
-
-                    <div class="col-auto">
-                        <div class="stat text-primary">
-                            <i class="align-middle text-black" data-feather="log-in"></i>
-                        </div>
-                    </div>
-                </div>
-                <h3 class="mt-1 mb-3 text-black">2.382</h3>
-                <div class="mb-0">
-                    <span class="text-white"> <i class="mdi mdi-arrow-bottom-right"></i> PUB-SM
-                    </span>
-                    <!-- <span class="text-black">Since last week</span> -->
-                </div>
-            </div>
-        </a>
-    </div>
-
-    <?php //} ?>
-
-
-
-    <div class="card-principal card bg-info m-2">
-        <a href="#" style="text-decoration:none;">
+        <a href="../SESSIONS/session.php" style="text-decoration:none;">
             <div class="card-body">
                 <div class="row">
                     <div class="col mt-0">
@@ -223,13 +197,29 @@
 
                     <div class="col-auto">
                         <div class="stat text-primary">
-                            <i class="align-middle text-black" data-feather="shopping-cart"></i>
+                            <i class="align-middle text-black" data-feather="log-in"></i>
                         </div>
                     </div>
                 </div>
-                <h3 class="mt-1 mb-3 text-black">2.382</h3>
+                <h3 class="mt-1 mb-3 text-white" style="font-size: 10px;">
+                    <?php
+                        $sessionDao = new SessionsDao();
+                        $sessionInfo = $sessionDao->selectOpenSession();
+                        $countSession = $sessionDao->checkOpenSessions();
+                        // print_r($sessionInfo);
+                        if($countSession == 0)
+                        {
+                            echo "THERE IS NO OPEN SESSION";
+                        }
+                        else
+                        {
+                            echo $sessionInfo[0]['S_REF'];
+                        }
+                    
+                    ?>
+                </h3>
                 <div class="mb-0">
-                    <span class="text-white"> <i class="mdi mdi-arrow-bottom-right"></i> PUB-SM
+                    <span class="text-white"> <i class="mdi mdi-arrow-bottom-right"></i>GSL-MIS
                     </span>
                     <!-- <span class="text-black">Since last week</span> -->
                 </div>
@@ -237,17 +227,18 @@
         </a>
     </div>
 
+    <?php endif; ?>
 
+    <?php  if ($countSession !== 0 ):?>
 
+    <?php if($employee_role =="MD" || $employee_role == "MANAGER" || $employee_role == "IT" || $employee_role == "ACCOUNTANT"): ?>
 
-
-
-    <div class="card-principal card bg-warning m-2">
-        <a href="#" style="text-decoration:none;">
+    <div class="card-principal card bg-info m-2">
+        <a href="../STOCKS/gStock.php" style="text-decoration:none;">
             <div class="card-body">
                 <div class="row">
                     <div class="col mt-0">
-                        <h6 class="card-title text-black">PURCHASES</h6>
+                        <h6 class="card-title text-black">G-STOCK</h6>
                     </div>
 
                     <div class="col-auto">
@@ -258,7 +249,38 @@
                 </div>
                 <h3 class="mt-1 mb-3 text-black">2.382</h3>
                 <div class="mb-0">
-                    <span class="text-white"> <i class="mdi mdi-arrow-bottom-right"></i>PUB-SM
+                    <span class="text-white"> <i class="mdi mdi-arrow-bottom-right"></i>GSL-MIS
+                    </span>
+                    <!-- <span class="text-black">Since last week</span> -->
+                </div>
+            </div>
+        </a>
+    </div>
+    <?php endif; ?>
+
+
+
+
+    <?php if($employee_role =="MD" || $employee_role == "MANAGER" || $employee_role == "IT" || $employee_role == "ACCOUNTANT"): ?>
+
+
+    <div class="card-principal card bg-warning m-2">
+        <a href="#" style="text-decoration:none;">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col mt-0">
+                        <h6 class="card-title text-black">S-STOCK</h6>
+                    </div>
+
+                    <div class="col-auto">
+                        <div class="stat text-primary">
+                            <i class="align-middle text-black" data-feather="shopping-cart"></i>
+                        </div>
+                    </div>
+                </div>
+                <h3 class="mt-1 mb-3 text-black">2.382</h3>
+                <div class="mb-0">
+                    <span class="text-white"> <i class="mdi mdi-arrow-bottom-right"></i>GSL-MIS
                     </span>
                     <!-- <span class="text-black">Since last week</span> -->
                 </div>
@@ -266,6 +288,7 @@
         </a>
     </div>
 
+    <?php endif; ?>
 
 
 
@@ -276,7 +299,7 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col mt-0">
-                        <h6 class="card-title text-black">STOCK</h6>
+                        <h6 class="card-title text-black">ORDER</h6>
                     </div>
 
                     <div class="col-auto">
@@ -287,7 +310,7 @@
                 </div>
                 <h3 class="mt-1 mb-3 text-black">2.382</h3>
                 <div class="mb-0">
-                    <span class="text-white"> <i class="mdi mdi-arrow-bottom-right"></i> PUB-SM
+                    <span class="text-white"> <i class="mdi mdi-arrow-bottom-right"></i>GSL-MIS
                     </span>
                     <!-- <span class="text-black">Since last week</span> -->
                 </div>
@@ -323,7 +346,7 @@
         </a>
     </div>
 
-
+    <?php endif; ?>
 
     <?php //if($employee_role =="ADMIN"){ ?>
 

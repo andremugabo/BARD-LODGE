@@ -69,7 +69,7 @@ switch($action){
         // echo $p_id;
         $productObj->setPId($_POST['p_id']);
         $productObj->setPcId($_POST['pc_id']);
-        $productObj->setPName($_POST['p_name']);
+        $productObj->setPName(strtoupper($_POST['p_name']));
         $productObj->setUnityId($_POST['unity_id']);
 
         print_r($productObj);
