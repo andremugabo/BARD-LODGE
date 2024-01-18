@@ -48,7 +48,7 @@ if (isset($_POST['filter'])) {
                     <div class="col-12">
                         <!-- <label class="visually-hidden" for="p_type">Products&nbsp;Types</label> -->
                         <select class="form-select" id="type" name="p_type" aria-label=".form-select-lg example"
-                            onchange="getCategory(this.value)" required>
+                            onchange="getSCategory(this.value)" required>
                             <option selected disabled value="">Choose&nbsp;Product&nbsp;Type</option>
                             <?php 
                                 $typeDaoObj = new ProductTypeDao();
@@ -64,7 +64,7 @@ if (isset($_POST['filter'])) {
 
                     <div class="col-12">
                         <!-- <label class="visually-hidden" for="productF">Preference</label> -->
-                        <select class="form-select" id="category" onchange="getProduct(this.value)" name="pc_id"
+                        <select class="form-select" id="sCategory" onchange="getSProduct(this.value)" name="pc_id"
                             required>
                             <option selected disabled value="">Choose&nbsp;Category</option>
 
@@ -73,7 +73,7 @@ if (isset($_POST['filter'])) {
 
                     <div class="col-12">
                         <!-- <label class="visually-hidden" for="">Preference</label> -->
-                        <select class="form-select" id="product" name="p_id" required>
+                        <select class="form-select" id="sProduct" name="p_id" required>
                             <option selected>Choose&nbsp;Product</option>
 
                         </select>
