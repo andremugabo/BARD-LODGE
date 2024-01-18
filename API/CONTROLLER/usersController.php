@@ -3,6 +3,7 @@ session_start();
 require_once '../DAO/UsersDao.php';
 require_once '../DAO/MetricDao.php';
 require_once '../DAO/EmployeesDao.php';
+require_once '../DAO/SessionsDao.php';
 
 $action = $_GET['action'];
 $userDaoObj = new UsersDao();
@@ -11,6 +12,8 @@ $employeeDaoObj = new EmployeesDao();
 $employeeObj = new Employees();
 $metricDaoObj = new MetricDao();
 $metricObj = new Metric();
+$sessionObj = new Sessions();
+$sessionDao = new SessionsDao();
 
 switch($action){
     case 'login':
@@ -22,6 +25,20 @@ switch($action){
             $feedback = $userDaoObj->checkIfUserExist($userObj);
             if($feedback > 0)
             {
+                //Get current session 
+                $currentSession = $sessionDao->selectCurrentOpenSession();
+                if(!empty( $currentSession))
+                {
+                    $getCurrentSession = $currentSession['s_id'];
+                    $_SESSION['currentSession'] = $getCurrentSession ;
+                }
+                // print_r($currentSession);
+                
+                // echo $getCurrentSession;
+                //Set session for current sessions
+                
+                // printf($_SESSION['currentSession']);
+                
                 //Get user id 
                 $getUserId = $userDaoObj->getUserId($userObj);
                 //fetch user information
@@ -34,10 +51,18 @@ switch($action){
                 $metricObj->setEId($getUserId['e_id']);
                 $mDesc = " HAS LOGGED IN  ";
                 $metricObj->setMDesc($mDesc);
-                //to review after sessions
-                $metricObj->setSId(null);
+                //to review after sessions(Done)
+                if(isset( $_SESSION['currentSession']))
+                {
+                    $metricObj->setSId($getCurrentSession);
+                }
+                else
+                {
+                    $metricObj->setSId(null);
+                }
+                
                 $result = $metricDaoObj->createMetric($metricObj);
-                echo "  ".$result;
+                // echo "  ".$result;
 
 
                 // print_r($_SESSION['logged']);
@@ -74,8 +99,15 @@ switch($action){
             $metricObj->setEId($_SESSION['logged']['E_ID']);
             $mDesc = " GAVE AN EMPLOYEE WITH ".$selectEmployee['E_PHONE'].", AN ACCESS TO THE SYSTEM AS A USER";
             $metricObj->setMDesc($mDesc);
-            //to review after sessions
-            $metricObj->setSId(null);
+            //to review after sessions(Done)
+            if(isset( $_SESSION['currentSession']))
+            {
+                $metricObj->setSId($getCurrentSession);
+            }
+            else
+            {
+                $metricObj->setSId(null);
+            }
             $result = $metricDaoObj->createMetric($metricObj);
             //create a user
 
@@ -110,8 +142,15 @@ switch($action){
             $metricObj->setEId($_SESSION['logged']['E_ID']);
             $mDesc = " DISABLED A USER";
             $metricObj->setMDesc($mDesc);
-            //to review after sessions
-            $metricObj->setSId(null);
+            //to review after sessions(Done)
+            if(isset( $_SESSION['currentSession']))
+            {
+                $metricObj->setSId($getCurrentSession);
+            }
+            else
+            {
+                $metricObj->setSId(null);
+            }
             $result = $metricDaoObj->createMetric($metricObj);
             $userDaoObj->disableUser($userObj);
             $_SESSION['success_msg'] =" DISABLED SUCCESSFULLY!! ";

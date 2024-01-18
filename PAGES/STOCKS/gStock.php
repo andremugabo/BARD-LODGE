@@ -179,7 +179,7 @@ if (isset($_POST['filter'])) {
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
             <div class="modal-body">
-                <form action="../../API/CONTROLLER/pricesController.php?action=insert" method="POST">
+                <form action="../../API/CONTROLLER/GStockController.php?action=insert" method="POST">
 
                     <div class="mb-3">
                         <label for="p_type" class="col-form-label">Products&nbsp;Type:</label>
@@ -237,9 +237,9 @@ if (isset($_POST['filter'])) {
 
 
                     <div class="mb-3">
-                        <label for="p_name" class="col-form-label">Purchasing&nbsp;Price:</label>
-                        <input type="text" class="form-control" name="pprice" id="pprice"
-                            placeholder="ENTER PURCHASING PRICE" required>
+                        <label for="p_name" class="col-form-label">Quantity:</label>
+                        <input type="text" class="form-control" name="qty" id="qty" placeholder="ENTER QUANTITY"
+                            required>
                     </div>
                     <!-- <div class="mb-3">
                         <label for="p_name" class="col-form-label">Selling&nbsp;Price:</label>
@@ -254,7 +254,7 @@ if (isset($_POST['filter'])) {
 
 
 
-                    <button type="submit" name="addPrice" class="btn btn-primary">Add&nbsp;Prices</button>
+                    <button type="submit" name="addProductIS" class="btn btn-primary">Add&nbsp;Products</button>
 
                 </form>
             </div>
