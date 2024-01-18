@@ -34,6 +34,14 @@ class SessionsDao extends db{
         return $result;
     }
 
+    public function selectCurrentOpenSession(){
+        $query = "SELECT s_id FROM sessions WHERE sessions.s_status = 'OPEN'";
+        $statement = $this->connect()->prepare($query);
+        $statement->execute();
+        $result = $statement->fetch();
+            return $result;    
+    }
+
     public function selectOpenSession(){
         $query = "SELECT * FROM sessions  WHERE sessions.s_status = 'OPEN'";
         $statement = $this->connect()->prepare($query);

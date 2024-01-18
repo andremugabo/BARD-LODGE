@@ -26,10 +26,19 @@ switch($action){
                 $metricObj->setEId($_SESSION['logged']['E_ID']);
                 $mDesc = " CREATED A NEW TYPE  NAMED ".$_POST['pt_name'];
                 $metricObj->setMDesc($mDesc);
-                //to review after sessions
-                $metricObj->setSId(null);
+                //to review after sessions(Done)
+                if(isset( $_SESSION['currentSession']))
+                {
+                    $metricObj->setSId($getCurrentSession);
+                }
+                else
+                {
+                    $metricObj->setSId(null);
+                }
                 $_SESSION['success_msg'] = $_POST['pt_name']." REGISTERED SUCCESSFULLY!!!";
                 $productTypeDaoObj->createProductType($productTypeObj);
+                $metricDaoObj->createMetric($metricObj);
+
                 header("location:{$_SERVER['HTTP_REFERER']}");
 
             }
@@ -54,10 +63,19 @@ switch($action){
             $metricObj->setEId($_SESSION['logged']['E_ID']);
             $mDesc = " UPDATED TYPE  NAMED ".$_POST['pt_name'];
             $metricObj->setMDesc($mDesc);
-            //to review after sessions
-            $metricObj->setSId(null);
+            //to review after sessions(Done)
+            if(isset( $_SESSION['currentSession']))
+            {
+                $metricObj->setSId($getCurrentSession);
+            }
+            else
+            {
+                $metricObj->setSId(null);
+            }
             $_SESSION['success_msg'] = $_POST['pt_name']." TYPE UPDATED SUCCESSFULLY!!!";
             $productTypeDaoObj->updateProductType($productTypeObj);
+            $metricDaoObj->createMetric($metricObj);
+
             header("location:../../PAGES/PRODUCTS/productsType.php");
 
 

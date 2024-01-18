@@ -6,7 +6,7 @@ $productByFilter = "";
 if (isset($_POST['filter'])) {
   
   $product = $_POST['p_id'];
-  $productByFilter = "AND products.p_id = '".$product."' ";
+  $productByFilter = "WHERE products.p_id = '".$product."' ";
 
 }
 
@@ -126,18 +126,18 @@ if (isset($_POST['filter'])) {
                 <thead>
                     <tr>
                         <th scope="col" style="text-align: center;">#</th>
-                        <th scope="col" style="text-align: center;">P-Code</th>
-                        <th scope="col" style="text-align: center;">Unity</th>
-                        <th scope="col" style="text-align: center;">Category</th>
-                        <th scope="col" style="text-align: center;">Products</th>
+                        <th scope="col" style="text-align: center;">Session</th>
+                        <th scope="col" style="text-align: center;">Product</th>
+                        <th scope="col" style="text-align: center;">Quantity</th>
+                        <!-- <th scope="col" style="text-align: center;">Products</th> -->
                         <th scope="col" style="text-align: center;">Action</th>
                     </tr>
                     </tr>
                 </thead>
                 <tbody>
                     <?php 
-                    $product = new ProductsDao();
-                    $selectProduct =$product->selectProductsByFilter($productByFilter);
+                    $gStock = new GStockDao();
+                    $selectProduct =$gStock->selectGStockByFilter($productByFilter);
                     $num = 0;
                     if ($selectProduct):
                     foreach ($selectProduct as $item) {  $num++;?>
@@ -145,10 +145,10 @@ if (isset($_POST['filter'])) {
 
                     <tr>
                         <td style="text-align: center;"><?=$num?></td>
-                        <td style="text-align: center;"><?=$item['P_CODE']?></td>
-                        <td style="text-align: center;"><?=$item['UNITY_NAME']?></td>
-                        <td style="text-align: center;"><?=$item['PC_NAME']?></td>
+                        <td style="text-align: center;"><?=$item['S_REF']?></td>
                         <td style="text-align: center;"><?=$item['P_NAME']?></td>
+                        <td style="text-align: center;"><?=$item['P_QTY']?></td>
+                        <!-- <td style="text-align: center;"><?=$item['P_NAME']?></td> -->
                         <td style="text-align: center;"><button type="button btn-sm" title="Edit Product Info"
                                 class="btn btn-primary table-btn"
                                 onclick="window.location.href='editProducts.php?edit=<?=$item['P_ID']?>'"><img
@@ -217,7 +217,7 @@ if (isset($_POST['filter'])) {
                         </select>
                     </div>
 
-                    <div class="mb-3">
+                    <!-- <div class="mb-3">
                         <label for="role" class="col-form-label">Product&nbsp;Unity:</label>
                         <select class="form-select form-select mb-3" id="unity" name="unity_id"
                             aria-label=".form-select-lg example" required>
@@ -233,7 +233,7 @@ if (isset($_POST['filter'])) {
                             <?php }  endif?>
 
                         </select>
-                    </div>
+                    </div> -->
 
 
                     <div class="mb-3">
@@ -241,16 +241,16 @@ if (isset($_POST['filter'])) {
                         <input type="text" class="form-control" name="pprice" id="pprice"
                             placeholder="ENTER PURCHASING PRICE" required>
                     </div>
-                    <div class="mb-3">
+                    <!-- <div class="mb-3">
                         <label for="p_name" class="col-form-label">Selling&nbsp;Price:</label>
                         <input type="text" class="form-control" name="sprice" id="sprice"
                             placeholder="ENTER SELLING PRICE" required>
-                    </div>
-                    <div class="mb-3">
+                    </div> -->
+                    <!-- <div class="mb-3">
                         <label for="p_name" class="col-form-label">Special&nbsp;Price:</label>
                         <input type="text" class="form-control" name="eprice" id="eprice"
                             placeholder="ENTER SPECIAL PRICE" required>
-                    </div>
+                    </div> -->
 
 
 

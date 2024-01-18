@@ -29,8 +29,15 @@ switch($action)
             $metricObj->setEId($_SESSION['logged']['E_ID']);
             $mDesc = " PRODUCT IMAGES INSERT SUCCESSFULLY!!! ";
             $metricObj->setMDesc($mDesc);
-                 //to review after sessions
-            $metricObj->setSId(null);
+             //to review after sessions(Done)
+             if(isset( $_SESSION['currentSession']))
+             {
+                 $metricObj->setSId($getCurrentSession);
+             }
+             else
+             {
+                 $metricObj->setSId(null);
+             }
             $_SESSION['success_msg'] =" PRODUCT IMAGE INSERTED SUCCESSFULLY!!!";
             $metricDaoObj->createMetric($metricObj);
             $productImageDaoObj->createImage($productImageObj);
@@ -64,8 +71,15 @@ switch($action)
             $metricObj->setEId($_SESSION['logged']['E_ID']);
             $mDesc = " PRODUCT IMAGES UPDATED SUCCESSFULLY!!! ";
             $metricObj->setMDesc($mDesc);
-                 //to review after sessions
-            $metricObj->setSId(null);
+           //to review after sessions(Done)
+           if(isset( $_SESSION['currentSession']))
+           {
+               $metricObj->setSId($getCurrentSession);
+           }
+           else
+           {
+               $metricObj->setSId(null);
+           }
             $_SESSION['success_msg'] =" PRODUCT IMAGE UPDATED SUCCESSFULLY!!!";
             $metricDaoObj->createMetric($metricObj);
             $productImageDaoObj->updateImage($productImageObj);

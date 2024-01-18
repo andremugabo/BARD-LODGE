@@ -27,8 +27,15 @@ switch($action){
             $metricObj->setEId($_SESSION['logged']['E_ID']);
             $mDesc = "PRICE  CREATED ";
             $metricObj->setMDesc($mDesc);
-            //to review after sessions
-            $metricObj->setSId(null);
+            //to review after sessions(Done)
+            if(isset( $_SESSION['currentSession']))
+            {
+                $metricObj->setSId($getCurrentSession);
+            }
+            else
+            {
+                $metricObj->setSId(null);
+            }
             $_SESSION['success_msg'] ="PRICE CREATED SUCCESSFULLY!!!";
             $metricDaoObj->createMetric($metricObj);
             $priceDaoObj->createPrice($priceObj);
@@ -63,8 +70,15 @@ switch($action){
                 $metricObj->setEId($_SESSION['logged']['E_ID']);
                 $mDesc = "PRICE  UPDATED ";
                 $metricObj->setMDesc($mDesc);
-                //to review after sessions
-                $metricObj->setSId(null);
+                // //to review after sessions(Done)
+                if(isset( $_SESSION['currentSession']))
+                {
+                    $metricObj->setSId($getCurrentSession);
+                }
+                else
+                {
+                    $metricObj->setSId(null);
+                }
                 $_SESSION['success_msg'] ="PRICE UPDATED SUCCESSFULLY!!!";
                 $metricDaoObj->createMetric($metricObj);
                 $priceDaoObj->updatePrice($priceObj);

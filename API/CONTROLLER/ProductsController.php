@@ -48,10 +48,19 @@ switch($action){
                 $mDesc = " CREATED A NEW PRODUCT  NAMED ".$p_name;
                 $metricObj->setMDesc($mDesc);
                 echo $mDesc." ".$e_regnumber;
-                //to review after sessions
-                $metricObj->setSId(null);
+                //to review after sessions(Done)
+                if(isset( $_SESSION['currentSession']))
+                {
+                    $metricObj->setSId($getCurrentSession);
+                }
+                else
+                {
+                    $metricObj->setSId(null);
+                }
                 $_SESSION['success_msg'] = $p_name." REGISTERED SUCCESSFULLY!!!";
                 $productDaoObj->createProduct($productObj);
+                $metricDaoObj->createMetric($metricObj);
+
                 header("location:{$_SERVER['HTTP_REFERER']}");
 
 
@@ -77,8 +86,15 @@ switch($action){
         $metricObj->setEId($_SESSION['logged']['E_ID']);
         $mDesc = " UPDATED INFORMATION OF ". $employee_fname." ".$employee_lname;
         $metricObj->setMDesc($mDesc);
-        //to review after sessions
-        $metricObj->setSId(null);
+        //to review after sessions(Done)
+        if(isset( $_SESSION['currentSession']))
+        {
+            $metricObj->setSId($getCurrentSession);
+        }
+        else
+        {
+            $metricObj->setSId(null);
+        }
         $_SESSION['success_msg'] = $_POST['p_name']." INFORMATION UPDATED SUCCESSFULLY!!!";
         $result = $metricDaoObj->createMetric($metricObj);
         $productDaoObj->updateProducts($productObj);
@@ -98,8 +114,15 @@ switch($action){
             $metricObj->setEId($_SESSION['logged']['E_ID']);
             $mDesc = " PRODUCT UPGRADED TO REQUIRED A SIDE DISHES SUCCESSFULLY!!! ";
             $metricObj->setMDesc($mDesc);
-            //to review after sessions
-            $metricObj->setSId(null);
+            //to review after sessions(Done)
+            if(isset( $_SESSION['currentSession']))
+            {
+                $metricObj->setSId($getCurrentSession);
+            }
+            else
+            {
+                $metricObj->setSId(null);
+            }
             $_SESSION['success_msg'] =" PRODUCT UPGRADED TO REQUIRED A SIDE DISHES SUCCESSFULLY!!!";
             $metricDaoObj->createMetric($metricObj);
             $productDaoObj->productsWithSideDishes($productObj);
@@ -119,8 +142,15 @@ switch($action){
         $metricObj->setEId($_SESSION['logged']['E_ID']);
         $mDesc = " PRODUCT DISABLED FROM THOSE REQUIRED A SIDE DISHES ";
         $metricObj->setMDesc($mDesc);
-        //to review after sessions
-        $metricObj->setSId(null);
+        //to review after sessions(Done)
+        if(isset( $_SESSION['currentSession']))
+        {
+            $metricObj->setSId($getCurrentSession);
+        }
+        else
+        {
+            $metricObj->setSId(null);
+        }
         $_SESSION['success_msg'] =" PRODUCT DISABLED TO REQUIRED A SIDE DISHES SUCCESSFULLY!!!";
         $result = $metricDaoObj->createMetric($metricObj);
         $productDaoObj->disableProductsWithSideDishes($productObj);

@@ -47,11 +47,20 @@ switch($action){
                 $metricObj->setEId($_SESSION['logged']['E_ID']);
                 $mDesc = " CREATED A SESSION ".$s_ref;
                 $metricObj->setMDesc($mDesc);
-                //to review after sessions
-                $metricObj->setSId($s_ref);
+               //to review after sessions(Done)
+               if(isset( $_SESSION['currentSession']))
+               {
+                   $metricObj->setSId($getCurrentSession);
+               }
+               else
+               {
+                   $metricObj->setSId(null);
+               }
                 $_SESSION['success_msg'] = $s_ref." CREATED SUCCESSFULLY!!!";
                 $sessionObj->setSRef($s_ref);
                 $sessionDaoObj->createSession($sessionObj);
+                $metricDaoObj->createMetric($metricObj);
+
                 header("location:{$_SERVER['HTTP_REFERER']}");   
                 }
                 else

@@ -31,10 +31,19 @@ switch($action){
                 $metricObj->setEId($_SESSION['logged']['E_ID']);
                 $mDesc = " CREATED A NEW CATEGORY  NAMED ".$_POST['pc_name'];
                 $metricObj->setMDesc($mDesc);
-                //to review after sessions
-                $metricObj->setSId(null);
+               //to review after sessions(Done)
+               if(isset( $_SESSION['currentSession']))
+               {
+                   $metricObj->setSId($getCurrentSession);
+               }
+               else
+               {
+                   $metricObj->setSId(null);
+               }
                 $_SESSION['success_msg'] = $_POST['pc_name']." REGISTERED SUCCESSFULLY!!!";
                 $productCategoryDaoObj->createCategory($productCategoryObj);
+                $metricDaoObj->createMetric($metricObj);
+
                 header("location:{$_SERVER['HTTP_REFERER']}");   
             }
             else
@@ -64,10 +73,19 @@ switch($action){
             $metricObj->setEId($_SESSION['logged']['E_ID']);
             $mDesc = " EDITED CATEGORY  NAMED ".$_POST['pc_name'];
             $metricObj->setMDesc($mDesc);
-            //to review after sessions
-            $metricObj->setSId(null);
+            //to review after sessions(Done)
+            if(isset( $_SESSION['currentSession']))
+            {
+                $metricObj->setSId($getCurrentSession);
+            }
+            else
+            {
+                $metricObj->setSId(null);
+            }
             $_SESSION['success_msg'] = $_POST['pc_name']." UPDATED SUCCESSFULLY!!!";
             $productCategoryDaoObj->updateCategory($productCategoryObj);
+            $metricDaoObj->createMetric($metricObj);
+
             header("location:../../PAGES/PRODUCTS/category.php"); 
 
 

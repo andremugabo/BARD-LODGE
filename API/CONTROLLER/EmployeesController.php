@@ -54,8 +54,15 @@ switch($action){
                 $mDesc = " CREATED A NEW EMPLOYEE  NAMED ". $employee_fname." ".$employee_lname;
                 $metricObj->setMDesc($mDesc);
                 echo $mDesc." ".$e_regnumber;
-                //to review after sessions
-                $metricObj->setSId(null);
+               //to review after sessions(Done)
+               if(isset( $_SESSION['currentSession']))
+               {
+                   $metricObj->setSId($getCurrentSession);
+               }
+               else
+               {
+                   $metricObj->setSId(null);
+               }
                 $_SESSION['success_msg'] = $employee_fname." ".$employee_lname." REGISTERED SUCCESSFULLY!!!";
                 $result = $metricDaoObj->createMetric($metricObj);
                 $employeeDaoObj->createEmployee($employeeObj);
@@ -89,8 +96,15 @@ switch($action){
                 $metricObj->setEId($_SESSION['logged']['E_ID']);
                 $mDesc = " UPDATED INFORMATION OF ". $employee_fname." ".$employee_lname;
                 $metricObj->setMDesc($mDesc);
-                //to review after sessions
-                $metricObj->setSId(null);
+                //to review after sessions(Done)
+                if(isset( $_SESSION['currentSession']))
+                {
+                    $metricObj->setSId($getCurrentSession);
+                }
+                else
+                {
+                    $metricObj->setSId(null);
+                }
                 $_SESSION['success_msg'] = $employee_fname." ".$employee_lname." INFORMATION UPDATED SUCCESSFULLY!!!";
                 $result = $metricDaoObj->createMetric($metricObj);
                 $employeeDaoObj->updateEmployee($employeeObj);
