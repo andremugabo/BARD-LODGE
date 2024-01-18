@@ -1,14 +1,14 @@
 <?php
 require_once 'db.php';
-require_once(__DIR__.'/../MODEL/GStock.php');
+require_once(__DIR__.'/../MODEL/SStock.php');
 
-class GStockDao extends db{
+class SStockDao extends db{
 
-    public function createGStock(GStock $gstock){
-        $s_ref = $gstock->getSId();
-        $p_id = $gstock->getPId();
-        // $p_qty = $gstock->getPQty();
-        $query = "INSERT INTO g_stock(s_id,p_id) VALUES(?,?)";
+    public function createSStock(SStock $SStock){
+        $s_ref = $SStock->getSId();
+        $p_id = $SStock->getPId();
+        // $p_qty = $SStock->getPQty();
+        $query = "INSERT INTO s_stock(s_id,p_id) VALUES(?,?)";
         $statement = $this->connect()->prepare($query);
         $result = $statement->execute(array(
             $s_ref,
@@ -20,16 +20,16 @@ class GStockDao extends db{
 
 
     public function countItem(){
-        $query = "SELECT sum(p_qty) FROM g_stock";
+        $query = "SELECT sum(p_qty) FROM s_stock";
         $statement = $this->connect()->prepare($query);
         $statement->execute();
         $result = $statement->fetch();
         return $result;
     }
 
-    public function checkIfProductExistGStock(GStock $gstock){
-        $p_id = $gstock->getPId();
-        $query = "SELECT * FROM g_stock WHERE p_id = ?";
+    public function checkIfProductExistSStock(SStock $SStock){
+        $p_id = $SStock->getPId();
+        $query = "SELECT * FROM s_stock WHERE p_id = ?";
         $statement = $this->connect()->prepare($query);
         $statement->execute(array(
             $p_id
@@ -38,9 +38,9 @@ class GStockDao extends db{
         return $result;
     }
 
-    public function selectProductQty(GStock $gstock){
-        $p_id = $gstock->getPId();
-        $query = "SELECT p_qty FROM g_stock  WHERE g_stock.p_id = ?";
+    public function selectProductQty(SStock $SStock){
+        $p_id = $SStock->getPId();
+        $query = "SELECT p_qty FROM s_stock  WHERE s_stock.p_id = ?";
         $statement = $this->connect()->prepare($query);
         $statement->execute(array(
             $p_id
@@ -54,10 +54,10 @@ class GStockDao extends db{
 
 
 
-    public function updateProductQty(GStock $gstock){
-        $p_qty = $gstock->getPQty();
-        $p_id = $gstock->getPId();
-        $query = "UPDATE g_stock SET p_qty = ? WHERE g_stock.p_id = ?";
+    public function updateProductQty(SStock $SStock){
+        $p_qty = $SStock->getPQty();
+        $p_id = $SStock->getPId();
+        $query = "UPDATE s_stock SET p_qty = ? WHERE s_stock.p_id = ?";
         $statement = $this->connect()->prepare($query);
         $result = $statement->execute(array(
             $p_qty,
@@ -66,9 +66,9 @@ class GStockDao extends db{
         return $result;
     }
 
-    public function selectGStock(){
-        $query = "SELECT sessions.*,products.*,g_stock.* FROM g_stock JOIN sessions ON 
-        sessions.s_id = g_stock.s_id JOIN products ON products.p_id = g_stock.p_id";
+    public function selectSStock(){
+        $query = "SELECT sessions.*,products.*,s_stock.* FROM s_stock JOIN sessions ON 
+        sessions.s_id = s_stock.s_id JOIN products ON products.p_id = s_stock.p_id";
         $statement = $this->connect()->prepare($query);
         $statement->execute();
         while($result = $statement->fetchAll(PDO::FETCH_ASSOC)){
@@ -77,10 +77,10 @@ class GStockDao extends db{
     }
 
 
-    public function selectGStockById(GStock $gstock){
-        $p_id = $gstock->getPId();
-        $query = "SELECT sessions.*,products.*,g_stock.* FROM g_stock JOIN sessions ON 
-        sessions.s_id = g_stock.s_id JOIN products ON products.p_id = g_stock.p_id WHERE g_stock.p_id = ?";
+    public function selectSStockById(SStock $SStock){
+        $p_id = $SStock->getPId();
+        $query = "SELECT sessions.*,products.*,s_stock.* FROM s_stock JOIN sessions ON 
+        sessions.s_id = s_stock.s_id JOIN products ON products.p_id = s_stock.p_id WHERE s_stock.p_id = ?";
         $statement = $this->connect()->prepare($query);
         $statement->execute(array(
             $p_id
@@ -91,9 +91,9 @@ class GStockDao extends db{
     }
 
 
-    public function selectGStockByFilter($productByFilter){
-        $query = "SELECT sessions.*,products.*,g_stock.* FROM g_stock JOIN sessions ON 
-        sessions.s_id = g_stock.s_id JOIN products ON products.p_id = g_stock.p_id  $productByFilter ";
+    public function selectSStockByFilter($productByFilter){
+        $query = "SELECT sessions.*,products.*,s_stock.* FROM s_stock JOIN sessions ON 
+        sessions.s_id = s_stock.s_id JOIN products ON products.p_id = s_stock.p_id  $productByFilter ";
         $statement = $this->connect()->prepare($query);
         $statement->execute();
         while($result = $statement->fetchAll(PDO::FETCH_ASSOC)){

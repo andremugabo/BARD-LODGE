@@ -17,7 +17,7 @@ if (isset($_POST['filter'])) {
 
 <div class="container-fluid section-title d-flex mb-2">
     <div class="s-title text-start col-6">
-        <h2>General&nbsp;Stock</h2>
+        <h2>Sales&nbsp;Stock</h2>
     </div>
     <div class="s-btn text-end col-6">
         <!-- <button type="button" class="btn btn-sm btn-secondary m-1"
@@ -104,7 +104,7 @@ if (isset($_POST['filter'])) {
                 <button type="button" class="btn btn-outline-success btn-sm m-1"
                     onclick="window.location.href='price.php'">Price</button> -->
                 <button type="button" class="btn btn-outline-danger btn-sm m-1"
-                    onclick="window.location.href='purchased.php'">Purchased&nbsp;Products</button>
+                    onclick="window.location.href='purchased.php'">Received&nbsp;Products</button>
                 <button type="button" class="btn btn-warning btn-sm m-1" data-bs-toggle="modal"
                     data-bs-target="#employeeModal">Insert&nbsp;Product</button>
                 <!-- <button type="button" class="btn btn-outline-danger btn-sm">Danger</button> -->
@@ -119,7 +119,7 @@ if (isset($_POST['filter'])) {
 <div class="col" style="min-height: 100vh;">
     <div class="card">
         <div class="card-header">
-            <strong class="card-title">Stock Table</strong>
+            <strong class="card-title">Sales Stock Table</strong>
         </div>
         <div class="card-body overflow-auto" style="min-height: 100vh; overflow:auto;">
             <table class="table table-striped">

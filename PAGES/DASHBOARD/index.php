@@ -247,7 +247,24 @@
                         </div>
                     </div>
                 </div>
-                <h3 class="mt-1 mb-3 text-black">2.382</h3>
+                <h3 class="mt-1 mb-3 text-black" style="font-size: 15px;">
+                    <?php
+                        $gStockDao = new GStockDao();
+                        $ItemArray = $gStockDao->countItem();
+                        $countItem = $ItemArray['sum(p_qty)'];
+                        
+                        
+                        if($countItem == 0)
+                        {
+                            echo "THERE IS NO ANY ITEM";
+                        }
+                        else
+                        {
+                            echo $countItem." items In G-Stock";
+                        }
+                    
+                    ?>
+                </h3>
                 <div class="mb-0">
                     <span class="text-white"> <i class="mdi mdi-arrow-bottom-right"></i>GSL-MIS
                     </span>
@@ -265,7 +282,7 @@
 
 
     <div class="card-principal card bg-warning m-2">
-        <a href="#" style="text-decoration:none;">
+        <a href="../STOCKS/SStock.php" style="text-decoration:none;">
             <div class="card-body">
                 <div class="row">
                     <div class="col mt-0">
