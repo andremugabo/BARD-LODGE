@@ -7,13 +7,13 @@ class GStockDao extends db{
     public function createGStock(GStock $gstock){
         $s_ref = $gstock->getSId();
         $p_id = $gstock->getPId();
-        $p_qty = $gstock->getPQty();
-        $query = "INSERT INTO g_stock(s_id,p_id,p_qty) VALUES(?,?,?)";
+        // $p_qty = $gstock->getPQty();
+        $query = "INSERT INTO g_stock(s_id,p_id) VALUES(?,?)";
         $statement = $this->connect()->prepare($query);
         $result = $statement->execute(array(
             $s_ref,
-            $p_id,
-            $p_qty
+            $p_id
+            // $p_qty
         ));
         return $result;
     }
@@ -42,7 +42,10 @@ class GStockDao extends db{
 
 
 
-    public function updateProduct(GStock $gstock){
+
+
+
+    public function updateProductQty(GStock $gstock){
         $p_qty = $gstock->getPQty();
         $p_id = $gstock->getPId();
         $query = "UPDATE g_stock SET p_qty = ? WHERE g_stock.p_id = ?";
@@ -55,7 +58,7 @@ class GStockDao extends db{
     }
 
     public function selectGStock(){
-        $query = "SELECT sessions.*,products.* FROM g_stock JOIN sessions ON 
+        $query = "SELECT sessions.*,products.*,g_stock.* FROM g_stock JOIN sessions ON 
         sessions.s_id = g_stock.s_id JOIN products ON products.p_id = g_stock.p_id";
         $statement = $this->connect()->prepare($query);
         $statement->execute();
@@ -65,8 +68,22 @@ class GStockDao extends db{
     }
 
 
+    public function selectGStockById(GStock $gstock){
+        $p_id = $gstock->getPId();
+        $query = "SELECT sessions.*,products.*,g_stock.* FROM g_stock JOIN sessions ON 
+        sessions.s_id = g_stock.s_id JOIN products ON products.p_id = g_stock.p_id WHERE g_stock.p_id = ?";
+        $statement = $this->connect()->prepare($query);
+        $statement->execute(array(
+            $p_id
+        ));
+        $result = $statement->fetch();
+        return $result;
+        
+    }
+
+
     public function selectGStockByFilter($productByFilter){
-        $query = "SELECT sessions.*,products.* FROM g_stock JOIN sessions ON 
+        $query = "SELECT sessions.*,products.*,g_stock.* FROM g_stock JOIN sessions ON 
         sessions.s_id = g_stock.s_id JOIN products ON products.p_id = g_stock.p_id  $productByFilter ";
         $statement = $this->connect()->prepare($query);
         $statement->execute();

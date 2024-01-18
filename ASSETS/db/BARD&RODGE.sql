@@ -121,6 +121,16 @@ CREATE TABLE G_STOCK (
     FOREIGN KEY (S_ID) REFERENCES SESSIONS(S_ID)
 );
 
+CREATE TABLE PURCHASE (
+    PURCHASE_ID INT PRIMARY KEY AUTO_INCREMENT,
+    S_ID INT,
+    P_ID INT,
+    QTY_PUR INT,,
+ -- Add other relevant columns
+    FOREIGN KEY (P_ID) REFERENCES PRODUCTS(P_ID),
+    FOREIGN KEY (S_ID) REFERENCES SESSIONS(S_ID)
+);
+
 # -----------------------------------------------------------------------------
 
 INSERT INTO `PRODUCT_CATEGORY`(

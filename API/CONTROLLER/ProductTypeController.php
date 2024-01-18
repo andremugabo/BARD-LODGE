@@ -29,7 +29,8 @@ switch($action){
                 //to review after sessions(Done)
                 if(isset( $_SESSION['currentSession']))
                 {
-                    $metricObj->setSId($getCurrentSession);
+                    $metricObj->setSId($_SESSION['currentSession']);
+
                 }
                 else
                 {
@@ -66,7 +67,8 @@ switch($action){
             //to review after sessions(Done)
             if(isset( $_SESSION['currentSession']))
             {
-                $metricObj->setSId($getCurrentSession);
+                $metricObj->setSId($_SESSION['currentSession']);
+
             }
             else
             {

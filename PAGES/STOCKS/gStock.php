@@ -121,7 +121,7 @@ if (isset($_POST['filter'])) {
         <div class="card-header">
             <strong class="card-title">Stock Table</strong>
         </div>
-        <div class="card-body overflow-auto" style="min-height: 40vh; overflow:auto;">
+        <div class="card-body overflow-auto" style="min-height: 100vh; overflow:auto;">
             <table class="table table-striped">
                 <thead>
                     <tr>
@@ -139,6 +139,7 @@ if (isset($_POST['filter'])) {
                     $gStock = new GStockDao();
                     $selectProduct =$gStock->selectGStockByFilter($productByFilter);
                     $num = 0;
+                    // print_r($selectProduct);
                     if ($selectProduct):
                     foreach ($selectProduct as $item) {  $num++;?>
 
@@ -149,11 +150,10 @@ if (isset($_POST['filter'])) {
                         <td style="text-align: center;"><?=$item['P_NAME']?></td>
                         <td style="text-align: center;"><?=$item['P_QTY']?></td>
                         <!-- <td style="text-align: center;"><?=$item['P_NAME']?></td> -->
-                        <td style="text-align: center;"><button type="button btn-sm" title="Edit Product Info"
-                                class="btn btn-primary table-btn"
-                                onclick="window.location.href='editProducts.php?edit=<?=$item['P_ID']?>'"><img
-                                    src="../../ASSETS/SIMAGES/Edit_20px.png" class="align-middle table-img"
-                                    alt=""></button></td>
+                        <td style="text-align: center;"><button type="button" title="Edit Product Info"
+                                class="btn btn-primary btn-sm"
+                                onclick="window.location.href='gStockUpDateQuantity.php?edit=<?=$item['P_ID']?>'">Update</button>
+                        </td>
                     </tr>
 
 
@@ -236,11 +236,11 @@ if (isset($_POST['filter'])) {
                     </div> -->
 
 
-                    <div class="mb-3">
+                    <!-- <div class="mb-3">
                         <label for="p_name" class="col-form-label">Quantity:</label>
                         <input type="text" class="form-control" name="qty" id="qty" placeholder="ENTER QUANTITY"
                             required>
-                    </div>
+                    </div> -->
                     <!-- <div class="mb-3">
                         <label for="p_name" class="col-form-label">Selling&nbsp;Price:</label>
                         <input type="text" class="form-control" name="sprice" id="sprice"

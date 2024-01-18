@@ -51,7 +51,8 @@ switch($action){
                 //to review after sessions(Done)
                 if(isset( $_SESSION['currentSession']))
                 {
-                    $metricObj->setSId($getCurrentSession);
+                    $metricObj->setSId($_SESSION['currentSession']);
+
                 }
                 else
                 {
@@ -89,7 +90,8 @@ switch($action){
         //to review after sessions(Done)
         if(isset( $_SESSION['currentSession']))
         {
-            $metricObj->setSId($getCurrentSession);
+            $metricObj->setSId($_SESSION['currentSession']);
+
         }
         else
         {
@@ -115,9 +117,10 @@ switch($action){
             $mDesc = " PRODUCT UPGRADED TO REQUIRED A SIDE DISHES SUCCESSFULLY!!! ";
             $metricObj->setMDesc($mDesc);
             //to review after sessions(Done)
-            if(isset( $_SESSION['currentSession']))
+            if(isset($_SESSION['currentSession']))
             {
-                $metricObj->setSId($getCurrentSession);
+                $metricObj->setSId($_SESSION['currentSession']);
+
             }
             else
             {
@@ -145,7 +148,8 @@ switch($action){
         //to review after sessions(Done)
         if(isset( $_SESSION['currentSession']))
         {
-            $metricObj->setSId($getCurrentSession);
+            $metricObj->setSId($_SESSION['currentSession']);
+
         }
         else
         {
