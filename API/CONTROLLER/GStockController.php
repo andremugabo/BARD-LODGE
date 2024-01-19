@@ -65,7 +65,7 @@ switch($action){
                 if(!empty($_POST['p_id']) && !empty($_POST['qty'])){
                     if($_POST['qty'] > 0){
                         $gStockObj->setPId($_POST['p_id']);
-                        $gStockObj->setPQty($_POST['qty']);
+                        // $gStockObj->setPQty($_POST['qty']);
                         //insert 
                         $metricObj->setEId($_SESSION['logged']['E_ID']);
                         $mDesc = " PRODUCT QUANTITY UPDATED IN G STOCK  ";

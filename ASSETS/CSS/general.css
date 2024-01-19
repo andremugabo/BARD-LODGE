@@ -20,8 +20,8 @@ td{
 }
 
 body {
-	-webkit-text-size-adjust: 100%;
-	-webkit-tap-highlight-color: rgba(0,0,0,0);
+	/* -webkit-text-size-adjust: 100%; */
+	/* -webkit-tap-highlight-color: rgba(0,0,0,0); */
 	background-color: var(--bs-body-bg);
 	color: var(--bs-body-color);
 	font-family: var(--bs-body-font-family);

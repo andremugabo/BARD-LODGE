@@ -42,6 +42,9 @@ if (isset($_GET['logout'])) {
     session_destroy();
 }
 
+$sessionDao = new SessionsDao();
+$sessionInfo = $sessionDao->selectOpenSession();
+$countSession = $sessionDao->checkOpenSessions();
 ?>
 
 <!DOCTYPE html>
@@ -50,7 +53,7 @@ if (isset($_GET['logout'])) {
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <!-- <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="icon" type="image/png" href="../../ASSETS/SIMAGES/greenog.png">
     <link href="../../ASSETS/CSS/general.css" rel="stylesheet">
 

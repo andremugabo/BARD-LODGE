@@ -95,7 +95,7 @@ require_once '../../INCLUDES/header.php';?>
                     <div class="mb-3">
                         <label for="p_type" class="col-form-label">Products&nbsp;Type:</label>
                         <select class="form-select form-select mb-3" id="type" name="p_type"
-                            aria-label=".form-select-lg example" onchange="getimage(this.value)" required>
+                            aria-label=".form-select-lg example" onchange="getCategory(this.value)" required>
                             <option selected disabled value="">Choose&nbsp;Product&nbsp;Type</option>
                             <?php 
                                 $typeDaoObj = new ProductTypeDao();
@@ -111,10 +111,10 @@ require_once '../../INCLUDES/header.php';?>
                     </div>
 
                     <div class="mb-3">
-                        <label for="role" class="col-form-label">Products&nbsp;image:</label>
-                        <select class="form-select form-select mb-3" id="image" onchange="getProduct(this.value)"
+                        <label for="role" class="col-form-label">Products&nbsp;Category:</label>
+                        <select class="form-select form-select mb-3" id="category" onchange="getProduct(this.value)"
                             name="pc_id" aria-label=".form-select-lg example" required>
-                            <option selected disabled value="">Choose&nbsp;Product&nbsp;image</option>
+                            <option selected disabled value="">Choose&nbsp;Product&nbsp;Category</option>
 
                         </select>
                     </div>

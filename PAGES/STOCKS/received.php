@@ -6,7 +6,7 @@ $productByFilter = "";
 if (isset($_POST['filter'])) {
   
   $product = $_POST['p_id'];
-  $productByFilter = "WHERE products.p_id = '".$product."' ";
+  $productByFilter = "AND products.p_id = '".$product."' ";
 
 }
 
@@ -17,7 +17,7 @@ if (isset($_POST['filter'])) {
 
 <div class="container-fluid section-title d-flex mb-2">
     <div class="s-title text-start col-6">
-        <h2 style="color:#0dcaf0;">Sales&nbsp;Stock</h2>
+        <h2 style="color:#0dcaf0;">Received&nbsp;Products</h2>
     </div>
     <div class="s-btn text-end col-6">
         <!-- <button type="button" class="btn btn-sm btn-secondary m-1"
@@ -29,7 +29,7 @@ if (isset($_POST['filter'])) {
         <button type="button" class="btn btn-sm btn-warning text-white m-1" data-bs-toggle="modal"
             data-bs-target="#employeeModal">Create&nbsp;Product</button>
         &nbsp; -->
-        <button type="button" class="btn btn-sm btn-info " onclick="window.location.href='../DASHBOARD/'">Back</button>
+        <button type="button" class="btn btn-sm btn-info " onclick="window.location.href='sStock.php'">Back</button>
     </div>
 </div>
 
@@ -37,7 +37,7 @@ if (isset($_POST['filter'])) {
     <div class="s-title text-start col-lg-6 p-2 ">
         <div class="card">
             <div class="card-header">
-                <strong>Filter&nbsp;Stock</strong>
+                <strong>Filter&nbsp;Received&nbsp;Products</strong>
             </div>
             <div class="card-body card-block">
                 <form class="row row-cols-lg-auto g-3 align-items-center justify-content-between" action=""
@@ -88,30 +88,28 @@ if (isset($_POST['filter'])) {
         </div>
 
     </div>
-    <div class="s-title text-start col-lg-6 p-2 ">
+    <!-- <div class="s-title text-start col-lg-6 p-2 ">
         <div class="card">
             <div class="card-header">
                 <strong>Stock Description </strong>
             </div>
             <div class="card-body">
-                <!-- <button type="button" class="btn btn-outline-primary btn-sm m-1"
+                <button type="button" class="btn btn-outline-primary btn-sm m-1"
                     onclick="window.location.href='productsType.php'">Type</button>
                 <button type="button" class="btn btn-outline-success btn-sm m-1"
                     onclick="window.location.href='category.php'">Category</button>
                 <button type="button" class="btn btn-outline-secondary btn-sm m-1"
                     onclick="window.location.href='sideDishes.php'">Products&nbsp;with&nbsp;Sides&nbsp;Dishes</button>
                 <button type="button" class="btn btn-outline-success btn-sm m-1"
-                    onclick="window.location.href='price.php'">Price</button> -->
-                <button type="button" class="btn btn-outline-success btn-sm m-1"
-                    onclick="window.location.href='received.php'">Received&nbsp;Products</button>
-                <?php if($employee_role =="MD" || $employee_role == "MANAGER" || $employee_role == "IT" || $employee_role == "ACCOUNTANT"):?>
-                <button type="button" class="btn btn-info btn-sm m-1" data-bs-toggle="modal"
+                    onclick="window.location.href='price.php'">Price</button>
+                <button type="button" class="btn btn-outline-danger btn-sm m-1"
+                    onclick="window.location.href='Receivedd.php'">Receivedd&nbsp;Products</button>
+                <button type="button" class="btn btn-warning btn-sm m-1" data-bs-toggle="modal"
                     data-bs-target="#employeeModal">Insert&nbsp;Product</button>
-                <?php endif;?>
-                <!-- <button type="button" class="btn btn-outline-danger btn-sm">Danger</button> -->
+                <button type="button" class="btn btn-outline-danger btn-sm">Danger</button>
             </div>
         </div>
-    </div>
+    </div> -->
 
 
 
@@ -120,27 +118,27 @@ if (isset($_POST['filter'])) {
 <div class="col" style="min-height: 100vh;">
     <div class="card">
         <div class="card-header">
-            <strong class="card-title">Sales Stock Table</strong>
+            <strong class="card-title">Received&nbsp;Products&nbsp;Table</strong>
         </div>
         <div class="card-body overflow-auto" style="min-height: 100vh; overflow:auto;">
             <table class="table table-striped">
                 <thead>
                     <tr>
                         <th scope="col" style="text-align: center;">#</th>
-                        <!-- <th scope="col" style="text-align: center;">Session</th> -->
+                        <th scope="col" style="text-align: center;">Session</th>
                         <th scope="col" style="text-align: center;">Product</th>
                         <th scope="col" style="text-align: center;">Quantity</th>
                         <!-- <th scope="col" style="text-align: center;">Products</th> -->
-                        <?php if($employee_role =="MD" || $employee_role == "MANAGER" || $employee_role == "IT" || $employee_role == "ACCOUNTANT"):?>
-                        <th scope="col" style="text-align: center;">Action</th>
-                        <?php endif;?>
+                        <!-- <th scope="col" style="text-align: center;">Action</th> -->
                     </tr>
                     </tr>
                 </thead>
                 <tbody>
                     <?php 
-                    $SStock = new SStockDao();
-                    $selectProduct =$SStock->selectSStockByFilter($productByFilter);
+                    $receivedDao = new ReceivedProductsDao();
+                    $receivedObj = new ReceivedProducts();
+                    $receivedObj->setSId($_SESSION['currentSession']);
+                    $selectProduct =$receivedDao->selectReceivedByFilterAndSession($productByFilter,$receivedObj);
                     $num = 0;
                     // print_r($selectProduct);
                     if ($selectProduct):
@@ -149,16 +147,14 @@ if (isset($_POST['filter'])) {
 
                     <tr>
                         <td style="text-align: center;"><?=$num?></td>
-                        <!-- <td style="text-align: center;"><?=$item['S_REF']?></td> -->
+                        <td style="text-align: center;"><?=$item['S_REF']?></td>
                         <td style="text-align: center;"><?=$item['P_NAME']?></td>
-                        <td style="text-align: center;"><?=$item['P_QTY']?></td>
+                        <td style="text-align: center;"><?=$item['QTY_REC']?></td>
                         <!-- <td style="text-align: center;"><?=$item['P_NAME']?></td> -->
-                        <?php if($employee_role =="MD" || $employee_role == "MANAGER" || $employee_role == "IT" || $employee_role == "ACCOUNTANT"):?>
-                        <td style="text-align: center;"><button type="button" title="Edit Product Info"
+                        <!-- <td style="text-align: center;"><button type="button" title="Edit Product Info"
                                 class="btn btn-primary btn-sm"
-                                onclick="window.location.href='sStockUpDateQuantity.php?edit=<?=$item['P_ID']?>'">Update</button>
-                        </td>
-                        <?php endif;?>
+                                onclick="window.location.href='gStockUpDateQuantity.php?edit=<?=$item['P_ID']?>'">Update</button>
+                        </td> -->
                     </tr>
 
 
@@ -176,7 +172,7 @@ if (isset($_POST['filter'])) {
       ======================================================= -->
 
 
-<div class="modal fade" id="employeeModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<!-- <div class="modal fade" id="employeeModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -184,7 +180,7 @@ if (isset($_POST['filter'])) {
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
             <div class="modal-body">
-                <form action="../../API/CONTROLLER/SStockController.php?action=insert" method="POST">
+                <form action="../../API/CONTROLLER/GStockController.php?action=insert" method="POST">
 
                     <div class="mb-3">
                         <label for="p_type" class="col-form-label">Products&nbsp;Type:</label>
@@ -222,7 +218,7 @@ if (isset($_POST['filter'])) {
                         </select>
                     </div>
 
-                    <!-- <div class="mb-3">
+                    <div class="mb-3">
                         <label for="role" class="col-form-label">Product&nbsp;Unity:</label>
                         <select class="form-select form-select mb-3" id="unity" name="unity_id"
                             aria-label=".form-select-lg example" required>
@@ -238,24 +234,24 @@ if (isset($_POST['filter'])) {
                             <?php }  endif?>
 
                         </select>
-                    </div> -->
+                    </div>
 
 
-                    <!-- <div class="mb-3">
+                    <div class="mb-3">
                         <label for="p_name" class="col-form-label">Quantity:</label>
                         <input type="text" class="form-control" name="qty" id="qty" placeholder="ENTER QUANTITY"
                             required>
-                    </div> -->
-                    <!-- <div class="mb-3">
+                    </div>
+                    <div class="mb-3">
                         <label for="p_name" class="col-form-label">Selling&nbsp;Price:</label>
                         <input type="text" class="form-control" name="sprice" id="sprice"
                             placeholder="ENTER SELLING PRICE" required>
-                    </div> -->
-                    <!-- <div class="mb-3">
+                    </div>
+                    <div class="mb-3">
                         <label for="p_name" class="col-form-label">Special&nbsp;Price:</label>
                         <input type="text" class="form-control" name="eprice" id="eprice"
                             placeholder="ENTER SPECIAL PRICE" required>
-                    </div> -->
+                    </div>
 
 
 
@@ -269,7 +265,7 @@ if (isset($_POST['filter'])) {
             </div>
         </div>
     </div>
-</div>
+</div> -->
 
 
 

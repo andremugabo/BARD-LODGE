@@ -25,9 +25,9 @@
 
 <script type="text/javascript" src="../../ASSETS/JS/bootstrap.js"></script>
 <script type="text/javascript" src="../../ASSETS/JS/app.js"></script>
-<script type="text/javascript" src="../../ASSETS/JS/products.js"></script>
-<script type="text/javascript" src="../../ASSETS/JS/price.js"></script>
-<!-- <script type="text/javascript" src="../../ASSETS/JS/getProduct.js"></script> -->
+<!-- <script type="text/javascript" src="../../ASSETS/JS/products.js"></script> -->
+<!-- <script type="text/javascript" src="../../ASSETS/JS/price.js"></script> -->
+<script type="text/javascript" src="../../ASSETS/JS/getProduct.js"></script>
 <script type="text/javascript" src="../../ASSETS/JS/insertProducts.js"></script>
 <script type="text/javascript" src="../../ASSETS/JS/forSecId.js"></script>
 </body>

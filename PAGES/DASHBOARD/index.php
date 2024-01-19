@@ -203,9 +203,9 @@
                 </div>
                 <h3 class="mt-1 mb-3 text-white" style="font-size: 10px;">
                     <?php
-                        $sessionDao = new SessionsDao();
-                        $sessionInfo = $sessionDao->selectOpenSession();
-                        $countSession = $sessionDao->checkOpenSessions();
+                        // $sessionDao = new SessionsDao();
+                        // $sessionInfo = $sessionDao->selectOpenSession();
+                        // $countSession = $sessionDao->checkOpenSessions();
                         // print_r($sessionInfo);
                         if($countSession == 0)
                         {
@@ -227,7 +227,8 @@
         </a>
     </div>
 
-    <?php endif; ?>
+
+    <?php endif;?>
 
     <?php  if ($countSession !== 0 ):?>
 
@@ -278,11 +279,11 @@
 
 
 
-    <?php if($employee_role =="MD" || $employee_role == "MANAGER" || $employee_role == "IT" || $employee_role == "ACCOUNTANT"): ?>
+    <?php if($employee_role =="MD" || $employee_role == "MANAGER" || $employee_role == "IT" || $employee_role == "ACCOUNTANT" || $employee_role == "BARMAN"): ?>
 
 
     <div class="card-principal card bg-warning m-2">
-        <a href="../STOCKS/SStock.php" style="text-decoration:none;">
+        <a href="../STOCKS/sStock.php" style="text-decoration:none;">
             <div class="card-body">
                 <div class="row">
                     <div class="col mt-0">
@@ -295,7 +296,24 @@
                         </div>
                     </div>
                 </div>
-                <h3 class="mt-1 mb-3 text-black">2.382</h3>
+                <h3 class="mt-1 mb-3 text-black" style="font-size: 15px;">
+                    <?php
+                        $sStockDao = new SStockDao();
+                        $ItemArray = $sStockDao->countItem();
+                        $countItem = $ItemArray['sum(p_qty)'];
+                        
+                        
+                        if($countItem == 0)
+                        {
+                            echo "THERE IS NO ANY ITEM";
+                        }
+                        else
+                        {
+                            echo $countItem." items In S-Stock";
+                        }
+                    
+                    ?>
+                </h3>
                 <div class="mb-0">
                     <span class="text-white"> <i class="mdi mdi-arrow-bottom-right"></i>GSL-MIS
                     </span>
@@ -312,7 +330,7 @@
     <?php //if($employee_role =="ADMIN"){ ?>
 
     <div class="card-principal card bg-success m-2">
-        <a href="#" style="text-decoration:none;">
+        <a href="../ORDERS/order.php" style="text-decoration:none;">
             <div class="card-body">
                 <div class="row">
                     <div class="col mt-0">
