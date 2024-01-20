@@ -49,7 +49,8 @@ class OrdersDao extends db{
 
         $statement = $this->connect()->prepare($query);
         $statement->execute(array(
-            $e_id
+            $e_id,
+            $s_id
         ));
 
         while($result = $statement->fetchAll(PDO::FETCH_ASSOC)){

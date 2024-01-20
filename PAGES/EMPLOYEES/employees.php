@@ -49,12 +49,12 @@
                         <td style="text-align: center;"><?=$item['FIRSTNAME']." ".$item['LASTNAME']?></td>
                         <td style="text-align: center;"><?=$item['E_ROLE']?></td>
                         <td style="text-align: center;"><?=$item['E_PHONE']?></td>
-                        <td style="text-align: center;"><button type="button btn-sm" title="Edit Employee Info"
-                                class="btn btn-primary table-btn"
-                                onclick="window.location.href='editEmployee.php?edit=<?=$item['E_ID']?>'"><img
-                                    src="../../ASSETS/SIMAGES/EditU.png" class="align-middle table-img"
-                                    alt=""></button>&nbsp;<button type="button btn-sm"
-                                title="Allow employee to use the system" class="btn btn-success table-btn"
+                        <td style="text-align: center;"><button type="button  title=" Edit Employee Info"
+                                class="btn btn-primary  btn-sm""
+                                onclick=" window.location.href='editEmployee.php?edit=<?=$item['E_ID']?>'"><img
+                                    src=" ../../ASSETS/SIMAGES/EditU.png" class="align-middle table-img"
+                                alt=""></button>&nbsp;<button type="button " title="Allow employee to use the system"
+                                class="btn btn-sm btn-success table-btn"
                                 onclick="window.location.href='../../API/CONTROLlER/usersController.php?action=insert&e_id=<?=$item['E_ID']?>'"><img
                                     src="../../ASSETS/SIMAGES/AddUM.png" class="align-middle table-img" alt=""></button>
                         </td>

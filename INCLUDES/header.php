@@ -25,6 +25,7 @@ if(isset($_SESSION['logged']))
     $employee_names = $employee_fnames." ".$employee_lnames;
     $employee_role = $userData['E_ROLE'];
     $employee_phone = $userData['E_PHONE'];
+    $employee_eid = $userData['E_ID'];
 
 
     if ($employee_fnames == null || $employee_role == null) {
