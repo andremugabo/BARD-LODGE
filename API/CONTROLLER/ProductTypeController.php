@@ -9,6 +9,7 @@ $productTypeDaoObj = new ProductTypeDao();
 $productTypeObj = new ProductType();
 $metricDaoObj = new MetricDao();
 $metricObj = new Metric();
+$typeData = [];
 
 
 
@@ -89,7 +90,11 @@ switch($action){
         }
         break;  
         
-        
+    case 'fetchType':
+        $results = $productTypeDaoObj->selectProductType();
+        array_push($typeData,$results);
+        echo json_encode($typeData);
+        break;    
 
         default:
         header('location:../../');
@@ -101,5 +106,5 @@ switch($action){
 
 
 
-
+header("content-type:application/json");
 ?>

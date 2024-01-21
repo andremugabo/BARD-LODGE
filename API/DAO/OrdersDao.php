@@ -16,6 +16,19 @@ class OrdersDao extends db{
         return $result;
     }
 
+    public function selectOrderById(Orders $Order){
+        $o_ref = $Order->getORef();
+        $query = "SELECT employees.*,sessions.*,orders.* FROM orders JOIN employees 
+        ON employees.e_id = orders.e_id JOIN sessions 
+        ON sessions.s_id = orders.s_id  WHERE orders.o_ref = ?";
+        $statement = $this->connect()->prepare($query);
+        $statement->execute(array(
+            $o_ref
+        ));
+        $result = $statement->fetch();
+        return $result;
+    }
+
     public function countOrder(){
         $query = "SELECT * FROM orders ";
         $statement = $this->connect()->prepare($query);

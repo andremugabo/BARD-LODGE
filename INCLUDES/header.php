@@ -63,7 +63,7 @@ $countSession = $sessionDao->checkOpenSessions();
 
 </head>
 
-<body>
+<body onload="fetchProductCategories(1),fetchProductByCategory(1)">
     <div class="wrapper">
         <div class="main">
             <nav class="navbar navbar-expand navbar-light navbar-bg">

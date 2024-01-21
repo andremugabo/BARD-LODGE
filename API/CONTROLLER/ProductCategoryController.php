@@ -9,7 +9,7 @@ $productCategoryDaoObj = new ProductCategoryDao();
 $productCategoryObj = new ProductCategory();
 $metricDaoObj = new MetricDao();
 $metricObj = new Metric();
-
+$categoryData = [];
 
 
 switch($action){
@@ -98,6 +98,19 @@ switch($action){
             header("location:{$_SERVER['HTTP_REFERER']}");
         }
         break; 
+case 'fetchType':
+        $pt_id = $_GET['pt_id'];
+        $productCategoryObj->setPtId($pt_id);
+        $results = $productCategoryDaoObj->selectOneType($productCategoryObj);
+        if($results != null){
+            array_push($categoryData,$results);
+        }else{
+            $results = "";
+            array_push($categoryData,$results);
+        }
+        echo json_encode($categoryData);
+        break;    
+        
         
         
     default:
@@ -111,5 +124,5 @@ switch($action){
 
 
 
-
+header("content-type:application/json");
 ?>

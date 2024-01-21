@@ -8,6 +8,7 @@ $priceDaoObj = new PricesDao();
 $metricDaoObj = new MetricDao();
 $metricObj = new Metric();
 $action = $_GET['action'];
+$productData = [];
 
 
 switch($action){
@@ -102,7 +103,14 @@ switch($action){
 
         }
        
-        break; 
+        break;
+        // fetch product for order details
+        case 'fetchProduct':
+            $pc_id = $_GET['pc_id'];
+            $results = $priceDaoObj->selectProductByPc_id($pc_id);
+            array_push($productData,$results);
+            echo json_encode($productData);
+            break;     
         
         
 
@@ -118,5 +126,5 @@ switch($action){
 
 
 
-
+header("content-type:application/json");
 ?>

@@ -55,13 +55,13 @@
                 ?>
 
                     <tr>
-                        <td style="text-align: center;">$num</td>
+                        <td style="text-align: center;"><?=$num?></td>
                         <!-- <td style="text-align: center;">subSession/15-01-2024/0007</td> -->
                         <td style="text-align: center;"><?=$item['O_REF']?></td>
                         <td style="text-align: center;"><?=$item['FIRSTNAME']." ".$item['LASTNAME']?></td>
-                        <td style="text-align: center;"><?=$item['O_REF']?></td>
-                        <td style="text-align: center;"><?=$item['O_REF']?></td>
-                        <td style="text-align: center;"><?=$item['O_REF']?></td>
+                        <td style="text-align: center;"><?=$item['O_DATE']?></td>
+                        <td style="text-align: center;"><?=$item['O_PAYMENT']?></td>
+                        <td style="text-align: center;"><?=$item['O_AMOUNT']?></td>
                         <td style="text-align: center;"><button type="button" class="btn btn-success btn-sm mb-1"
                                 onclick="window.location.href='orderDetails.php?o_ref=<?=$item['O_REF']?>'">Add&nbsp;Items</button>&nbsp;<button
                                 type="button" class="btn btn-info btn-sm mb-1"
@@ -105,7 +105,7 @@
             <div class="modal-body">
 
                 <form id="product_create"
-                    action="../../API/CONTROLLER/OrdersController.php?action=insert&sub_id=<?=$sessionInfo[0]['S_ID'];?>"
+                    action="../../API/CONTROLLER/OrdersController.php?action=insert&s_id=<?=$sessionInfo[0]['S_ID'];?>"
                     method="POST">
 
                     <div class="message_login mb-3 ">

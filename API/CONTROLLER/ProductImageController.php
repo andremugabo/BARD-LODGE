@@ -42,6 +42,7 @@ switch($action)
             $_SESSION['success_msg'] =" PRODUCT IMAGE INSERTED SUCCESSFULLY!!!";
             $metricDaoObj->createMetric($metricObj);
             $productImageDaoObj->createImage($productImageObj);
+            $productImageDaoObj->updateImageInProduct($productImageObj);
             header("location:{$_SERVER['HTTP_REFERER']}");
             }
             else
@@ -85,6 +86,7 @@ switch($action)
             $_SESSION['success_msg'] =" PRODUCT IMAGE UPDATED SUCCESSFULLY!!!";
             $metricDaoObj->createMetric($metricObj);
             $productImageDaoObj->updateImage($productImageObj);
+            $productImageDaoObj->updateImageInProduct($productImageObj);
             header("location:../../PAGES/PRODUCTS/productImage.php");
             
             

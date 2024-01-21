@@ -44,6 +44,19 @@ class ProductImagesDao extends db {
     }
 
 
+    public function updateImageInProduct(ProductImages $images){
+        $pi_name = $images->getPiImage();
+        $p_id = $images->getPId();
+        $query = "UPDATE products SET pi_name = ?  WHERE  products.p_id = ?";
+        $statement = $this->connect()->prepare($query);
+        $statement->execute(array(
+            $pi_name,
+            $p_id
+        ));
+
+    }
+
+
     public function getImagesById(ProductImages $images){
         $pi_id = $images->getPiId();
         $query = "SELECT products.*,product_image.* FROM product_image JOIN products 

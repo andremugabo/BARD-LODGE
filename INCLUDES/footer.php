@@ -30,6 +30,7 @@
 <script type="text/javascript" src="../../ASSETS/JS/getProduct.js"></script>
 <script type="text/javascript" src="../../ASSETS/JS/insertProducts.js"></script>
 <script type="text/javascript" src="../../ASSETS/JS/forSecId.js"></script>
+<script type="text/javascript" src="../../ASSETS/JS/productOrderDetails.js"></script>
 </body>
 
 </html>

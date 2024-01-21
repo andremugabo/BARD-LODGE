@@ -16,47 +16,39 @@
         <button type="button" class="btn btn-sm btn-info " onclick="window.location.href='order.php'">Back</button>
     </div>
 </div>
+<div class="card">
+    <div class="card-header">
+        <strong>Products&nbsp;Types</strong>
+    </div>
+    <div class="card-body" id="product_type">
 
+    </div>
+</div>
+<div class="card">
+    <div class="card-header">
+        <strong>Products&nbsp;Categories</strong>
+    </div>
+    <div class="card-body" id="product_category">
+
+    </div>
+</div>
+<?php
+$o_ref = $_GET['o_ref'];
+$orderDao = new OrdersDao();
+$orderObj = new Orders();
+$orderObj->setORef($o_ref);
+$oInfo = $orderDao->selectOrderById($orderObj);
+// print_r($oInfo);
+
+
+?>
 <div class="content mt-3">
     <div class="animated fadeIn">
         <div class="row">
             <div class="col-lg-6">
-                <div class="card">
-                    <div class="card-header">
-                        <strong class="card-title">Basic Table</strong>
-                    </div>
-                    <div class="card-body">
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th scope="col">#</th>
-                                    <th scope="col">First</th>
-                                    <th scope="col">Last</th>
-                                    <th scope="col">Handle</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <th scope="row">1</th>
-                                    <td>Mark</td>
-                                    <td>Otto</td>
-                                    <td>@mdo</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">2</th>
-                                    <td>Jacob</td>
-                                    <td>Thornton</td>
-                                    <td>@fat</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">3</th>
-                                    <td>Larry</td>
-                                    <td>the Bird</td>
-                                    <td>@twitter</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
+                <div class="row overflow-auto" id="productDetails">
+                    <!-- PRODUCTS GOES HERE -->
+
                 </div>
             </div>
             <div class="col-lg-6">
@@ -82,12 +74,12 @@
                         </div>
                         <div class="address_info m-1  row">
                             <div class="col-6 justify-content-start">
-                                <p>Ref : O-0170</p>
-                                <p>Waiter :MUGABO Andre</p>
+                                <p>Ref : <?=$oInfo['O_REF']?></p>
+                                <p>Waiter : <?=$oInfo['LASTNAME']." ".$oInfo['FIRSTNAME']?></p>
                             </div>
                             <div class="col-6 justify-content-end">
-                                <p>Session :&nbsp;<b>VIP</b></p>
-                                <p>Date: 2022-03-14 </p>
+                                <p style="font-size:10px;">Session : <?=$oInfo['S_REF']?></p>
+                                <p>Date: <?=$oInfo['O_DATE']?> </p>
                             </div>
                         </div>
                         <div class="table-responsive">
@@ -104,6 +96,12 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    <?php
+                                    
+                                    
+                                    
+                                    
+                                    ?>
                                     <tr>
                                         <td style="text-align: center;">1</td>
                                         <td style="text-align: center;">MUTZING 65CL</td>

@@ -89,6 +89,24 @@ class PricesDao extends db{
     }
 
 
+    public function selectProductByPc_id($pc_id){
+        $query = "SELECT products.*,unity.*,prices.* FROM prices JOIN products 
+        ON products.p_id = prices.p_id JOIN unity 
+        ON unity.unity_id = prices.unity_id  WHERE products.pc_id = ?";
+
+        $statement = $this->connect()->prepare($query);
+        $statement->execute(array(
+            $pc_id
+        ));
+
+        while($result = $statement->fetchAll(PDO::FETCH_ASSOC)){
+            return $result;
+        }
+      
+
+    }
+
+
     public function disablePrice(Price $price){
         $endDate = $price->getEndDate();
         $price_id = $price->getPriceId();
