@@ -9,6 +9,7 @@ $metricDaoObj = new MetricDao();
 $metricObj = new Metric();
 $action = $_GET['action'];
 $productData = [];
+$oneProductData = [];
 
 
 switch($action){
@@ -111,7 +112,13 @@ switch($action){
             array_push($productData,$results);
             echo json_encode($productData);
             break;     
-        
+        case 'fetchOrder':
+            $p_id = $_GET['p_id'];
+            $price_id = $_GET['price_id'];
+            $results = $priceDaoObj->selectProductToOrder($p_id,$price_id);
+            array_push($oneProductData,$results);
+            echo json_encode($oneProductData);
+            break;
         
 
     default:

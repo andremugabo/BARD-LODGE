@@ -232,7 +232,7 @@
 
     <?php  if ($countSession !== 0 ):?>
 
-    <?php if($employee_role =="MD" || $employee_role == "MANAGER" || $employee_role == "IT" || $employee_role == "ACCOUNTANT"): ?>
+    <?php if($employee_role =="MD" ||  $employee_role == "IT"): ?>
 
     <div class="card-principal card bg-info m-2">
         <a href="../STOCKS/gStock.php" style="text-decoration:none;">

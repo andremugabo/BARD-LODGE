@@ -106,6 +106,24 @@ class PricesDao extends db{
 
     }
 
+    public function selectProductToOrder($p_id,$price_id){
+        $query = "SELECT products.*,unity.*,prices.* FROM prices JOIN products 
+        ON products.p_id = prices.p_id JOIN unity 
+        ON unity.unity_id = prices.unity_id  WHERE prices.p_id = ? AND prices.price_id = ?";
+
+        $statement = $this->connect()->prepare($query);
+        $statement->execute(array(
+            $p_id,
+            $price_id
+        ));
+
+        $result = $statement->fetch();
+            return $result;
+        
+      
+
+    }
+
 
     public function disablePrice(Price $price){
         $endDate = $price->getEndDate();

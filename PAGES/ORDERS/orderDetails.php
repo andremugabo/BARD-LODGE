@@ -42,6 +42,9 @@ $oInfo = $orderDao->selectOrderById($orderObj);
 
 
 ?>
+<div class="oRefInput">
+    <input type="text" value="<?=$o_ref?>" id="oRefInput" style="display:none;">
+</div>
 <div class="content mt-3">
     <div class="animated fadeIn">
         <div class="row">
@@ -135,7 +138,7 @@ $oInfo = $orderDao->selectOrderById($orderObj);
 
                             </table>
                             <div class="p-1">
-                                <button type="submit" name="PlaceOrder" class="btn btn-info "
+                                <button type="submit" name="printOrder" class="btn btn-info "
                                     onclick="window.location.href='../../../PDF/pdf_order.php?ref=O-0170'">Print</button>
                             </div>
 
@@ -149,4 +152,12 @@ $oInfo = $orderDao->selectOrderById($orderObj);
         </div>
     </div><!-- .animated -->
 </div><!-- .content -->
+
+<div class="edit_modal hide">
+
+
+
+</div>
+
+
 <?php require_once '../../INCLUDES/footer.php' ?>

@@ -82,7 +82,7 @@ $countSession = $sessionDao->checkOpenSessions();
             <main class="content">
                 <div class="container-fluid p-0">
 
-                    <div class="w-100">
+                    <div class="w-100 min-vh-100">
 
                         <div class="msg">
                             <?php 

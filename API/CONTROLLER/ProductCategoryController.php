@@ -1,8 +1,9 @@
 <?php
 session_start();
 require_once '../DAO/ProductCategoryDao.php';
-require_once '../DAO/MetricDao.php';
 require_once '../MODEL/ProductCategory.php';
+require_once '../DAO/MetricDao.php';
+
 
 $action = $_GET['action'];
 $productCategoryDaoObj = new ProductCategoryDao();
