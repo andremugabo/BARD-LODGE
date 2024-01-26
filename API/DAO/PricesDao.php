@@ -51,7 +51,7 @@ class PricesDao extends db{
             $ePrice,
             $pPrice,
             $unity_id,
-            $price_id
+            $price_id 
         ));
         return $result;
     }

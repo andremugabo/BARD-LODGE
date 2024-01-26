@@ -100,36 +100,47 @@ $oInfo = $orderDao->selectOrderById($orderObj);
                                 </thead>
                                 <tbody>
                                     <?php
-                                    
-                                    
+
+                                    $orderDetailsDao = new OrderDetailsDao();
+                                    $orderDetails = new OrderDetails();
+                                    $orderDaoObj = new OrdersDao();
+                                    $orderObj = new Orders;
+                                    $orderObj->setORef($_GET['o_ref']);
+                                    $orderInfo = $orderDaoObj->selectOrderById($orderObj);
+                                    // echo$orderInfo['O_ID'];
+                                    $orderDetails->setOId($orderInfo['O_ID']);
+                                    $selectedOrder = $orderDetailsDao->selectOrderDetailsByOId($orderDetails);
+                                    $num = 0;
+                                    $total = 0;
+                                    $sum = 0;
+                                    if ($selectedOrder != null):
+                                    foreach ($selectedOrder as $item) {  $num++;
+                                    $total = $item['S_PRICE']*$item['P_QTY'];
+                                    $sum += $total;    
                                     
                                     
                                     ?>
                                     <tr>
-                                        <td style="text-align: center;">1</td>
-                                        <td style="text-align: center;">MUTZING 65CL</td>
-                                        <td style="text-align: center;">Btl</td>
-                                        <td style="text-align: center;">4</td>
-                                        <td style="text-align: center;">1300Frw</td>
-                                        <td style="text-align: center;">5200Frw</td>
+                                        <td style="text-align: center;"><?=$num?></td>
+                                        <td style="text-align: center;"><?=$item['P_NAME']?></td>
+                                        <td style="text-align: center;"><?=$item['UNITY_NAME']?></td>
+                                        <td style="text-align: center;"><?=$item['P_QTY']?></td>
+                                        <td style="text-align: center;"><?=$item['S_PRICE']?></td>
+                                        <td style="text-align: center;"><?=$total?></td>
                                     </tr>
 
+                                    <?php 
+                            }
+                        endif;
+                             ?>
 
 
-                                    <tr>
-                                        <td style="text-align: center;">2</td>
-                                        <td style="text-align: center;">PRIMUS 65CL</td>
-                                        <td style="text-align: center;">Btl</td>
-                                        <td style="text-align: center;">2</td>
-                                        <td style="text-align: center;">1000Frw</td>
-                                        <td style="text-align: center;">2000Frw</td>
-                                    </tr>
 
 
 
                                     <tr style='background:darkred; color: white;font-weight: bold;'>
                                         <td colspan="5" style="text-align: left;">TOTAL:</td>
-                                        <td style="text-align: center;">7200Frw</td>
+                                        <td style="text-align: center;"><?=$sum?></td>
                                     </tr>
 
 
@@ -138,8 +149,8 @@ $oInfo = $orderDao->selectOrderById($orderObj);
 
                             </table>
                             <div class="p-1">
-                                <button type="submit" name="printOrder" class="btn btn-info "
-                                    onclick="window.location.href='../../../PDF/pdf_order.php?ref=O-0170'">Print</button>
+                                <a type="submit" target="_blank" name="printOrder" class="btn btn-info "
+                                    href='../PDF/pdf_order.php?o_ref=<?=$_GET['o_ref']?>'>Print</a>
                             </div>
 
                         </div>

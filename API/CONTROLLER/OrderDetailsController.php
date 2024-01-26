@@ -4,6 +4,8 @@ require_once '../DAO/OrderDetailsDao.php';
 require_once '../DAO/MetricDao.php';
 require_once '../DAO/ProductCategoryDao.php';
 require_once '../DAO/OrdersDao.php';
+require_once '../DAO/SStockDao.php';
+
 
 $action = $_GET['action'];
 $orderDetailsDao = new OrderDetailsDao();
@@ -12,13 +14,15 @@ $productCategoryDaoObj = new ProductCategoryDao();
 $productCategoryObj = new ProductCategory();
 $orderDaoObj = new OrdersDao();
 $orderObj = new Orders;
+$SStockDaoObj = new SStockDao();
+$SStockObj = new SStock();
 $metricDaoObj = new MetricDao();
 $metricObj = new Metric();
 
 switch($action){
     case 'insert':
         if(isset($_POST['placeOrder'])){
-                if(!empty($_POST['p_qty'])){
+                if(!empty($_POST['p_qty']) && $_POST['p_qty'] > 0){
                     $orderDetails->setSId($_SESSION['currentSession']);
                     $orderObj->setORef($_GET['o_ref']);
                     $orderInfo = $orderDaoObj->selectOrderById($orderObj);
@@ -48,14 +52,61 @@ switch($action){
                         $metricObj->setSId(null);
                     }
                     //CHECK THE IF THE PRODUCT EXIST ON ORDER FIRST THE ADJUST QUANTITY
-                    $result = $metricDaoObj->createMetric($metricObj);
-                    // $orderDetailsDao->createOrderDetails($orderDetails);
-                    header("location:{$_SERVER['HTTP_REFERER']}");
+                    $SStockObj->setPId($_POST['p_id']);
+                    $isProductExistInSalesStock = $SStockDaoObj->checkIfProductExistSStock($SStockObj);
+                    if($isProductExistInSalesStock > 0){
+                        $qtyInSaleStock = $SStockDaoObj->selectProductQty($SStockObj);
+                        if($qtyInSaleStock['p_qty'] >= $_POST['p_qty']){
+                            //new quantity in sales stock
+                           $newQtyInSalesStock = $qtyInSaleStock['p_qty'] - $_POST['p_qty'];
+                           $SStockObj->setPQty($newQtyInSalesStock);
+                           $SStockObj->setPId($_POST['p_id']);
+
+                           $orderDetails->setOId($orderInfo['O_ID']);
+                           $orderDetails->setPId($_POST['p_id']);
+                           $isProductExistInOrderDetails = $orderDetailsDao->checkProductOnOrderDetailsExists($orderDetails);
+                          
+                           
+                           if($isProductExistInOrderDetails === 0){
+                                //update product in sales stock
+                                $SStockDaoObj->updateProductQty($SStockObj);
+                                $result = $metricDaoObj->createMetric($metricObj);
+                                $orderDetailsDao->createOrderDetails($orderDetails);
+                                header("location:{$_SERVER['HTTP_REFERER']}");
+                           }else{
+                                //get quantity in order details
+                                $quantityInOrderDetails = $orderDetailsDao->selectProductQtyOrderDetails($orderDetails);
+                                print_r($quantityInOrderDetails['p_qty']);
+                                $newQtyInOrderDetails = $quantityInOrderDetails['p_qty'] + $_POST['p_qty'];
+                                $orderDetails->setPQty($newQtyInOrderDetails);
+                                //update product in sales stock
+                                $SStockDaoObj->updateProductQty($SStockObj);
+                                $orderDetailsDao->updateQtyOnOrderDetails($orderDetails);
+                                header("location:{$_SERVER['HTTP_REFERER']}");
+                           }
+
+                          
+                           
+                          
+                        }else{
+                            $_SESSION['fail_msg']="NOT ENOUGH PRODUCT IN SALE STOCK ";
+                            header("location:{$_SERVER['HTTP_REFERER']}");
+                        }
+                        
+
+                    }else{
+                        $_SESSION['fail_msg']="THIS PRODUCT IS NOT PRESENT IN SALES STOCK ";
+                        header("location:{$_SERVER['HTTP_REFERER']}");
+                    }
+
+
+
+                    
 
 
 
                 }else{
-                    $_SESSION['fail_msg']="FIRST ENTER THE QUANTITY OF THE PRODUCT";
+                    $_SESSION['fail_msg']="FIRST ENTER THE QUANTITY OF THE PRODUCT GREATER THAN ZERO";
                     header("location:{$_SERVER['HTTP_REFERER']}");
                 }
         
