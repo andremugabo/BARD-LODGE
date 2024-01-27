@@ -38,6 +38,18 @@ class OrdersDao extends db{
     }
 
 
+    public function countOrderBySId(Orders $order){
+        $s_id = $order->getSId();
+        $query = "SELECT * FROM orders  WHERE orders.s_id = ? ";
+        $statement = $this->connect()->prepare($query);
+        $statement->execute(array(
+            $s_id
+        ));
+        $result = $statement->rowCount();
+        return $result;
+    }
+
+
     public function createOrders(Orders $order){
         $o_ref = $order->getORef();
         $e_id = $order->getEId();

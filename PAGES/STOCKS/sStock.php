@@ -130,7 +130,7 @@ if (isset($_POST['filter'])) {
                         <!-- <th scope="col" style="text-align: center;">Session</th> -->
                         <th scope="col" style="text-align: center;">Product</th>
                         <th scope="col" style="text-align: center;">Quantity</th>
-                        <!-- <th scope="col" style="text-align: center;">Products</th> -->
+                        <th scope="col" style="text-align: center;">Purchase Price</th>
                         <?php if($employee_role =="MD" || $employee_role == "MANAGER" || $employee_role == "IT" || $employee_role == "ACCOUNTANT"):?>
                         <th scope="col" style="text-align: center;">Action</th>
                         <?php endif;?>
@@ -152,7 +152,7 @@ if (isset($_POST['filter'])) {
                         <!-- <td style="text-align: center;"><?=$item['S_REF']?></td> -->
                         <td style="text-align: center;"><?=$item['P_NAME']?></td>
                         <td style="text-align: center;"><?=$item['P_QTY']?></td>
-                        <!-- <td style="text-align: center;"><?=$item['P_NAME']?></td> -->
+                        <td style="text-align: center;"><?=$item['P_PPRICE']?></td>
                         <?php if($employee_role =="MD" || $employee_role == "MANAGER" || $employee_role == "IT" || $employee_role == "ACCOUNTANT"):?>
                         <td style="text-align: center;"><button type="button" title="Edit Product Info"
                                 class="btn btn-primary btn-sm"

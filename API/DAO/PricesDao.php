@@ -17,6 +17,20 @@ class PricesDao extends db{
         return $result;
     }
 
+
+    public function selectPurchasePriceByPId(Price $price){
+        $p_id = $price->getPId();
+        $unity_id = $price->getUnityId();
+        $query = "SELECT pprice FROM prices WHERE prices.p_id = ? AND prices.unity_id = ? AND prices.price_status = '1'";
+        $statement = $this->connect()->prepare($query);
+        $statement->execute(array(
+            $p_id,
+            $unity_id
+        ));
+        $result = $statement->fetch();
+        return $result;
+    }
+
     public function createPrice(Price $price){
         $p_id = $price->getPId();
         $sPrice = $price->getSPrice();

@@ -3,6 +3,7 @@ session_start();
 require_once '../DAO/SStockDao.php';
 require_once '../DAO/GStockDao.php';
 require_once '../DAO/ReceivedProductsDao.php';
+require_once '../DAO/PricesDao.php';
 require_once '../DAO/MetricDao.php';
 
 $action = $_GET['action'];
@@ -10,6 +11,8 @@ $SStockDaoObj = new SStockDao();
 $GStockDaoObj = new GStockDao();
 $SStockObj = new SStock();
 $GStockObj = new GStock();
+$priceDao = new PricesDao();
+$price = new Price();
 $receivedDao = new ReceivedProductsDao();
 $received = new ReceivedProducts();
 $metricDaoObj = new MetricDao();
@@ -93,39 +96,51 @@ switch($action){
                             //RECEIVED PRODUCT
                             $received->setPId($_POST['p_id']);
                             $received->setSId($_SESSION['currentSession']);
-
-                            //is the product exist in the current session?
-                            $feedback = $receivedDao->checkIfProductExistInSession($received);
-                            echo $feedback;
-                            if($feedback === 0){
-                                //first time in received
-                                $received->setQtyRec($_POST['qty']);
-                                $_SESSION['success_msg'] ="PRODUCT QUANTITY UPDATED IN SALES STOCK SUCCESSFULLY!!!";
-                                $metricDaoObj->createMetric($metricObj);
-                                //UPDATE SALES STOCK
-                                $SStockDaoObj->updateProductQty($SStockObj);
-                                //UPDATE GENERAL STOCK
-                                $GStockDaoObj->updateProductQty($GStockObj);
-                                $receivedDao->createReceived($received);
-                                header("location:../../PAGES/STOCKS/sStock.php");
+                            $price->setPId($_POST['p_id']);
+                            $price->setUnityId($_POST['unity_id']);
+                            $purchase_price = $priceDao->selectPurchasePriceByPId($price);
+                            if($purchase_price != null){
+                                    //is the product exist in the current session?
+                                $feedback = $receivedDao->checkIfProductExistInSession($received);
+                                $SStockObj->setPPrice($purchase_price['pprice']);
+                                // echo $feedback;
+                                if($feedback === 0){
+                                    //first time in received
+                                   
+                                    $received->setPPrice($purchase_price['pprice']);
+                                    $received->setQtyRec($_POST['qty']);
+                                    $_SESSION['success_msg'] ="PRODUCT QUANTITY UPDATED IN SALES STOCK SUCCESSFULLY!!!";
+                                    $metricDaoObj->createMetric($metricObj);
+                                    //UPDATE SALES STOCK
+                                    $SStockDaoObj->updateProductQty($SStockObj);
+                                    //UPDATE GENERAL STOCK
+                                    $GStockDaoObj->updateProductQty($GStockObj);
+                                    $receivedDao->createReceived($received);
+                                    header("location:../../PAGES/STOCKS/sStock.php");
+                                }else{
+                                    $currentQtyInreceived = $receivedDao->selectProductQty($received);
+                                    // echo "update received";
+                                    // echo "<br>";
+                                    // print_r($currentQtyInreceived);
+                                    $newQtyInreceived = $currentQtyInreceived['qty_rec'] + $_POST['qty'];
+                                    // echo "<br>";
+                                    // echo $newQtyInreceived;
+                                    $received->setQtyRec($newQtyInreceived);
+                                    $_SESSION['success_msg'] ="PRODUCT QUANTITY UPDATED IN SALES STOCK SUCCESSFULLY!!!";
+                                    $metricDaoObj->createMetric($metricObj);
+                                    //UPDATE SALES STOCK
+                                    $SStockDaoObj->updateProductQty($SStockObj);
+                                    //UPDATE GENERAL STOCK
+                                    $GStockDaoObj->updateProductQty($GStockObj);
+                                    $receivedDao->updateProductQty($received);
+                                    header("location:../../PAGES/STOCKS/sStock.php");
+                                }
                             }else{
-                                $currentQtyInreceived = $receivedDao->selectProductQty($received);
-                                // echo "update received";
-                                // echo "<br>";
-                                // print_r($currentQtyInreceived);
-                                $newQtyInreceived = $currentQtyInreceived['qty_rec'] + $_POST['qty'];
-                                // echo "<br>";
-                                // echo $newQtyInreceived;
-                                $received->setQtyRec($newQtyInreceived);
-                                $_SESSION['success_msg'] ="PRODUCT QUANTITY UPDATED IN SALES STOCK SUCCESSFULLY!!!";
-                                $metricDaoObj->createMetric($metricObj);
-                                //UPDATE SALES STOCK
-                                $SStockDaoObj->updateProductQty($SStockObj);
-                                //UPDATE GENERAL STOCK
-                                $GStockDaoObj->updateProductQty($GStockObj);
-                                $receivedDao->updateProductQty($received);
-                                header("location:../../PAGES/STOCKS/sStock.php");
+                                $_SESSION['fail_msg']="THAT PRODUCT DOES NOT HAVE A PRICE";
+                                header("location:{$_SERVER['HTTP_REFERER']}"); 
                             }
+
+                           
 
 
 

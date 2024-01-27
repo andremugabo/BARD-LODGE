@@ -6,12 +6,14 @@ class ReceivedProductsDao extends db{
     public function createReceived(ReceivedProducts $Received){
         $s_id = $Received->getSId();
         $p_id = $Received->getPId();
+        $p_pprice = $Received->getPPrice();
         $qty_rec = $Received->getQtyRec();
-        $query = "INSERT INTO received(s_id,p_id,qty_rec) VALUES(?,?,?)";
+        $query = "INSERT INTO received(s_id,p_id,p_pprice,qty_rec) VALUES(?,?,?,?)";
         $statement = $this->connect()->prepare($query);
         $result = $statement->execute(array(
             $s_id,
             $p_id,
+            $p_pprice,
             $qty_rec
         ));
         return $result;

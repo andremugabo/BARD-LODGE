@@ -5,6 +5,7 @@ class SStock
     private $s_id;
     private $p_id;
     private $p_qty;
+    private $p_pprice;
     private $ss_date;
 
     // Default constructor
@@ -27,6 +28,11 @@ class SStock
     public function getPId()
     {
         return $this->p_id;
+    }
+
+    public function getPPrice()
+    {
+        return $this->p_pprice;
     }
 
     public function getPQty()
@@ -53,6 +59,11 @@ class SStock
     public function setPId($p_id)
     {
         $this->p_id = $p_id;
+    }
+
+    public function setPPrice($p_pprice)
+    {
+        $this->p_pprice = $p_pprice;
     }
 
     public function setPQty($p_qty)

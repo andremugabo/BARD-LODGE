@@ -4,6 +4,7 @@ class ReceivedProducts
     private $received_id;
     private $s_id;
     private $p_id;
+    private $p_pprice;
     private $qty_rec;
 
     // Default constructor
@@ -28,6 +29,11 @@ class ReceivedProducts
         return $this->p_id;
     }
 
+    public function getPPrice()
+    {
+        return $this->p_pprice;
+    }
+
     public function getQtyRec()
     {
         return $this->qty_rec;
@@ -47,6 +53,11 @@ class ReceivedProducts
     public function setPId($p_id)
     {
         $this->p_id = $p_id;
+    }
+
+    public function setPPrice($p_pprice)
+    {
+        $this->p_pprice = $p_pprice;
     }
 
     public function setQtyRec($qty_rec)

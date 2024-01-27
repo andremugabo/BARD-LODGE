@@ -46,6 +46,22 @@ class OrderDetailsDao extends db{
     }
 
 
+    public function selectOrderDetailsByOIdAndByFood(OrderDetails $details){
+        $o_id = $details->getOId();
+        $query = "SELECT product_type.*,sessions.*,orders.*,products.*,unity.*,order_details.* FROM order_details JOIN orders on 
+        orders.o_id = order_details.o_id JOIN product_type ON product_type.pt_id = order_details.pt_id  JOIN products
+        ON products.p_id = order_details.p_id JOIN sessions ON sessions.s_id = orders.s_id  JOIN unity 
+        ON unity.unity_id = order_details.unity_id  WHERE order_details.o_id = ?";
+        $statement = $this->connect()->prepare($query);
+        $statement->execute(array(
+            $o_id
+        ));
+        while($result = $statement->fetchAll(PDO::FETCH_ASSOC)){
+            return $result;
+        }
+    }
+
+
     public function checkProductOnOrderDetailsExists(OrderDetails $details){
         $o_id = $details->getOId();
         $p_id = $details->getPId();

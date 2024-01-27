@@ -3,6 +3,7 @@
     <div class="s-title text-start col-6">
         <h2 style="color:#0dcaf0;">Order&nbsp;Details&nbsp;View</h2>
     </div>
+
     <div class="s-btn text-end col-6">
         <!-- <button type="button" class="btn btn-sm btn-secondary m-1"
             onclick="window.location.href='sideDishes.php'">Products&nbsp;with&nbsp;Sides&nbsp;Dishes</button>
@@ -16,46 +17,96 @@
         <button type="button" class="btn btn-sm btn-info " onclick="window.location.href='order.php'">Back</button>
     </div>
 </div>
+<?php
+$o_ref = $_GET['o_ref'];
+$orderDao = new OrdersDao();
+$orderObj = new Orders();
+$orderObj->setORef($o_ref);
+$oInfo = $orderDao->selectOrderById($orderObj);
+// print_r($oInfo);
 
+
+?>
 <div class="content mt-3">
     <div class="animated fadeIn">
         <div class="row">
             <div class="col-lg-6">
                 <div class="card">
                     <div class="card-header">
-                        <strong class="card-title">Basic Table</strong>
+                        <strong class="card-title">Kitchen order form</strong>
                     </div>
                     <div class="card-body">
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th scope="col">#</th>
-                                    <th scope="col">First</th>
-                                    <th scope="col">Last</th>
-                                    <th scope="col">Handle</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <th scope="row">1</th>
-                                    <td>Mark</td>
-                                    <td>Otto</td>
-                                    <td>@mdo</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">2</th>
-                                    <td>Jacob</td>
-                                    <td>Thornton</td>
-                                    <td>@fat</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">3</th>
-                                    <td>Larry</td>
-                                    <td>the Bird</td>
-                                    <td>@twitter</td>
-                                </tr>
-                            </tbody>
-                        </table>
+                        <div class="title_o m-1 p-1 row">
+                            <span>X-LOUNGE</span>
+                        </div>
+                        <div class="title_o m-1 p-1 row">
+                            <span>KITCHEN ORDER FORM</span>
+                        </div>
+
+                        <div class="table-responsive">
+                            <table class="table table-striped table-sm table-hover">
+                                <thead>
+                                    <tr
+                                        style='background:#e3e2e2; color: black;font-weight: bold;border-bottom:2px solid black;'>
+                                        <th scope="col" style="text-align: center;">Ref:</th>
+                                        <th colspan="4" scope="col" style="text-align: center;">O-0171</th>
+                                    </tr>
+                                    <tr
+                                        style='background:#e3e2e2; color: black;font-weight: bold;border-bottom:2px solid black;'>
+                                        <th scope="col" style="text-align: center;">Waiter</th>
+                                        <th colspan="4" scope="col" style="text-align: center;">MUGABO Andre</th>
+                                    </tr>
+                                    <tr style='background:#e3e2e2; color: black;font-weight: bold;'>
+                                        <th scope="col" style="text-align: center;">#</th>
+                                        <th scope="col" style="text-align: center;">Item</th>
+                                        <th scope="col" style="text-align: center;">Qty</th>
+                                        <th scope="col" style="text-align: center;">U/P</th>
+                                        <th scope="col" style="text-align: center;">Amount</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php 
+                                       $orderDetailsDao = new OrderDetailsDao();
+                                       $orderDetails = new OrderDetails();
+                                       $orderDaoObj = new OrdersDao();
+                                       $orderObj = new Orders;
+                                       $orderObj->setORef($_GET['o_ref']);
+                                       $orderInfo = $orderDaoObj->selectOrderById($orderObj);
+                                       // echo$orderInfo['O_ID'];
+                                       $orderDetails->setOId($orderInfo['O_ID']);
+                                       $selectedOrder = $orderDetailsDao->selectOrderDetailsByOId($orderDetails);
+                                       $num = 0;
+                                       $total = 0;
+                                       $sum = 0;
+                                       if ($selectedOrder != null):
+                                       foreach ($selectedOrder as $item) {  $num++;
+                                       $total = $item['S_PRICE']*$item['P_QTY'];
+                                       $sum += $total; 
+                                    ?>
+                                    <tr>
+                                        <td style="text-align: center;"><?=$num?></td>
+                                        <td style="text-align: center;"><?=$item['P_NAME']?></td>
+                                        <td style="text-align: center;"><?=$item['P_QTY']?></td>
+                                        <td style="text-align: center;"><?=$item['S_PRICE']."Frw"?></td>
+                                        <td style="text-align: center;"><?=$total."Frw"?></td>
+                                    </tr>
+
+
+
+                                    <?php } ?>
+                                    <tr style='background:darkred; color: white;font-weight: bold;'>
+                                        <td colspan="4" style="text-align: left;">TOTAL:</td>
+                                        <td style="text-align: center;"><?=$sum."Frw"?></td>
+                                    </tr>
+                                    <?php endif; ?>
+                                </tbody>
+                            </table>
+                            <div class="p-1">
+                                <button type="submit" name="PlaceOrder" class="btn btn-warning "
+                                    onclick="window.location.href='../../../PDF/pdf_korder.php?ref=O-0171'">Print</button>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </div>
@@ -82,12 +133,12 @@
                         </div>
                         <div class="address_info m-1  row">
                             <div class="col-6 justify-content-start">
-                                <p>Ref : O-0170</p>
-                                <p>Waiter :MUGABO Andre</p>
+                                <p>Ref : <?=$oInfo['O_REF']?></p>
+                                <p>Waiter : <?=$oInfo['LASTNAME']." ".$oInfo['FIRSTNAME']?></p>
                             </div>
                             <div class="col-6 justify-content-end">
-                                <p>Session :&nbsp;<b>VIP</b></p>
-                                <p>Date: 2022-03-14 </p>
+                                <p style="font-size:10px;">Session : <?=$oInfo['S_REF']?></p>
+                                <p>Date: <?=$oInfo['O_DATE']?> </p>
                             </div>
                         </div>
                         <div class="table-responsive">
@@ -104,31 +155,48 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    <?php
+
+                                    $orderDetailsDao = new OrderDetailsDao();
+                                    $orderDetails = new OrderDetails();
+                                    $orderDaoObj = new OrdersDao();
+                                    $orderObj = new Orders;
+                                    $orderObj->setORef($_GET['o_ref']);
+                                    $orderInfo = $orderDaoObj->selectOrderById($orderObj);
+                                    // echo$orderInfo['O_ID'];
+                                    $orderDetails->setOId($orderInfo['O_ID']);
+                                    $selectedOrder = $orderDetailsDao->selectOrderDetailsByOId($orderDetails);
+                                    $num = 0;
+                                    $total = 0;
+                                    $sum = 0;
+                                    if ($selectedOrder != null):
+                                    foreach ($selectedOrder as $item) {  $num++;
+                                    $total = $item['S_PRICE']*$item['P_QTY'];
+                                    $sum += $total;    
+                                    
+                                    
+                                    ?>
                                     <tr>
-                                        <td style="text-align: center;">1</td>
-                                        <td style="text-align: center;">MUTZING 65CL</td>
-                                        <td style="text-align: center;">Btl</td>
-                                        <td style="text-align: center;">4</td>
-                                        <td style="text-align: center;">1300Frw</td>
-                                        <td style="text-align: center;">5200Frw</td>
+                                        <td style="text-align: center;"><?=$num?></td>
+                                        <td style="text-align: center;"><?=$item['P_NAME']?></td>
+                                        <td style="text-align: center;"><?=$item['UNITY_NAME']?></td>
+                                        <td style="text-align: center;"><?=$item['P_QTY']?></td>
+                                        <td style="text-align: center;"><?=$item['S_PRICE']?></td>
+                                        <td style="text-align: center;"><?=$total?></td>
                                     </tr>
 
+                                    <?php 
+                                     }
+                                     endif;
+                                     ?>
 
 
-                                    <tr>
-                                        <td style="text-align: center;">2</td>
-                                        <td style="text-align: center;">PRIMUS 65CL</td>
-                                        <td style="text-align: center;">Btl</td>
-                                        <td style="text-align: center;">2</td>
-                                        <td style="text-align: center;">1000Frw</td>
-                                        <td style="text-align: center;">2000Frw</td>
-                                    </tr>
 
 
 
                                     <tr style='background:darkred; color: white;font-weight: bold;'>
                                         <td colspan="5" style="text-align: left;">TOTAL:</td>
-                                        <td style="text-align: center;">7200Frw</td>
+                                        <td style="text-align: center;"><?=$sum?></td>
                                     </tr>
 
 
@@ -137,8 +205,8 @@
 
                             </table>
                             <div class="p-1">
-                                <button type="submit" name="PlaceOrder" class="btn btn-info "
-                                    onclick="window.location.href='../../../PDF/pdf_order.php?ref=O-0170'">Print</button>
+                                <a type="submit" target="_blank" name="printOrder" class="btn btn-info "
+                                    href='../PDF/pdf_order.php?o_ref=<?=$_GET['o_ref']?>'>Print</a>
                             </div>
 
                         </div>

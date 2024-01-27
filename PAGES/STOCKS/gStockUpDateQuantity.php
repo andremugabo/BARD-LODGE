@@ -80,16 +80,10 @@ $selectById = $gStockDao->selectGStockById($gStock);
                     </div>
 
                     <div class="mb-3">
-                        <label for="p_name" class="col-form-label">New&nbsp;Quantity:</label>
-                        <input type="text" class="form-control" name="qty" id="qty" placeholder="ENTER QUANTITY"
-                            required>
-                    </div>
-
-                    <!-- <div class="mb-3">
-                        <label for="role" class="col-form-label">Product&nbsp;Unity:</label>
+                        <label for="role" class="col-form-label">Product&nbsp;Unity*:</label>
                         <select class="form-select form-select mb-3" id="unity" name="unity_id"
                             aria-label=".form-select-lg example" required>
-                            <option selected disabled value=""><?=$selectById['UNITY_NAME']?></option>
+                            <option selected disabled value="">Select Unity</option>
                             <?php 
                                 $unityDaoObj = new UnityDao();
                                 $selectUnity = $unityDaoObj->selectUnity();
@@ -101,7 +95,15 @@ $selectById = $gStockDao->selectGStockById($gStock);
                             <?php }  endif?>
 
                         </select>
-                    </div> -->
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="p_name" class="col-form-label">New&nbsp;Quantity:</label>
+                        <input type="text" class="form-control" name="qty" id="qty" placeholder="ENTER QUANTITY"
+                            required>
+                    </div>
+
+
 
 
 

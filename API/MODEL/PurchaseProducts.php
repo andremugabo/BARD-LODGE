@@ -5,6 +5,7 @@ class PurchaseProducts
     private $s_id;
     private $p_id;
     private $qty_pur;
+    private $pprice;
 
     // Default constructor
     public function __construct()
@@ -28,6 +29,12 @@ class PurchaseProducts
         return $this->p_id;
     }
 
+    public function getPPrice()
+    {
+        return $this->pprice;
+    }
+
+
     public function getQtyPur()
     {
         return $this->qty_pur;
@@ -47,6 +54,11 @@ class PurchaseProducts
     public function setPId($p_id)
     {
         $this->p_id = $p_id;
+    }
+
+    public function setPPrice($pprice)
+    {
+        $this->pprice = $pprice;
     }
 
     public function setQtyPur($qty_pur)

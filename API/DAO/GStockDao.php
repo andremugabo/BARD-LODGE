@@ -56,12 +56,16 @@ class GStockDao extends db{
 
     public function updateProductQty(GStock $gstock){
         $p_qty = $gstock->getPQty();
+        $p_pprice = $gstock->getPPrice();
         $p_id = $gstock->getPId();
-        $query = "UPDATE g_stock SET p_qty = ? WHERE g_stock.p_id = ?";
+        
+        $query = "UPDATE g_stock SET p_qty = ?,p_pprice = ? WHERE g_stock.p_id = ?";
         $statement = $this->connect()->prepare($query);
         $result = $statement->execute(array(
             $p_qty,
+            $p_pprice,
             $p_id
+          
         ));
         return $result;
     }

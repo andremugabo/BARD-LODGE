@@ -2,6 +2,7 @@
 session_start();
 require_once '../DAO/GStockDao.php';
 require_once '../DAO/PurchaseProductsDao.php';
+require_once '../DAO/PricesDao.php';
 require_once '../DAO/MetricDao.php';
 
 $action = $_GET['action'];
@@ -9,6 +10,8 @@ $gStockDaoObj = new GStockDao();
 $gStockObj = new GStock();
 $purchaseDao = new PurchaseProductsDao();
 $purchase = new PurchaseProducts();
+$priceDao = new PricesDao();
+$price = new Price();
 $metricDaoObj = new MetricDao();
 $metricObj = new Metric();
 
@@ -74,50 +77,63 @@ switch($action){
                         $currentQty = $gStockDaoObj->selectProductQty($gStockObj);
                         $newQuantity = $currentQty['p_qty'] + $_POST['qty'];
                         $gStockObj->setPQty($newQuantity);
+                        $price->setPId($_POST['p_id']);
+                        $price->setUnityId($_POST['unity_id']);
+                        $purchase_price = $priceDao->selectPurchasePriceByPId($price);
+                        if($purchase_price != null){
+                                // print_r($purchase_price['pprice']);
+                            $gStockObj->setPPrice($purchase_price['pprice']);
 
 
-                        //to review after sessions(Done)
-                        if(isset($_SESSION['currentSession']))
-                        {
-                            $metricObj->setSId($_SESSION['currentSession']);
-                        }
-                        else
-                        {
-                            $metricObj->setSId(null);
-                        }
-                        $purchase->setPId($_POST['p_id']);
-                        $purchase->setSId($_SESSION['currentSession']);
+                            //to review after sessions(Done)
+                            if(isset($_SESSION['currentSession']))
+                            {
+                                $metricObj->setSId($_SESSION['currentSession']);
+                            }
+                            else
+                            {
+                                $metricObj->setSId(null);
+                            }
+                            $purchase->setPId($_POST['p_id']);
+                            $purchase->setSId($_SESSION['currentSession']);
 
-                        //is the product exist in the current session?
-                        $feedback = $purchaseDao->checkIfProductExistInSession($purchase);
-                        // echo $feedback;
-                        if($feedback === 0){
-                            //first time in purchase
-                        $purchase->setQtyPur($_POST['qty']);
-                        $_SESSION['success_msg'] ="PRODUCT QUANTITY UPDATED IN G STOCK SUCCESSFULLY!!!";
-                        $metricDaoObj->createMetric($metricObj);
-                        $gStockDaoObj->updateProductQty($gStockObj);
-                        $purchaseDao->createPurchase($purchase);
-                        header("location:../../PAGES/STOCKS/gStock.php");
-
-                        }else{
-                            //update purchase
-                            
-                            $currentQtyInPurchase = $purchaseDao->selectProductQty($purchase);
-                            // echo "update purchase";
-                            // echo "<br>";
-                            print_r($currentQtyInPurchase);
-                            $newQtyInPurchase = $currentQtyInPurchase['qty_pur'] + $_POST['qty'];
-                            // echo "<br>";
-                            // echo $newQtyInPurchase;
-                            $purchase->setQtyPur($newQtyInPurchase);
+                            //is the product exist in the current session?
+                            $feedback = $purchaseDao->checkIfProductExistInSession($purchase);
+                            // echo $feedback;
+                            if($feedback === 0){
+                                //first time in purchase
+                            $purchase->setQtyPur($_POST['qty']);
+                            $purchase->setPPrice($purchase_price['pprice']);
                             $_SESSION['success_msg'] ="PRODUCT QUANTITY UPDATED IN G STOCK SUCCESSFULLY!!!";
                             $metricDaoObj->createMetric($metricObj);
                             $gStockDaoObj->updateProductQty($gStockObj);
-                            $purchaseDao->updateProductQty($purchase);
+                            $purchaseDao->createPurchase($purchase);
                             header("location:../../PAGES/STOCKS/gStock.php");
 
+                            }else{
+                                //update purchase
+                                
+                                $currentQtyInPurchase = $purchaseDao->selectProductQty($purchase);
+                                // echo "update purchase";
+                                // echo "<br>";
+                                // print_r($currentQtyInPurchase);
+                                $newQtyInPurchase = $currentQtyInPurchase['qty_pur'] + $_POST['qty'];
+                                // echo "<br>";
+                                // echo $newQtyInPurchase;
+                                $purchase->setQtyPur($newQtyInPurchase);
+
+                                $_SESSION['success_msg'] ="PRODUCT QUANTITY UPDATED IN G STOCK SUCCESSFULLY!!!";
+                                $metricDaoObj->createMetric($metricObj);
+                                $gStockDaoObj->updateProductQty($gStockObj);
+                                $purchaseDao->updateProductQty($purchase);
+                                header("location:../../PAGES/STOCKS/gStock.php");
+
+                            }
+                        }else{
+                            $_SESSION['fail_msg']="THAT PRODUCT DOES NOT HAVE A PRICE";
+                            header("location:{$_SERVER['HTTP_REFERER']}"); 
                         }
+                        
 
                         
                     }else{

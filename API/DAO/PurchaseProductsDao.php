@@ -6,12 +6,14 @@ class PurchaseProductsDao extends db{
     public function createPurchase(PurchaseProducts $purchase){
         $s_id = $purchase->getSId();
         $p_id = $purchase->getPId();
+        $p_pprice = $purchase->getPPrice();
         $qty_pur = $purchase->getQtyPur();
-        $query = "INSERT INTO purchase(s_id,p_id,qty_pur) VALUES(?,?,?)";
+        $query = "INSERT INTO purchase(s_id,p_id,p_pprice,qty_pur) VALUES(?,?,?,?)";
         $statement = $this->connect()->prepare($query);
         $result = $statement->execute(array(
             $s_id,
             $p_id,
+            $p_pprice,
             $qty_pur
         ));
         return $result;
