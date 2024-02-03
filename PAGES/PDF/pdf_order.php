@@ -48,10 +48,10 @@ $pdf = new FPDF('P','mm',array(58,120));
 $pdf->SetMargins(4.175, 3.175, 4.175);
 
 $pdf->AddPage('P',array(58,120),0);
-$pdf->SetFont('Arial','I',4);
+$pdf->SetFont('Arial','I',3);
 
 
-$pdf->Cell(45,5,'GSL  / ORDER NOTE',0,1,'C');
+$pdf->Cell(45,5,'GWC / ORDER NOTE',0,1,'C');
 
 // $pdf->Ln(2);
 $pdf->Cell(45,5,'Tel:(+250) 788 322 151',0,1,'C');

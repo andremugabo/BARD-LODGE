@@ -105,9 +105,11 @@ if (isset($_POST['filter'])) {
                     onclick="window.location.href='price.php'">Price</button>
                 <button type="button" class="btn btn-outline-danger btn-sm m-1"
                     onclick="window.location.href='productImage.php'">Images</button>
+                <button type="button" class="btn btn-outline-danger btn-sm"
+                    onclick="window.location.href='unityDisplay.php'">Unity</button>
                 <button type="button" class="btn btn-warning btn-sm m-1" data-bs-toggle="modal"
                     data-bs-target="#employeeModal">Create&nbsp;Product</button>
-                <!-- <button type="button" class="btn btn-outline-danger btn-sm">Danger</button> -->
+
             </div>
         </div>
     </div>

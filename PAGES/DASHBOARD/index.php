@@ -24,9 +24,9 @@
                         </div>
                     </div>
                 </div>
-                <h3 class="mt-1 mb-3 text-black text-black" style="font-size: 18px;">GSL-MIS&nbsp;Dashboard</h3>
+                <h3 class="mt-1 mb-3 text-black text-black" style="font-size: 18px;">GWC-MIS&nbsp;Dashboard</h3>
                 <div class="mb-0">
-                    <span class="text-black"> <i class="mdi mdi-arrow-bottom-right"></i> GSL-MIS
+                    <span class="text-black"> <i class="mdi mdi-arrow-bottom-right"></i> GWC-MIS
                     </span>
                     <!-- <span class="text-black">Since last week</span> -->
                 </div>
@@ -63,7 +63,7 @@
                     <?=$count?>&nbsp;Employees
                 </h3>
                 <div class="mb-0">
-                    <span class="text-white"> <i class="mdi mdi-arrow-bottom-right"></i> GSL-MIS
+                    <span class="text-white"> <i class="mdi mdi-arrow-bottom-right"></i> GWC-MIS
                     </span>
                     <!-- <span class="text-black">Since last week</span> -->
                 </div>
@@ -103,7 +103,7 @@
                 <h3 class="mt-1 mb-3 text-black text-black" style="font-size: 18px;">Lodge&nbsp;Dashboard
                 </h3>
                 <div class="mb-0">
-                    <span class="text-white"> <i class="mdi mdi-arrow-bottom-right"></i> GSL-MIS
+                    <span class="text-white"> <i class="mdi mdi-arrow-bottom-right"></i> GWC-MIS
                     </span>
                     <!-- <span class="text-black">Since last week</span> -->
                 </div>
@@ -137,7 +137,7 @@
                 <h3 class="mt-1 mb-3 text-black text-black" style="font-size: 15px;">Liquor&nbsp;Store&nbsp;Dashboard
                 </h3>
                 <div class="mb-0">
-                    <span class="text-white"> <i class="mdi mdi-arrow-bottom-right"></i>GSL-MIS
+                    <span class="text-white"> <i class="mdi mdi-arrow-bottom-right"></i>GWC-MIS
                     </span>
                     <!-- <span class="text-black fw-bold3">SM</span> -->
                 </div>
@@ -174,7 +174,7 @@
                     <?=$count?>&nbsp;Products
                 </h3>
                 <div class="mb-0">
-                    <span class="text-white"> <i class="mdi mdi-arrow-bottom-right"></i>GSL-MIS
+                    <span class="text-white"> <i class="mdi mdi-arrow-bottom-right"></i>GWC-MIS
                     </span>
                     <!-- <span class="text-black">Since last week</span> -->
                 </div>
@@ -219,7 +219,7 @@
                     ?>
                 </h3>
                 <div class="mb-0">
-                    <span class="text-white"> <i class="mdi mdi-arrow-bottom-right"></i>GSL-MIS
+                    <span class="text-white"> <i class="mdi mdi-arrow-bottom-right"></i>GWC-MIS
                     </span>
                     <!-- <span class="text-black">Since last week</span> -->
                 </div>
@@ -267,7 +267,7 @@
                     ?>
                 </h3>
                 <div class="mb-0">
-                    <span class="text-white"> <i class="mdi mdi-arrow-bottom-right"></i>GSL-MIS
+                    <span class="text-white"> <i class="mdi mdi-arrow-bottom-right"></i>GWC-MIS
                     </span>
                     <!-- <span class="text-black">Since last week</span> -->
                 </div>
@@ -315,7 +315,7 @@
                     ?>
                 </h3>
                 <div class="mb-0">
-                    <span class="text-white"> <i class="mdi mdi-arrow-bottom-right"></i>GSL-MIS
+                    <span class="text-white"> <i class="mdi mdi-arrow-bottom-right"></i>GWC-MIS
                     </span>
                     <!-- <span class="text-black">Since last week</span> -->
                 </div>
@@ -362,7 +362,7 @@
                     ?>
                 </h3>
                 <div class="mb-0">
-                    <span class="text-white"> <i class="mdi mdi-arrow-bottom-right"></i>GSL-MIS
+                    <span class="text-white"> <i class="mdi mdi-arrow-bottom-right"></i>GWC-MIS
                     </span>
                     <!-- <span class="text-black">Since last week</span> -->
                 </div>

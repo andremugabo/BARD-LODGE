@@ -68,7 +68,7 @@ switch($action){
 
                 // print_r($_SESSION['logged']);
                 $employee_name = $_SESSION['logged']['LASTNAME']." ".$_SESSION['logged']['FIRSTNAME'];
-                $_SESSION['success_msg'] = $employee_name." WELCOME TO GSL-MIS ";
+                $_SESSION['success_msg'] = $employee_name." WELCOME TO GWC-MIS ";
                 header('location:../../PAGES/DASHBOARD/');
             }
             else

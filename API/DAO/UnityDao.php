@@ -7,13 +7,11 @@ require_once (__DIR__.'/../MODEL/Unity.php');
 
 class UnityDao extends db{
     public function createUnity(Unity $unity) {
-        $unity_id = $unity->getUnityId();
         $unity_name = $unity->getUnityName();
 
         $query = "INSERT INTO unity (unity_name) VALUES (?)";
         $statement = $this->connect()->prepare($query);
         $result  = $statement->execute(array(
-            $unity_id,
             $unity_name            
         ));
         return $result;
@@ -68,6 +66,21 @@ class UnityDao extends db{
 		return $result;
 		
 	}
+
+    public function updateUnity(Unity $unity)
+    {
+        $unity_name = $unity->getUnityName();
+        $unity_id = $unity->getUnityId();
+        $query = "UPDATE unity SET unity.unity_name = ? WHERE unity.unity_id = ?";
+        $statement = $this->connect()->prepare($query);
+        $statement->execute(array(
+            $unity_name,
+            $unity_id
+        ));
+        $result = $statement->execute();
+        return $result;
+    }
+    
 
 }
 

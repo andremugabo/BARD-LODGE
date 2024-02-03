@@ -18,6 +18,8 @@ $SStockDaoObj = new SStockDao();
 $SStockObj = new SStock();
 $metricDaoObj = new MetricDao();
 $metricObj = new Metric();
+$productData = [];
+
 
 switch($action){
     case 'insert':
@@ -114,11 +116,19 @@ switch($action){
             header("location:{$_SERVER['HTTP_REFERER']}");
         }
         break;
+    case "fetchOrder":
+            $orderObj->setORef($_GET['o_ref']);
+            $orderInfo = $orderDaoObj->selectOrderById($orderObj);
+            $orderDetails->setOId($orderInfo['O_ID']);
+            $results = $orderDetailsDao->selectOrderDetailsByOId( $orderDetails);
+            array_push($productData,$results);
+            echo json_encode($productData);
+        break;    
     default:
-        header('location:../../');
-        session_destroy();    
+        // header('location:../../');
+        // session_destroy();    
         break;      
 }
 
-
+header("content-type:application/json");
 ?>

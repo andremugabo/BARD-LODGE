@@ -4,7 +4,7 @@ require_once '../../INCLUDES/header.php';?>
 
 <div class="container-fluid section-title d-flex mb-2">
     <div class="s-title text-start col-5">
-        <h2>Products Images</h2>
+        <h2>Products Unity</h2>
     </div>
     <div class="s-btn text-end col-7">
         <!-- <button type="button" class="btn btn-sm btn-secondary" onclick="window.location.href='sideDishes.php'">Sides
@@ -13,7 +13,7 @@ require_once '../../INCLUDES/header.php';?>
         <button type="button" class="btn btn-sm btn-success" onclick="window.location.href='Price.php'">Price</button>
         &nbsp; -->
         <button type="button" class="btn btn-sm btn-warning text-white" data-bs-toggle="modal"
-            data-bs-target="#employeeModal">Insert&nbsp;Products&nbsp;Images</button>
+            data-bs-target="#employeeModal">Insert&nbsp;Products&nbsp;Unity</button>
         &nbsp;
         <button type="button" class="btn btn-sm btn-danger " onclick="window.location.href='products.php'">Back</button>
     </div>
@@ -22,15 +22,15 @@ require_once '../../INCLUDES/header.php';?>
 <div class="col">
     <div class="card">
         <div class="card-header">
-            <strong class="card-title">Products Images Table</strong>
+            <strong class="card-title">Products Unity Table</strong>
         </div>
         <div class="card-body overflow-auto">
             <table class="table align-middle mb-0 bg-white table-striped">
                 <thead class="bg-light">
                     <tr>
                         <th scope="col" style="text-align: center;">#</th>
-                        <th scope="col">Image</th>
-                        <th scope="col" style="text-align: center;">Product</th>
+                        <th scope="col">Unity</th>
+                        <!-- <th scope="col" style="text-align: center;">Product</th> -->
                         <th scope="col" style="text-align: center;">Actions</th>
                     </tr>
                 </thead>
@@ -38,29 +38,22 @@ require_once '../../INCLUDES/header.php';?>
 
                 <tbody>
                     <?php 
-                 $image = new ProductImagesDao;
-                 $selectImage =$image->selectImages();
+                 $unity = new UnityDao;
+                 $selectUnity =$unity->selectUnity();
                  $num = 0;
                 //  print_r($selectImage);
-                 if ($selectImage != null):
-                 foreach ($selectImage as $item) {  $num++;
+                 if ($selectUnity != null):
+                 foreach ($selectUnity as $item) {  $num++;
                 
                  ?>
                     <tr>
                         <td style="text-align: center;"><?=$num?></td>
                         <td style="text-align: center;">
-                            <div class="d-flex align-items-center">
-                                <img src="../../ASSETS/PIMAGES/<?=$item['PI_NAME']?>" alt=""
-                                    style="width: 45px; height: 45px" class="rounded-circle" />
-
-                            </div>
-                        </td>
-                        <td style="text-align: center;">
-                            <?=$item['P_NAME']?>
+                            <?=$item['UNITY_NAME']?>
                         </td>
                         <td style="text-align: center;">
                             <button type="button" class="btn btn-primary btn-sm btn-rounded"
-                                onclick="window.location.href='editImage.php?edit=<?=$item['PI_ID']?>'">
+                                onclick="window.location.href='editUnity.php?edit=<?=$item['UNITY_ID']?>'">
                                 Edit
                             </button>
                         </td>
@@ -85,15 +78,15 @@ require_once '../../INCLUDES/header.php';?>
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Insert&nbsp;Products&nbsp;Type</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Insert&nbsp;Products&nbsp;Unity</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
             <div class="modal-body">
-                <form action="../../API/CONTROLLER/ProductImageController.php?action=insert" method="POST"
+                <form action="../../API/CONTROLLER/UnityController.php?action=insert" method="POST"
                     enctype="multipart/form-data">
 
-                    <div class="mb-3">
-                        <label for="p_type" class="col-form-label">Products&nbsp;Unity:</label>
+                    <!-- <div class="mb-3">
+                        <label for="p_type" class="col-form-label">Products&nbsp;Type:</label>
                         <select class="form-select form-select mb-3" id="type" name="p_type"
                             aria-label=".form-select-lg example" onchange="getCategory(this.value)" required>
                             <option selected disabled value="">Choose&nbsp;Product&nbsp;Type</option>
@@ -108,25 +101,25 @@ require_once '../../INCLUDES/header.php';?>
                             <?php endif?>
 
                         </select>
-                    </div>
+                    </div> -->
 
-                    <div class="mb-3">
+                    <!-- <div class="mb-3">
                         <label for="role" class="col-form-label">Products&nbsp;Category:</label>
                         <select class="form-select form-select mb-3" id="category" onchange="getProduct(this.value)"
                             name="pc_id" aria-label=".form-select-lg example" required>
                             <option selected disabled value="">Choose&nbsp;Product&nbsp;Category</option>
 
                         </select>
-                    </div>
+                    </div> -->
 
-                    <div class="mb-3">
+                    <!-- <div class="mb-3">
                         <label for="product" class="col-form-label">Product:</label>
                         <select class="form-select form-select mb-3" id="product" name="p_id" required
                             aria-label=".form-select-lg example">
                             <option selected disabled value=" ">Choose&nbsp;Product</option>
 
                         </select>
-                    </div>
+                    </div> -->
 
                     <!-- <div class="mb-3">
                         <label for="role" class="col-form-label">Product&nbsp;Unity:</label>
@@ -158,14 +151,14 @@ require_once '../../INCLUDES/header.php';?>
                             placeholder="ENTER SELLING PRICE" required>
                     </div> -->
                     <div class="mb-3">
-                        <label for="p_name" class="col-form-label">Product&nbsp;Image:</label>
-                        <input type="file" class="form-control" name="pi_name" id="pi_name"
-                            placeholder="ENTER PRODUCT IMAGE" required>
+                        <label for="p_name" class="col-form-label">Product&nbsp;Unity:</label>
+                        <input type="text" class="form-control" name="unity_name" id="unity_name"
+                            placeholder="ENTER PRODUCT UNITY" required>
                     </div>
 
 
 
-                    <button type="submit" name="addImage" class="btn btn-primary">Add&nbsp;Image</button>
+                    <button type="submit" name="addUnity" class="btn btn-primary">Add&nbsp;Unity</button>
 
                 </form>
             </div>

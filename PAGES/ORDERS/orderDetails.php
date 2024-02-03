@@ -78,7 +78,7 @@ $oInfo = $orderDao->selectOrderById($orderObj);
                         <div class="address_info m-1  row">
                             <div class="col-6 justify-content-start">
                                 <p>Ref : <?=$oInfo['O_REF']?></p>
-                                <p>Waiter : <?=$oInfo['LASTNAME']." ".$oInfo['FIRSTNAME']?></p>
+                                <p>Served&nbsp;By:&nbsp; <?=$oInfo['LASTNAME']." ".$oInfo['FIRSTNAME']?></p>
                             </div>
                             <div class="col-6 justify-content-end">
                                 <p style="font-size:10px;">Session : <?=$oInfo['S_REF']?></p>

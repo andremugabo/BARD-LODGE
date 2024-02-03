@@ -38,24 +38,33 @@
                     </tr>
                 </thead>
                 <tbody>
-
+                    <?php 
+                $orderDao = new OrdersDao();
+                $orderObj = new Orders();
+                $orderObj->setEId($employee_eid);
+                $orderObj->setSId($sessionInfo[0]['S_ID']);
+                $selectProduct =$orderDao->selectOrdersByEIdAndSId($orderObj);
+                $num = 0;
+                if ($selectProduct):
+                foreach ($selectProduct as $item) {  $num++;            
+                ?>
 
                     <tr>
-                        <td style="text-align: center;">1</td>
+                        <td style="text-align: center;"><?=$num?></td>
                         <!-- <td style="text-align: center;">subSession/15-01-2024/0007</td> -->
-                        <td style="text-align: center;">O-0171</td>
-                        <td style="text-align: center;">MUGABO Andre</td>
-                        <td style="text-align: center;">2024-01-15</td>
-                        <td style="text-align: center;">NOT PAID</td>
-                        <td style="text-align: center;">0</td>
+                        <td style="text-align: center;"><?=$item['O_REF']?></td>
+                        <td style="text-align: center;"><?=$item['FIRSTNAME']." ".$item['LASTNAME']?></td>
+                        <td style="text-align: center;"><?=$item['O_DATE']?></td>
+                        <td style="text-align: center;"><?=$item['O_PAYMENT']?></td>
+                        <td style="text-align: center;"><?=$item['O_AMOUNT']?></td>
                         <td style="text-align: center;"><button type="button" class="btn btn-success table-btn"
-                                onclick="window.location.href='orderDetails.php?o_ref=O-0171'"><img
+                                onclick="window.location.href='orderDetails.php?o_ref=<?=$item['O_REF']?>'"><img
                                     src="../../../../ASSETS/IMAGES/Buy.png" class="align-middle table-img"
                                     alt=""></button>&nbsp;<button type="button" class="btn btn-info table-btn"
-                                onclick="window.location.href='viewOrderDetails.php?o_ref=O-0171'"><img
+                                onclick="window.location.href='viewOrderDetails.php?o_ref=<?=$item['O_REF']?>'"><img
                                     src="../../../../ASSETS/IMAGES/View.png" class="align-middle table-img"
                                     alt=""></button>&nbsp;<button type="button"
-                                onclick="window.location.href='voidOrder.php?o_ref=O-0171'"
+                                onclick="window.location.href='voidOrder.php?o_ref=<?=$item['O_REF']?>'"
                                 class="btn btn-warning table-btn"><img src="../../../../ASSETS/IMAGES/ReturnP.png"
                                     class="align-middle table-img" alt=""></button></td>
                     </tr>
@@ -63,76 +72,14 @@
 
 
 
-                    <tr>
-                        <td style="text-align: center;">2</td>
-                        <!-- <td style="text-align: center;">subSession/14-03-2022/0006</td> -->
-                        <td style="text-align: center;">O-0170</td>
-                        <td style="text-align: center;">MUGABO Andre</td>
-                        <td style="text-align: center;">2022-03-14</td>
-                        <td style="text-align: center;">NOT PAID</td>
-                        <td style="text-align: center;">0</td>
-                        <td style="text-align: center;"><button type="button" class="btn btn-success table-btn"
-                                onclick="window.location.href='orderDetails.php?o_ref=O-0170'" style="display:none"><img
-                                    src="../../../../ASSETS/IMAGES/Buy.png" class="align-middle table-img"
-                                    alt=""></button>&nbsp;<button type="button" class="btn btn-info table-btn"
-                                onclick="window.location.href='viewOrderDetails.php?o_ref=O-0170'"><img
-                                    src="../../../../ASSETS/IMAGES/View.png" class="align-middle table-img"
-                                    alt=""></button>&nbsp;<button type="button"
-                                onclick="window.location.href='voidOrder.php?o_ref=O-0170'"
-                                class="btn btn-warning table-btn" style="display:none"><img
-                                    src="../../../../ASSETS/IMAGES/ReturnP.png" class="align-middle table-img"
-                                    alt=""></button></td>
-                    </tr>
 
 
 
 
-                    <tr>
-                        <td style="text-align: center;">3</td>
-                        <!-- <td style="text-align: center;">subSession/14-03-2022/0006</td> -->
-                        <td style="text-align: center;">O-0167</td>
-                        <td style="text-align: center;">MUGABO Andre</td>
-                        <td style="text-align: center;">2022-03-14</td>
-                        <td style="text-align: center;">NOT PAID</td>
-                        <td style="text-align: center;">0</td>
-                        <td style="text-align: center;"><button type="button" class="btn btn-success table-btn"
-                                onclick="window.location.href='orderDetails.php?o_ref=O-0167'" style="display:none"><img
-                                    src="../../../../ASSETS/IMAGES/Buy.png" class="align-middle table-img"
-                                    alt=""></button>&nbsp;<button type="button" class="btn btn-info table-btn"
-                                onclick="window.location.href='viewOrderDetails.php?o_ref=O-0167'"><img
-                                    src="../../../../ASSETS/IMAGES/View.png" class="align-middle table-img"
-                                    alt=""></button>&nbsp;<button type="button"
-                                onclick="window.location.href='voidOrder.php?o_ref=O-0167'"
-                                class="btn btn-warning table-btn" style="display:none"><img
-                                    src="../../../../ASSETS/IMAGES/ReturnP.png" class="align-middle table-img"
-                                    alt=""></button></td>
-                    </tr>
 
 
 
-
-                    <tr>
-                        <td style="text-align: center;">4</td>
-                        <!-- <td style="text-align: center;">subSession/13-03-2022/0005</td> -->
-                        <td style="text-align: center;">O-0165</td>
-                        <td style="text-align: center;">HABIYAMBERE Celestin</td>
-                        <td style="text-align: center;">2022-03-13</td>
-                        <td style="text-align: center;">NOT PAID</td>
-                        <td style="text-align: center;">0</td>
-                        <td style="text-align: center;"><button type="button" class="btn btn-success table-btn"
-                                onclick="window.location.href='orderDetails.php?o_ref=O-0165'" style="display:none"><img
-                                    src="../../../../ASSETS/IMAGES/Buy.png" class="align-middle table-img"
-                                    alt=""></button>&nbsp;<button type="button" class="btn btn-info table-btn"
-                                onclick="window.location.href='viewOrderDetails.php?o_ref=O-0165'"><img
-                                    src="../../../../ASSETS/IMAGES/View.png" class="align-middle table-img"
-                                    alt=""></button>&nbsp;<button type="button"
-                                onclick="window.location.href='voidOrder.php?o_ref=O-0165'"
-                                class="btn btn-warning table-btn" style="display:none"><img
-                                    src="../../../../ASSETS/IMAGES/ReturnP.png" class="align-middle table-img"
-                                    alt=""></button></td>
-                    </tr>
-
-
+                    <?php } endif; ?>
 
 
                 </tbody>

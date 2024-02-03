@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GREEN STONE LTD</title>
+    <title>GREEN WORLD CORNER LTD</title>
     <link rel="icon" type="image/png" href="ASSETS/SIMAGES/greenog.png">
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
@@ -29,7 +29,7 @@
 
             <div class="card">
                 <div class="justify-content-center text-center text-white">
-                    <h1>Green&nbsp;Stone&nbsp;Ltd || MIS</h1>
+                    <h3>Green&nbsp;World&nbsp;Corner&nbsp;Ltd || MIS</h3>
                 </div>
                 <div class="msg">
                     <?php 

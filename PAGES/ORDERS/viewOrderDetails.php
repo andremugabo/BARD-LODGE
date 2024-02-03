@@ -27,6 +27,8 @@ $oInfo = $orderDao->selectOrderById($orderObj);
 
 
 ?>
+
+
 <div class="content mt-3">
     <div class="animated fadeIn">
         <div class="row">
@@ -37,7 +39,7 @@ $oInfo = $orderDao->selectOrderById($orderObj);
                     </div>
                     <div class="card-body">
                         <div class="title_o m-1 p-1 row">
-                            <span>X-LOUNGE</span>
+                            <span>GREEN-WORLD-CORNER</span>
                         </div>
                         <div class="title_o m-1 p-1 row">
                             <span>KITCHEN ORDER FORM</span>
@@ -49,12 +51,14 @@ $oInfo = $orderDao->selectOrderById($orderObj);
                                     <tr
                                         style='background:#e3e2e2; color: black;font-weight: bold;border-bottom:2px solid black;'>
                                         <th scope="col" style="text-align: center;">Ref:</th>
-                                        <th colspan="4" scope="col" style="text-align: center;">O-0171</th>
+                                        <th colspan="4" scope="col" style="text-align: center;"><?=$oInfo['O_REF']?>
+                                        </th>
                                     </tr>
                                     <tr
                                         style='background:#e3e2e2; color: black;font-weight: bold;border-bottom:2px solid black;'>
-                                        <th scope="col" style="text-align: center;">Waiter</th>
-                                        <th colspan="4" scope="col" style="text-align: center;">MUGABO Andre</th>
+                                        <th scope="col" style="text-align: center;">Served&nbsp;By:&nbsp;</th>
+                                        <th colspan="4" scope="col" style="text-align: center;">
+                                            <?=$oInfo['LASTNAME']." ".$oInfo['FIRSTNAME']?></th>
                                     </tr>
                                     <tr style='background:#e3e2e2; color: black;font-weight: bold;'>
                                         <th scope="col" style="text-align: center;">#</th>
@@ -74,11 +78,12 @@ $oInfo = $orderDao->selectOrderById($orderObj);
                                        $orderInfo = $orderDaoObj->selectOrderById($orderObj);
                                        // echo$orderInfo['O_ID'];
                                        $orderDetails->setOId($orderInfo['O_ID']);
-                                       $selectedOrder = $orderDetailsDao->selectOrderDetailsByOId($orderDetails);
+                                       $selectedOrder = $orderDetailsDao->selectOrderDetailsByOIdAndByFood($orderDetails);
                                        $num = 0;
                                        $total = 0;
                                        $sum = 0;
                                        if ($selectedOrder != null):
+                                        // print_r($selectedOrder);
                                        foreach ($selectedOrder as $item) {  $num++;
                                        $total = $item['S_PRICE']*$item['P_QTY'];
                                        $sum += $total; 
@@ -94,16 +99,17 @@ $oInfo = $orderDao->selectOrderById($orderObj);
 
 
                                     <?php } ?>
+                                    <?php endif; ?>
                                     <tr style='background:darkred; color: white;font-weight: bold;'>
                                         <td colspan="4" style="text-align: left;">TOTAL:</td>
                                         <td style="text-align: center;"><?=$sum."Frw"?></td>
                                     </tr>
-                                    <?php endif; ?>
+
                                 </tbody>
                             </table>
                             <div class="p-1">
-                                <button type="submit" name="PlaceOrder" class="btn btn-warning "
-                                    onclick="window.location.href='../../../PDF/pdf_korder.php?ref=O-0171'">Print</button>
+                                <a type="submit" target="_blank" name="PlaceOrder" class="btn btn-warning "
+                                    href='../PDF/pdf_korder.php?o_ref=<?=$_GET['o_ref']?>'>Print</a>
                             </div>
                         </div>
 
@@ -118,7 +124,7 @@ $oInfo = $orderDao->selectOrderById($orderObj);
 
                     <div class="card-body">
                         <div class="title_o m-1 p-1 row">
-                            <span>GREEN-GARDEN-BAR</span>
+                            <span>GREEN-WORLD-CORNER</span>
                         </div>
                         <div class="address_o  m-1 row">
                             <div class="col-5 justify-content-start">
@@ -134,9 +140,9 @@ $oInfo = $orderDao->selectOrderById($orderObj);
                         <div class="address_info m-1  row">
                             <div class="col-6 justify-content-start">
                                 <p>Ref : <?=$oInfo['O_REF']?></p>
-                                <p>Waiter : <?=$oInfo['LASTNAME']." ".$oInfo['FIRSTNAME']?></p>
+                                <p>Served&nbsp;By:&nbsp;<?=$oInfo['LASTNAME']." ".$oInfo['FIRSTNAME']?></p>
                             </div>
-                            <div class="col-6 justify-content-end">
+                            <div class=" col-6 justify-content-end">
                                 <p style="font-size:10px;">Session : <?=$oInfo['S_REF']?></p>
                                 <p>Date: <?=$oInfo['O_DATE']?> </p>
                             </div>
