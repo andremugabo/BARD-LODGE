@@ -1,7 +1,7 @@
 <?php  require_once '../../INCLUDES/header.php' ?>
 <div class="container-fluid section-title d-flex mb-2">
     <div class="s-title text-start col-6">
-        <h2 style="color:#0dcaf0;">Order&nbsp;Details&nbsp;View</h2>
+        <h2 style="color:#0dcaf0;">Paid&nbsp;Order&nbsp;Details&nbsp;View</h2>
     </div>
 
     <div class="s-btn text-end col-6">
@@ -22,7 +22,7 @@ $o_ref = $_GET['o_ref'];
 $orderDao = new OrdersDao();
 $orderObj = new Orders();
 $orderObj->setORef($o_ref);
-$oInfo = $orderDao->selectOrderById($orderObj);
+$oInfo = $orderDao->selectOrderByIdAndPaid($orderObj);
 // print_r($oInfo);
 
 
@@ -75,7 +75,7 @@ $oInfo = $orderDao->selectOrderById($orderObj);
                                        $orderDaoObj = new OrdersDao();
                                        $orderObj = new Orders;
                                        $orderObj->setORef($_GET['o_ref']);
-                                       $orderInfo = $orderDaoObj->selectOrderById($orderObj);
+                                       $orderInfo = $orderDaoObj->selectOrderByIdAndPaid($orderObj);
                                     //    print_r($orderInfo);
                                     //    echo$orderInfo['O_ID'];
                                     //    echo $_GET['o_ref'];
@@ -170,7 +170,7 @@ $oInfo = $orderDao->selectOrderById($orderObj);
                                     $orderDaoObj = new OrdersDao();
                                     $orderObj = new Orders;
                                     $orderObj->setORef($_GET['o_ref']);
-                                    $orderInfo = $orderDaoObj->selectOrderById($orderObj);
+                                    $orderInfo = $orderDaoObj->selectOrderByIdAndPaid($orderObj);
                                     // echo$orderInfo['O_ID'];
                                     $orderDetails->setOId($orderInfo['O_ID']);
                                     $selectedOrder = $orderDetailsDao->selectOrderDetailsByOId($orderDetails);

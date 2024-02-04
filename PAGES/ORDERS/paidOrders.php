@@ -1,7 +1,7 @@
 <?php  require_once '../../INCLUDES/header.php' ?>
 <div class="container-fluid section-title d-flex mb-2">
     <div class="s-title text-start col-6">
-        <h2 style="color:#0dcaf0;">All&nbsp;Daily&nbsp;Orders</h2>
+        <h2 style="color:#0dcaf0;">All&nbsp;Paid&nbsp;Daily&nbsp;Orders</h2>
     </div>
     <div class="s-btn text-end col-6">
         <!-- <button type="button" class="btn btn-sm btn-secondary m-1"
@@ -21,7 +21,7 @@
 <div class="col">
     <div class="card">
         <div class="card-header">
-            <strong class="card-title">List of Registered Daily Orders</strong>
+            <strong class="card-title">List of Registered Paid Daily Orders</strong>
         </div>
         <div class="card-body overflow-auto">
             <table class="table align-middle mb-0 bg-white table-striped table-sm table-hover">
@@ -33,6 +33,7 @@
                         <th scope="col" style="text-align: center;">Placed&nbsp;By</th>
                         <th scope="col" style="text-align: center;">Date</th>
                         <th scope="col" style="text-align: center;">Payment&nbsp;Status</th>
+                        <th scope="col" style="text-align: center;">Payment&nbsp;Mode</th>
                         <th scope="col" style="text-align: center;">Total&nbsp;Amount</th>
                         <th scope="col" style="text-align: center;">Action</th>
                     </tr>
@@ -43,7 +44,7 @@
                 $orderObj = new Orders();
                 $orderObj->setEId($employee_eid);
                 $orderObj->setSId($sessionInfo[0]['S_ID']);
-                $selectProduct =$orderDao->selectOrdersBySId($orderObj);
+                $selectProduct =$orderDao->selectOrdersByEIdAndSIdAndPaid($orderObj);
                 $num = 0;
                 if ($selectProduct):
                 foreach ($selectProduct as $item) {  $num++;            
@@ -56,19 +57,13 @@
                         <td style="text-align: center;"><?=$item['FIRSTNAME']." ".$item['LASTNAME']?></td>
                         <td style="text-align: center;"><?=$item['O_DATE']?></td>
                         <td style="text-align: center;"><?=$item['O_PAYMENT']?></td>
+                        <td style="text-align: center;"><?=$item['payment_mode']?></td>
                         <td style="text-align: center;"><?=$item['O_AMOUNT']?></td>
                         <td style="text-align: center;">
-                            <?php if($item['O_PAYMENT'] !== "PAID"):?>
-                            <button type="button" class="btn btn-success btn-sm  mt-1"
-                                onclick="window.location.href='orderDetails.php?o_ref=<?=$item['O_REF']?>'">Add&nbsp;Items</button>&nbsp;
-                            <?php endif ?>
+
                             <button type="button" class="btn btn-info btn-sm  mt-1"
-                                onclick="window.location.href='viewOrderDetails.php?o_ref=<?=$item['O_REF']?>'">Order&nbsp;Details</button>
-                            <?php if($item['O_PAYMENT'] !== "PAID"):?>
-                            &nbsp;<button type="button"
-                                onclick="window.location.href='voidOrder.php?o_ref=<?=$item['O_REF']?>'"
-                                class="btn btn-warning btn-sm  mt-1">Void&nbsp;Order</button>
-                            <?php endif ?>
+                                onclick="window.location.href='viewOrderDetailsPaid.php?o_ref=<?=$item['O_REF']?>'">Order&nbsp;Details</button>
+
                         </td>
                     </tr>
 

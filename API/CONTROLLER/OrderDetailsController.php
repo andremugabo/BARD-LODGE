@@ -71,7 +71,7 @@ switch($action){
                            
                            if($isProductExistInOrderDetails === 0){
                                 //update product in sales stock
-                                $SStockDaoObj->updateProductQty($SStockObj);
+                                $SStockDaoObj->updateProductQtyOnOrder($SStockObj);
                                 $result = $metricDaoObj->createMetric($metricObj);
                                 $orderDetailsDao->createOrderDetails($orderDetails);
                                 header("location:{$_SERVER['HTTP_REFERER']}");
@@ -82,7 +82,7 @@ switch($action){
                                 $newQtyInOrderDetails = $quantityInOrderDetails['p_qty'] + $_POST['p_qty'];
                                 $orderDetails->setPQty($newQtyInOrderDetails);
                                 //update product in sales stock
-                                $SStockDaoObj->updateProductQty($SStockObj);
+                                $SStockDaoObj->updateProductQtyOnOrder($SStockObj);
                                 $orderDetailsDao->updateQtyOnOrderDetails($orderDetails);
                                 header("location:{$_SERVER['HTTP_REFERER']}");
                            }

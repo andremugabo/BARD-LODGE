@@ -65,8 +65,8 @@ switch($action){
              if($_POST['pprice'] > 0 && $_POST['pprice'] < $_POST['eprice'] && $_POST['sprice'] >= $_POST['eprice'] )
              {
                 echo "edit";
-                echo $_POST['price_id']."  pid:";
-                echo $_POST['p_id'];
+                // echo $_POST['price_id']."  pid:";
+                // echo $_POST['p_id'];
 
                 //set user id for metric 
                 $metricObj->setEId($_SESSION['logged']['E_ID']);

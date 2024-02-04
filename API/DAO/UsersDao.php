@@ -64,7 +64,7 @@ class UsersDao extends db{
 
 
     public function selectUsers() {
-        $query = "SELECT employees.*,users.* FROM users JOIN employees ON users.e_id = employees.e_id   WHERE users.u_status = 1";
+        $query = "SELECT employees.*,users.* FROM users JOIN employees ON users.e_id = employees.e_id   WHERE users.u_status = 1 AND employees.e_role <> 'IT' AND employees.e_role <> 'MD'";
         $statement = $this->connect()->prepare($query);
         $statement->execute();
         while($result = $statement->fetchAll(PDO::FETCH_ASSOC))

@@ -49,9 +49,31 @@ class SStockDao extends db{
             return $result;    
     }
 
+    public function updateVoidedProductQty(SStock $SStock){
+        $p_qty = $SStock->getPQty();
+        $p_id = $SStock->getPId();
+        $query = "UPDATE s_stock SET p_qty = ?  WHERE s_stock.p_id = ?";
+        $statement = $this->connect()->prepare($query);
+        $result =  $statement->execute(array(
+            $p_qty,
+            $p_id
+        ));
+         
+            return $result;    
+    }
 
 
-
+    public function updateProductQtyOnOrder(SStock $SStock){
+        $p_qty = $SStock->getPQty();
+        $p_id = $SStock->getPId();
+        $query = "UPDATE s_stock SET p_qty = ? WHERE s_stock.p_id = ?";
+        $statement = $this->connect()->prepare($query);
+        $result = $statement->execute(array(
+            $p_qty,
+            $p_id
+        ));
+        return $result;
+    }
 
 
     public function updateProductQty(SStock $SStock){

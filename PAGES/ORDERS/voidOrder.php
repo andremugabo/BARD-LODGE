@@ -35,6 +35,46 @@ $oInfo = $orderDao->selectOrderById($orderObj);
             <div class="col-lg-6">
                 <div class="row overflow-auto" id="productToRemoveDetails">
                     <!-- PRODUCTS TO REMOVE GOES HERE -->
+                    <?php 
+
+                        $orderDetailsDao = new OrderDetailsDao();
+                        $orderDetails = new OrderDetails();
+                        $orderDaoObj = new OrdersDao();
+                        $orderObj = new Orders;
+                         $orderObj->setORef($_GET['o_ref']);
+                         $orderInfo = $orderDaoObj->selectOrderById($orderObj);
+                         $orderDetails->setOId($orderInfo['O_ID']);
+                         $results = $orderDetailsDao->selectOrderDetailsByOId( $orderDetails);
+                         if($results != null):
+                         foreach($results as $items){?>
+                    <div class="col-md-4 mb-1 btn"
+                        onclick="window.location.href='productToBeVoided.php?o_ref=<?=$items['O_REF']?>&od_id=<?=$items['OD_ID']?>'">
+                        <div class="card" style="height:176px;">
+                            <div class="card-header">
+                                <h6 class="card-title" style="font-size:12px;">PRODUCT</h6>
+                            </div>
+                            <div class="card-body">
+                                <div class="mx-auto d-block">
+                                    <img class=" mx-auto d-block" src="../../ASSETS/PIMAGES/<?=$items['PI_NAME']?>"
+                                        alt="Products Image" style="width: 50px; height: 50px">
+                                    <h6 class="text-sm-center mt-2 mb-1" style="font-size:8px;font-weight:bold;">
+                                        <?=$items['P_NAME']?></h6>
+                                    <div class="location text-sm-center" style="font-size:9px;font-weight:bold;">
+                                        <?=$items['S_PRICE']?>&nbsp;Frw&nbsp;Per&nbsp;<?=$items['UNITY_NAME']?></div>
+                                </div>
+                                <hr>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <?php } endif;
+
+
+
+
+                    ?>
                 </div>
             </div>
             <div class="col-lg-6">
@@ -84,10 +124,7 @@ $oInfo = $orderDao->selectOrderById($orderObj);
                                 <tbody>
                                     <?php
 
-                                    $orderDetailsDao = new OrderDetailsDao();
-                                    $orderDetails = new OrderDetails();
-                                    $orderDaoObj = new OrdersDao();
-                                    $orderObj = new Orders;
+                                    
                                     $orderObj->setORef($_GET['o_ref']);
                                     $orderInfo = $orderDaoObj->selectOrderById($orderObj);
                                     // echo$orderInfo['O_ID'];

@@ -390,7 +390,7 @@
                 </div>
                 <h3 class="mt-1 mb-3  text-black">2.382</h3>
                 <div class="mb-0">
-                    <span class="text-white"> <i class="mdi mdi-arrow-bottom-right"></i>PUB-SM
+                    <span class="text-white"> <i class="mdi mdi-arrow-bottom-right"></i>GWC-MIS
                     </span>
                     <!-- <span class="text-black">Since last week</span> -->
                 </div>
@@ -418,7 +418,7 @@
                 </div>
                 <h3 class="mt-1 mb-3 text-black">2.382</h3>
                 <div class="mb-0">
-                    <span class="text-white"> <i class="mdi mdi-arrow-bottom-right"></i>PUB-SM
+                    <span class="text-white"> <i class="mdi mdi-arrow-bottom-right"></i>GWC-MIS
                     </span>
                     <!-- <span class="text-black">Since last week</span> -->
                 </div>
@@ -460,7 +460,7 @@
 
 
     <div class="card-principal card bg-danger m-2">
-        <a href="#" style="text-decoration:none;">
+        <a href="../EMPLOYEES/userSetting.php" style="text-decoration:none;">
             <div class="card-body">
                 <div class="row">
                     <div class="col mt-0">
@@ -473,9 +473,9 @@
                         </div>
                     </div>
                 </div>
-                <h3 class="mt-1 mb-3 text-black">2.382</h3>
+                <h3 class="mt-1 mb-3 text-black" style="font-size: 15px;"><?=$employee_role?></h3>
                 <div class="mb-0">
-                    <span class="text-white"> <i class="mdi mdi-arrow-bottom-right"></i> PUB-SM
+                    <span class="text-white"> <i class="mdi mdi-arrow-bottom-right"></i> GWC-MIS
                     </span>
                     <!-- <span class="text-black">Since last week</span> -->
                 </div>
@@ -490,7 +490,7 @@
 
 
     <div class="card-principal card bg-info m-2">
-        <a href="#" style="text-decoration:none;">
+        <a href="../REPORTS/report.php" style="text-decoration:none;">
             <div class="card-body">
                 <div class="row">
                     <div class="col mt-0">
@@ -505,7 +505,7 @@
                 </div>
                 <h3 class="mt-1 mb-3 text-black">2.382</h3>
                 <div class="mb-0">
-                    <span class="text-white"> <i class="mdi mdi-arrow-bottom-right"></i> PUB-SM
+                    <span class="text-white"> <i class="mdi mdi-arrow-bottom-right"></i> GWC-MIS
                     </span>
                     <!-- <span class="text-black">Since last week</span> -->
                 </div>

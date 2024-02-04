@@ -98,8 +98,7 @@
 
                     <div class="mb-3">
                         <label for="role" class="col-form-label">Employee&nbsp;Role:</label>
-                        <select class="form-select form-select mb-3" id="role" name="e_role"
-                            aria-label=".form-select-lg example" required>
+                        <select class="form-select form-select mb-3" id="role" name="e_role" required>
                             <option selected disabled value="">Choose&nbsp;Employee&nbsp;Role</option>
                             <option value="MANAGER">MANAGER</option>
                             <option value="ACCOUNTANT">ACCOUNTANT</option>

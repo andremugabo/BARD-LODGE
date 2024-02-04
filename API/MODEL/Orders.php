@@ -8,6 +8,9 @@ class Orders {
     private $o_table;
     private $o_amount;
     private $o_payment;
+    private $payment_mode;
+    private $c_name;
+    private $c_phone;
     private $o_status;
 
     // Default constructor
@@ -47,6 +50,18 @@ class Orders {
         return $this->o_payment;
     }
 
+    public function getPaymentMode() {
+        return $this->payment_mode;
+    }
+
+    public function getCName() {
+        return $this->c_name;
+    }
+
+    public function getCPhone() {
+        return $this->c_phone;
+    }
+
     public function getOStatus() {
         return $this->o_status;
     }
@@ -83,6 +98,21 @@ class Orders {
     public function setOPayment($o_payment) {
         $this->o_payment = $o_payment;
     }
+
+
+    public function setPaymentMode($payment_mode) {
+        $this->payment_mode = $payment_mode;
+    }
+
+    public function setCName($c_name) {
+        $this->c_name = $c_name;
+    }
+
+    public function setCPhone($c_phone) {
+        $this->c_phone = $c_phone;
+    }
+
+
 
     public function setOStatus($o_status) {
         $this->o_status = $o_status;

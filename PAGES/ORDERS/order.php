@@ -13,8 +13,12 @@
     <div class="s-btn text-end col-9">
         <!-- <button type="button" class="btn btn-success" onclick="window.location.href='category.php'">Category</button>
         <button type="button" class="btn btn-secondary" onclick="window.location.href='description.php'">Description</button> -->
+        <button type="button" class="btn btn-success btn-sm"
+            onclick="window.location.href='paidOrders.php'">Paid&nbsp;Orders</button>
+        <?php if($employee_role =="MD" || $employee_role == "MANAGER" || $employee_role == "IT" || $employee_role == "ACCOUNTANT"): ?>
         <button type="button" class="btn btn-info btn-sm"
             onclick="window.location.href='allOrders.php'">All&nbsp;Daily&nbsp;Orders</button>
+        <?php endif;?>
         <button type="button" class="btn btn-warning btn-sm" data-bs-toggle="modal"
             data-bs-target="#orderModal">Create&nbsp;A&nbsp;New&nbsp;Order</button>
         <button type="button" class="btn btn-sm btn-danger "
@@ -62,9 +66,12 @@
                         <td style="text-align: center;"><?=$item['O_DATE']?></td>
                         <td style="text-align: center;"><?=$item['O_PAYMENT']?></td>
                         <td style="text-align: center;"><?=$item['O_AMOUNT']?></td>
-                        <td style="text-align: center;"><button type="button" class="btn btn-success btn-sm mb-1"
-                                onclick="window.location.href='orderDetails.php?o_ref=<?=$item['O_REF']?>'">Add&nbsp;Items</button>&nbsp;<button
-                                type="button" class="btn btn-info btn-sm mb-1"
+                        <td style="text-align: center;">
+                            <?php if($item['O_PAYMENT'] !== "PAID"):?>
+                            <button type="button" class="btn btn-success btn-sm mb-1"
+                                onclick="window.location.href='orderDetails.php?o_ref=<?=$item['O_REF']?>'">Add&nbsp;Items</button>&nbsp;
+                            <?php endif ?>
+                            <button type="button" class="btn btn-info btn-sm mb-1"
                                 onclick="window.location.href='viewOrderDetails.php?o_ref=<?=$item['O_REF']?>'">Details</button>
                         </td>
                     </tr>

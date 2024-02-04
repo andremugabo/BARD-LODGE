@@ -50,7 +50,7 @@ switch($action){
             $_SESSION['success_msg'] =" ORDER $O_REF CREATED SUCCESSFULLY!!!";
             $metricDaoObj->createMetric($metricObj);
             $orderDaoObj->createOrders($orderObj);
-            header("location:{$_SERVER['HTTP_REFERER']}");
+            header("location:../../PAGES/ORDERS/order.php");
 
 
 
@@ -62,8 +62,42 @@ switch($action){
 
 
         }else{
-            header("location:{$_SERVER['HTTP_REFERER']}");
+            header("location:../../PAGES/ORDERS/order.php");
         }
+        break;
+    case 'pay':
+        if(isset($_POST['placeOrder'])){
+            if(!empty($_POST['o_amount']) && !empty($_POST['payment_mode'])){
+                $o_id = $_GET['order'];
+                $orderObj->setOAmount($_POST['o_amount']);
+                $orderObj->setPaymentMode($_POST['payment_mode']);
+                $orderObj->setCName($_POST['c_name']);
+                $orderObj->setCPhone($_POST['c_phone']);
+                $orderObj->setOId($o_id);
+                
+
+                $metricObj->setEId($_SESSION['logged']['E_ID']);
+                $mDesc = " ORDER PAID SUCCESSFULLY ";
+                $metricObj->setMDesc($mDesc);
+                //to review after sessions(Done)
+                if(isset($_SESSION['currentSession']))
+                {
+                    $metricObj->setSId($_SESSION['currentSession']);
+    
+                }
+                else
+                {
+                    $metricObj->setSId(null);
+                }
+                $_SESSION['success_msg'] =" ORDER PAID SUCCESSFULLY!!!";
+                $metricDaoObj->createMetric($metricObj);
+                $orderDaoObj->updatePayOrders($orderObj);
+                header("location:../../PAGES/ORDERS/order.php");
+
+
+            }
+        }
+        
         break;
             
     default:

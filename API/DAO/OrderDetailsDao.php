@@ -62,6 +62,24 @@ class OrderDetailsDao extends db{
     }
 
 
+
+    public function selectOrderDetailsOneP(OrderDetails $details){
+        $od_id = $details->getOdId();
+        $query = "SELECT product_type.*,sessions.*,orders.*,products.*,unity.*,order_details.* FROM order_details JOIN orders on 
+        orders.o_id = order_details.o_id JOIN product_type ON product_type.pt_id = order_details.pt_id  JOIN products
+        ON products.p_id = order_details.p_id JOIN sessions ON sessions.s_id = orders.s_id  JOIN unity 
+        ON unity.unity_id = order_details.unity_id  WHERE order_details.od_id = ?";
+        $statement = $this->connect()->prepare($query);
+        $statement->execute(array(
+            $od_id
+        ));
+        $result = $statement->fetch();
+        return $result; 
+    }
+
+
+    
+
     public function checkProductOnOrderDetailsExists(OrderDetails $details){
         $o_id = $details->getOId();
         $p_id = $details->getPId();
@@ -96,6 +114,32 @@ class OrderDetailsDao extends db{
         return $result;
     }
 
+
+
+    public function updateQtyOnVoidOrderDetails(OrderDetails $details){
+        $p_qty = $details->getPQty();
+        $od_id = $details->getOdId();
+        $query = "UPDATE  order_details SET order_details.p_qty = ?  WHERE order_details.od_id = ?";
+        $statement = $this->connect()->prepare($query);
+        $result = $statement->execute(array(
+            $p_qty,
+            $od_id
+        ));
+         
+        return $result;
+    }
+
+
+    public function deleteOrderDetails(OrderDetails $details){
+        $od_id = $details->getOdId();
+        $query = "DELETE FROM  order_details  WHERE order_details.od_id = ?";
+        $statement = $this->connect()->prepare($query);
+        $result = $statement->execute(array(
+            $od_id
+        ));
+         
+        return $result;
+    }
 
     public function selectProductQtyOrderDetails(OrderDetails $details){
         $o_id = $details->getOId();

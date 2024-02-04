@@ -159,7 +159,7 @@ function fetchProductToOrder(p_id, price_id) {
                           </div>
 
                           <div class="form-group" style="display:none;">
-                              <label for="cc-payment" class="control-label mb-1">PRODUCT</label>
+                              <label for="cc-payment" class="control-label mb-1">PRODUCT&nbsp;UNITY</label>
                               <input id="unity_id" name="unity_id" type="text" value="${result[0].UNITY_ID}"  class="form-control"  required>
                           </div>
 
