@@ -182,6 +182,54 @@
         </a>
     </div>
 
+    <div class="card-principal card border-dark shadow bg-info m-2">
+        <a href="closedSalesStock.php" style="text-decoration:none;">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col mt-0">
+                        <h6 class="card-title text-white">Closed&nbsp;SStock</h6>
+                    </div>
+
+                    <div class="col-auto">
+                        <div class="stat text-white">
+                            <i class="align-middle text-black" data-feather="airplay"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="mb-0">
+                    <span class="text-white"> <i class="mdi mdi-arrow-bottom-right"></i> GWC-MIS
+                    </span>
+                    <!-- <span class="text-black">Since last week</span> -->
+                </div>
+            </div>
+        </a>
+    </div>
+
+
+
+    <div class="card-principal card border-dark shadow bg-secondary m-2">
+        <a href="closedGstock.php" style="text-decoration:none;">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col mt-0">
+                        <h6 class="card-title text-white">Closed&nbsp;GStock</h6>
+                    </div>
+
+                    <div class="col-auto">
+                        <div class="stat text-white">
+                            <i class="align-middle text-black" data-feather="airplay"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="mb-0">
+                    <span class="text-white"> <i class="mdi mdi-arrow-bottom-right"></i> GWC-MIS
+                    </span>
+                    <!-- <span class="text-black">Since last week</span> -->
+                </div>
+            </div>
+        </a>
+    </div>
+
 
 
 
