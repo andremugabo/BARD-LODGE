@@ -6,6 +6,7 @@ class OrderDetails
     private $od_id;
     private $s_id;
     private $o_id;
+    private $e_id;
     private $p_id;
     private $pt_id;
     private $p_qty;
@@ -35,6 +36,11 @@ class OrderDetails
     public function getOId()
     {
         return $this->o_id;
+    }
+
+    public function getEId()
+    {
+        return $this->e_id;
     }
 
     public function getPId()
@@ -87,6 +93,11 @@ class OrderDetails
     public function setOId($o_id)
     {
         $this->o_id = $o_id;
+    }
+
+    public function setEId($e_id)
+    {
+        $this->e_id = $e_id;
     }
 
     public function setPId($p_id)

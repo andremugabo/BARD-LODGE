@@ -29,6 +29,7 @@ switch($action){
                     $orderObj->setORef($_GET['o_ref']);
                     $orderInfo = $orderDaoObj->selectOrderById($orderObj);
                     $orderDetails->setOId($orderInfo['O_ID']);
+                    $orderDetails->setEId($_SESSION['logged']['E_ID']);
                     $orderDetails->setPId($_POST['p_id']);
                     $productCategoryObj->setPcId($_POST['pc_id']);
                     $categoryInfo = $productCategoryDaoObj->selectProductCategoryByPcId($productCategoryObj);

@@ -17,7 +17,7 @@ $pdf->SetFont('Arial','B',10);
 
 $pdf->Ln(20);
 $pdf->Cell(200,10,'GREEN WORLD CORNER',0,1,'L');
-$pdf->Cell(200,10,'PURCHASED PRODUCTS',0,1,'L');
+$pdf->Cell(200,10,'CURRENT SALES STOCK',0,1,'L');
 $pdf->Cell(150,10,'Kigali, KG 730 ST ',0,1,'L');
 $pdf->Cell(35,10,'TIN:103477797',0,1,'L');
 $pdf->Cell(35,10,'Tel:(+250)788-322-151',0,1,'L');
@@ -38,26 +38,24 @@ $pdf->Cell(25,10,'VALUE ',1,0,'C',true);
 $pdf->Cell(25,10,'TOTAL',1,1,'C',true);
 
 
-require_once"../../API/DAO/PurchaseProductsDao.php"; 
-          $purchaseDao = new PurchaseProductsDao();
-          $purchaseObj = new PurchaseProducts();
-          $s_id = $_GET['s_id'];
-          $purchaseObj->setSId($s_id);
-          $getPurchased = $purchaseDao->selectPurchaseBySId($purchaseObj);
-            // print_r($getPurchased);
-          $num = 0;
-          $total = 0;
-          $sum = 0;
-if($getPurchased != null):
-          foreach ($getPurchased as $items) { 
-               $num++;
-               $total= $items['QTY_PUR'] * $items['P_PPRICE'];
-               $sum+=$total; 
+require_once"../../API/DAO/SStockDao.php"; 
+$gStockDao = new SStockDao();
+$gStockObj = new SStock();
+$currentStock =$gStockDao->selectSStock();
+// print_r($currentStock);
+$num = 0;
+$total = 0;
+$sum = 0;
+if($currentStock != null):
+    foreach($currentStock as $items){$num++;
+
+    $total = $items['P_QTY'] * $items['P_PPRICE'];
+    $sum+=$total;
 		
 	 $pdf->Cell(10,10,$num,1,0,'C');
 	 $pdf->Cell(70,10,$items['P_NAME'],1,0,'C');
 	 $pdf->Cell(20,10,$items['P_CODE'],1,0,'C');
-	 $pdf->Cell(40,10,$items['QTY_PUR'],1,0,'C');
+	 $pdf->Cell(40,10,$items['P_QTY'],1,0,'C');
 	 $pdf->Cell(25,10,$items['P_PPRICE'],1,0,'C');
 	 $pdf->Cell(25,10,number_format($total)." Frw",1,1,'C');
 	 

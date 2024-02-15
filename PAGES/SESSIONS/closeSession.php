@@ -26,14 +26,14 @@ $selectById = $sessionDao->selectSessionBySid($sessionObj);
         <div class="modal-content rounded-5 shadow">
             <div class="modal-header p-5 pb-4 border-bottom-0">
                 <!-- <h5 class="modal-title">Modal title</h5> -->
-                <h2 class="fw-bold mb-0">Are Sure You Want to Close the Current Session?</h2>
+                <h2 class="fw-bold mb-0" style="font-size: 15px;">Are Sure You Want to Close the Current Session?</h2>
             </div>
 
             <div class="modal-body p-5 pt-0">
-                <form class="" action="../../API/CONTROLLER/SessionsCategoryController.php?action=Close" method="post">
+                <form class="" action="../../API/CONTROLLER/SessionsController.php?action=close" method="post">
                     <div class="form-floating mb-3" style="display:none;">
                         <input type="text" class="form-control rounded-4" value="<?=$selectById['S_ID']?>" name="s_id"
-                            placeholder="PC_ID">
+                            placeholder="s_id">
                         <label for="floatingInput">s_id</label>
                     </div>
 
@@ -72,7 +72,7 @@ $selectById = $sessionDao->selectSessionBySid($sessionObj);
 
                     <div class="mb-3">
                         <label for="p_name" class="col-form-label">Current&nbsp;Session:</label>
-                        <input type="text" class="form-control" name="pc_name" id="pc_name"
+                        <input type="text" class="form-control" name="s_ref" id="pc_name"
                             value="<?=$selectById['S_REF']?>" placeholder="Enter Product" required>
                     </div>
 
@@ -117,11 +117,26 @@ $selectById = $sessionDao->selectSessionBySid($sessionObj);
 
 
 
-                    <button class="w-100 mb-2 btn btn-lg rounded-4 btn-primary" type="submit"
-                        name="editCategory">Close&nbsp;Session</button>
+                    <button class="w-100 mb-2 btn btn-lg rounded-4 btn-primary close_s" type="submit"
+                        name="closeSession">Close&nbsp;Session</button>
                 </form>
             </div>
+
         </div>
     </div>
 </div>
+
+<div class="closing_session hide">
+    <h1>WAIT... SESSION IS CLOSING...</h1>
+    <img src="../../ASSETS/SIMAGES/loading-loader.gif" alt="Loading..." />
+</div>
+<script>
+document.querySelector(".close_s").addEventListener("click", function() {
+    // e.preventDefault();
+    document.querySelector(".closing_session").classList.remove("hide");
+    setTimeout(() => {
+        document.querySelector(".closing_session").classList.add('hide');
+    }, 2000);
+});
+</script>
 <?php require_once '../../INCLUDES/footer.php' ?>

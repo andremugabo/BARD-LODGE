@@ -152,7 +152,9 @@ if (isset($_POST['filter'])) {
                         <td style="text-align: center;"><?=$item['P_PPRICE']?></td>
                         <td style="text-align: center;"><button type="button" title="Edit Product Info"
                                 class="btn btn-primary btn-sm"
-                                onclick="window.location.href='gStockUpDateQuantity.php?edit=<?=$item['P_ID']?>'">Update</button>
+                                onclick="window.location.href='gStockUpDateQuantity.php?edit=<?=$item['P_ID']?>'">Update</button>&nbsp;
+                            <button type="button" title="Edit Product Info" class="btn btn-danger btn-sm"
+                                onclick="window.location.href='gStockUpDateProduct.php?edit=<?=$item['P_ID']?>'">Product</button>
                         </td>
                     </tr>
 

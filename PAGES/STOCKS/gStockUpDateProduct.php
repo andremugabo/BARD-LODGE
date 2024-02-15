@@ -30,7 +30,7 @@ $selectById = $gStockDao->selectGStockById($gStock);
             </div>
 
             <div class="modal-body p-5 pt-0">
-                <form class="" action="../../API/CONTROLLER/GStockController.php?action=updateQ" method="post">
+                <form class="" action="../../API/CONTROLLER/GStockController.php?action=changeQ" method="post">
                     <div class="form-floating mb-3" style="display:none;">
                         <input type="text" class="form-control rounded-4" value="<?=$selectById['P_ID']?>" name="p_id"
                             placeholder="p_id">
@@ -73,13 +73,19 @@ $selectById = $gStockDao->selectGStockById($gStock);
                             id="p_mane" disabled required>
                     </div>
 
-                    <div class="mb-3">
-                        <label for="p_name" class="col-form-label">Current&nbsp;Quantity:</label>
-                        <input type="text" class="form-control" name="c_qty" value="<?=$selectById['P_QTY']?>"
-                            placeholder="ENTER QUANTITY" disabled>
+                    <div class="mb-3" style="display:none;">
+                        <label for="p_name" class="col-form-label">Product:</label>
+                        <input type="text" class="form-control" value="<?=$selectById['P_NAME']?>" name="p_mane"
+                            id="p_mane" required>
                     </div>
 
                     <div class="mb-3">
+                        <label for="p_name" class="col-form-label">Current&nbsp;Quantity:</label>
+                        <input type="text" class="form-control" name="change_qty" value="<?=$selectById['P_QTY']?>"
+                            placeholder="ENTER QUANTITY">
+                    </div>
+
+                    <!-- <div class="mb-3">
                         <label for="role" class="col-form-label">Product&nbsp;Unity*:</label>
                         <select class="form-select form-select mb-3" id="unity" name="unity_id"
                             aria-label=".form-select-lg example" required>
@@ -95,13 +101,13 @@ $selectById = $gStockDao->selectGStockById($gStock);
                             <?php }  endif?>
 
                         </select>
-                    </div>
+                    </div> -->
 
-                    <div class="mb-3">
+                    <!-- <div class="mb-3">
                         <label for="p_name" class="col-form-label">New&nbsp;Quantity:</label>
                         <input type="text" class="form-control" name="qty" id="qty" placeholder="ENTER QUANTITY"
                             required>
-                    </div>
+                    </div> -->
 
 
 
@@ -110,7 +116,7 @@ $selectById = $gStockDao->selectGStockById($gStock);
 
 
                     <button class="w-100 mb-2 btn btn-lg rounded-4 btn-primary" type="submit"
-                        name="updateQty">Update&nbsp;Quantity</button>
+                        name="changeQty">Change&nbsp;Quantity</button>
                 </form>
             </div>
         </div>

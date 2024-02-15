@@ -156,7 +156,9 @@ if (isset($_POST['filter'])) {
                         <?php if($employee_role =="MD" || $employee_role == "MANAGER" || $employee_role == "IT" || $employee_role == "ACCOUNTANT"):?>
                         <td style="text-align: center;"><button type="button" title="Edit Product Info"
                                 class="btn btn-primary btn-sm"
-                                onclick="window.location.href='sStockUpDateQuantity.php?edit=<?=$item['P_ID']?>'">Update</button>
+                                onclick="window.location.href='sStockUpDateQuantity.php?edit=<?=$item['P_ID']?>'">Update</button>&nbsp;
+                            <button type="button" title="Edit Product Info" class="btn btn-danger btn-sm"
+                                onclick="window.location.href='sStockUpDateProduct.php?edit=<?=$item['P_ID']?>'">Product</button>
                         </td>
                         <?php endif;?>
                     </tr>

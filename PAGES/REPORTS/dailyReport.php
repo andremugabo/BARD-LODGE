@@ -2,7 +2,7 @@
 <!-- =================================================================================================== -->
 <div class="container-fluid section-title d-flex mb-2">
     <div class="s-title text-start col-6">
-        <h2>Individual&nbsp;Sales&nbsp;Report</h2>
+        <h2>Daily&nbsp;Report</h2>
     </div>
     <div class="s-btn text-end col-6">
         <!-- <button type="button" class="btn btn-sm btn-secondary m-1"
@@ -11,20 +11,20 @@
         <button type="button" class="btn btn-sm btn-success m-1"
             onclick="window.location.href='Price.php'">Price</button>
         &nbsp; -->
-        <button type="button" class="btn btn-sm btn-success text-white m-1"
-            onclick="window.location.href='individualReport.php'">Report&nbsp;Summary</button>
-        &nbsp;
         <button type="button" class="btn btn-sm btn-info text-white m-1"
-            onclick="window.location.href='myOrder.php'">My&nbsp;Orders</button>
+            onclick="window.location.href='dailyReport.php'">Daily&nbsp;Report&nbsp;Summary</button>
         &nbsp;
-        <button type="button" class="btn btn-sm btn-warning text-white m-1"
-            onclick="window.location.href='individualSales.php'">Sales</button>
+        <button type="button" class="btn btn-sm btn-secondary text-white m-1"
+            onclick="window.location.href='allOrder.php'">All&nbsp;Orders</button>
+        &nbsp;
+        <button type="button" class="btn btn-sm btn-primary text-white m-1"
+            onclick="window.location.href='AllSales.php'">Sales</button>
         &nbsp;
         <button type="button" class="btn btn-sm btn-danger " onclick="window.location.href='report.php'">Back</button>
     </div>
 </div>
-<div class="title_bar btn-success d-flex">
-    <h2>Report&nbsp;Summary</h2>
+<div class="title_bar btn-info d-flex">
+    <h2>Daily&nbsp;Report&nbsp;Summary</h2>
 </div>
 <div class="content mt-3 d-flex flex-wrap ">
 
@@ -37,9 +37,8 @@
                         $orderDao = new OrdersDao();
                         $orderObj = new Orders();
                         $s_id = $sessionInfo[0]['S_ID'];
-                        $orderObj->setEId($employee_eid );
                         $orderObj->setSId($s_id);
-                        $countItem = $orderDao->countOrdersByEIdAndSIdOrder($orderObj);
+                        $countItem = $orderDao->countOrderBySId($orderObj);
                         if($countItem == 0)
                         {
                             echo "NO ORDER YET";
@@ -67,9 +66,8 @@
                         $orderDao = new OrdersDao();
                         $orderObj = new Orders();
                         $s_id = $sessionInfo[0]['S_ID'];
-                        $orderObj->setEId($employee_eid );
                         $orderObj->setSId($s_id);
-                        $countItem = $orderDao->countOrdersByEIdAndSIdUnPaid($orderObj);
+                        $countItem = $orderDao->countOrderBySIdUnPaid($orderObj);
                         if($countItem == 0)
                         {
                             echo "NO ORDER YET";
@@ -97,9 +95,8 @@
                         $orderDao = new OrdersDao();
                         $orderObj = new Orders();
                         $s_id = $sessionInfo[0]['S_ID'];
-                        $orderObj->setEId($employee_eid );
                         $orderObj->setSId($s_id);
-                        $countItem = $orderDao->countOrdersByEIdAndSIdPaid($orderObj);
+                        $countItem = $orderDao->countOrderBySIdPaid($orderObj);
                         if($countItem == 0)
                         {
                             echo "NO ORDER YET";
@@ -127,9 +124,8 @@
                         $orderDao = new OrdersDao();
                         $orderObj = new Orders();
                         $s_id = $sessionInfo[0]['S_ID'];
-                        $orderObj->setEId($employee_eid );
                         $orderObj->setSId($s_id);
-                        $countItem = $orderDao->countOrdersByEIdAndSIdCredits($orderObj);
+                        $countItem = $orderDao->countOrderBySIdCredit($orderObj);
                         if($countItem == 0)
                         {
                             echo "NO ORDER YET";
@@ -156,9 +152,7 @@
                         <?php
                         $orderDao = new OrdersDao();
                         $orderObj = new Orders();
-                        $s_id = $sessionInfo[0]['S_ID'];
-                        $orderObj->setEId($employee_eid );
-                        $countItem = $orderDao->countOrdersByEIdAllOrder($orderObj);
+                        $countItem = $orderDao->countOrder();
                         if($countItem == 0)
                         {
                             echo "NO ORDER YET";

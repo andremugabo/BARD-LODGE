@@ -20,7 +20,7 @@ class OrdersDao extends db{
         $o_ref = $Order->getORef();
         $query = "SELECT employees.*,sessions.*,orders.* FROM orders JOIN employees 
         ON employees.e_id = orders.e_id JOIN sessions 
-        ON sessions.s_id = orders.s_id  WHERE orders.o_ref = ? AND orders.o_payment = 'NOT PAID'";
+        ON sessions.s_id = orders.s_id  WHERE orders.o_ref = ? ";
         $statement = $this->connect()->prepare($query);
         $statement->execute(array(
             $o_ref
@@ -51,6 +51,8 @@ class OrdersDao extends db{
         return $result;
     }
 
+    
+
 
     public function countOrderBySId(Orders $order){
         $s_id = $order->getSId();
@@ -63,6 +65,39 @@ class OrdersDao extends db{
         return $result;
     }
 
+    public function countOrderBySIdUnPaid(Orders $order){
+        $s_id = $order->getSId();
+        $query = "SELECT * FROM orders  WHERE orders.s_id = ? AND orders.o_payment = 'NOT PAID'";
+        $statement = $this->connect()->prepare($query);
+        $statement->execute(array(
+            $s_id
+        ));
+        $result = $statement->rowCount();
+        return $result;
+    }
+
+
+    public function countOrderBySIdPaid(Orders $order){
+        $s_id = $order->getSId();
+        $query = "SELECT * FROM orders  WHERE orders.s_id = ? AND orders.o_payment = 'PAID'";
+        $statement = $this->connect()->prepare($query);
+        $statement->execute(array(
+            $s_id
+        ));
+        $result = $statement->rowCount();
+        return $result;
+    }
+
+    public function countOrderBySIdCredit(Orders $order){
+        $s_id = $order->getSId();
+        $query = "SELECT * FROM orders  WHERE orders.s_id = ? AND orders.payment_mode = 'DEBT'";
+        $statement = $this->connect()->prepare($query);
+        $statement->execute(array(
+            $s_id
+        ));
+        $result = $statement->rowCount();
+        return $result;
+    }
 
     public function createOrders(Orders $order){
         $o_ref = $order->getORef();
@@ -121,6 +156,196 @@ class OrdersDao extends db{
 
     }
 
+    public function selectOrdersByEIdAndSIdAllOrder(Orders $order){
+        $e_id = $order->getEId();
+        $s_id = $order->getSId();
+        $query = "SELECT employees.*,sessions.*,orders.* FROM orders JOIN employees 
+        ON employees.e_id = orders.e_id JOIN sessions 
+        ON sessions.s_id = orders.s_id  WHERE orders.e_id = ? AND orders.s_id = ?";
+
+        $statement = $this->connect()->prepare($query);
+        $statement->execute(array(
+            $e_id,
+            $s_id
+        ));
+
+        while($result = $statement->fetchAll(PDO::FETCH_ASSOC)){
+            return $result;
+        }
+      
+
+    }
+
+
+    public function selectPaymentMode(Orders $order,$paymentMode){
+        $e_id = $order->getEId();
+        $s_id = $order->getSId();
+        $query = "SELECT employees.*,sessions.*,orders.* FROM orders JOIN employees 
+        ON employees.e_id = orders.e_id JOIN sessions 
+        ON sessions.s_id = orders.s_id  WHERE orders.e_id = ? AND orders.s_id = ?  $paymentMode";
+
+        $statement = $this->connect()->prepare($query);
+        $statement->execute(array(
+            $e_id,
+            $s_id,
+
+        ));
+
+        while($result = $statement->fetchAll(PDO::FETCH_ASSOC)){
+            return $result;
+        }
+      
+
+    }
+
+
+    public function selectPaymentModeAll(Orders $order,$paymentMode){
+        $s_id = $order->getSId();
+        $query = "SELECT employees.*,sessions.*,orders.* FROM orders JOIN employees 
+        ON employees.e_id = orders.e_id JOIN sessions 
+        ON sessions.s_id = orders.s_id  WHERE  orders.s_id = ?  $paymentMode";
+
+        $statement = $this->connect()->prepare($query);
+        $statement->execute(array(
+            $s_id
+        ));
+
+        while($result = $statement->fetchAll(PDO::FETCH_ASSOC)){
+            return $result;
+        }
+      
+
+    }
+
+    public function selectEmployee(Orders $order,$byPaymentMode){
+        $s_id = $order->getSId();
+        $query = "SELECT DISTINCT orders.e_id,employees.*,sessions.* FROM orders JOIN employees 
+        ON employees.e_id = orders.e_id JOIN sessions 
+        ON sessions.s_id = orders.s_id  WHERE  orders.s_id = ? $byPaymentMode";
+
+        $statement = $this->connect()->prepare($query);
+        $statement->execute(array(
+            $s_id
+        ));
+
+        while($result = $statement->fetchAll(PDO::FETCH_ASSOC)){
+            return $result;
+        }
+      
+
+    }
+
+    public function selectOrdersSIdAndEIdSales(Orders $order){
+        $e_id = $order->getEId();
+        $s_id = $order->getSId();
+        $query = "SELECT DISTINCT orders.e_id, employees.*,sessions.* FROM orders JOIN employees 
+        ON employees.e_id = orders.e_id JOIN sessions 
+        ON sessions.s_id = orders.s_id  WHERE orders.e_id = ? AND orders.s_id = ?";
+
+        $statement = $this->connect()->prepare($query);
+        $statement->execute(array(
+            $e_id,
+            $s_id
+        ));
+
+        while($result = $statement->fetchAll(PDO::FETCH_ASSOC)){
+            return $result;
+        }
+      
+
+    }
+
+    public function countOrdersByEIdAndSIdUnPaid(Orders $order){
+        $e_id = $order->getEId();
+        $s_id = $order->getSId();
+        $query = "SELECT employees.*,sessions.*,orders.* FROM orders JOIN employees 
+        ON employees.e_id = orders.e_id JOIN sessions 
+        ON sessions.s_id = orders.s_id  WHERE orders.e_id = ? AND orders.s_id = ? AND orders.o_payment = 'NOT PAID'";
+
+        $statement = $this->connect()->prepare($query);
+        $statement->execute(array(
+            $e_id,
+            $s_id
+        ));
+
+        $result = $statement->rowCount();
+            return $result;
+
+    }
+
+    public function countOrdersByEIdAndSIdPaid(Orders $order){
+        $e_id = $order->getEId();
+        $s_id = $order->getSId();
+        $query = "SELECT employees.*,sessions.*,orders.* FROM orders JOIN employees 
+        ON employees.e_id = orders.e_id JOIN sessions 
+        ON sessions.s_id = orders.s_id  WHERE orders.e_id = ? AND orders.s_id = ? AND orders.o_payment = 'PAID'";
+
+        $statement = $this->connect()->prepare($query);
+        $statement->execute(array(
+            $e_id,
+            $s_id
+        ));
+
+        $result = $statement->rowCount();
+            return $result;
+
+    }
+
+
+    public function countOrdersByEIdAndSIdOrder(Orders $order){
+        $e_id = $order->getEId();
+        $s_id = $order->getSId();
+        $query = "SELECT employees.*,sessions.*,orders.* FROM orders JOIN employees 
+        ON employees.e_id = orders.e_id JOIN sessions 
+        ON sessions.s_id = orders.s_id  WHERE orders.e_id = ? AND orders.s_id = ?";
+
+        $statement = $this->connect()->prepare($query);
+        $statement->execute(array(
+            $e_id,
+            $s_id
+        ));
+
+        $result = $statement->rowCount();
+            return $result;
+
+    }
+
+    public function countOrdersByEIdAndSIdCredits(Orders $order){
+        $e_id = $order->getEId();
+        $s_id = $order->getSId();
+        $query = "SELECT employees.*,sessions.*,orders.* FROM orders JOIN employees 
+        ON employees.e_id = orders.e_id JOIN sessions 
+        ON sessions.s_id = orders.s_id  WHERE orders.e_id = ? AND orders.s_id = ? AND orders.o_payment='DEBT'";
+
+        $statement = $this->connect()->prepare($query);
+        $statement->execute(array(
+            $e_id,
+            $s_id
+        ));
+
+        $result = $statement->rowCount();
+            return $result;
+
+    }
+
+    public function countOrdersByEIdAllOrder(Orders $order){
+        $e_id = $order->getEId();
+        $query = "SELECT employees.*,sessions.*,orders.* FROM orders JOIN employees 
+        ON employees.e_id = orders.e_id JOIN sessions 
+        ON sessions.s_id = orders.s_id  WHERE orders.e_id = ?";
+
+        $statement = $this->connect()->prepare($query);
+        $statement->execute(array(
+            $e_id
+           
+        ));
+
+        $result = $statement->rowCount();
+            return $result;
+
+    }
+
+    
 
     public function selectOrdersByEIdAndSIdAndPaid(Orders $order){
         $e_id = $order->getEId();
@@ -147,6 +372,45 @@ class OrdersDao extends db{
         $query = "SELECT employees.*,sessions.*,orders.* FROM orders JOIN employees 
         ON employees.e_id = orders.e_id JOIN sessions 
         ON sessions.s_id = orders.s_id  WHERE  orders.s_id = ? AND orders.o_payment = 'NOT PAID' ";
+
+        $statement = $this->connect()->prepare($query);
+        $statement->execute(array(
+            $s_id
+        ));
+
+        while($result = $statement->fetchAll(PDO::FETCH_ASSOC)){
+            return $result;
+        }
+      
+
+    }
+
+
+
+    public function selectOrdersBySIdForReport(Orders $order){
+        $s_id = $order->getSId();
+        $query = "SELECT employees.*,sessions.*,orders.* FROM orders JOIN employees 
+        ON employees.e_id = orders.e_id JOIN sessions 
+        ON sessions.s_id = orders.s_id  WHERE  orders.s_id = ?";
+
+        $statement = $this->connect()->prepare($query);
+        $statement->execute(array(
+            $s_id
+        ));
+
+        while($result = $statement->fetchAll(PDO::FETCH_ASSOC)){
+            return $result;
+        }
+      
+
+    }
+
+
+    public function selectOrdersBySIdForReportDebt(Orders $order){
+        $s_id = $order->getSId();
+        $query = "SELECT employees.*,sessions.*,orders.* FROM orders JOIN employees 
+        ON employees.e_id = orders.e_id JOIN sessions 
+        ON sessions.s_id = orders.s_id  WHERE  orders.s_id = ? AND orders.payment_mode = 'DEBT'";
 
         $statement = $this->connect()->prepare($query);
         $statement->execute(array(

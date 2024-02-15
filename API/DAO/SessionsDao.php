@@ -63,7 +63,7 @@ class SessionsDao extends db{
     }
 
     public function selectAllSession(){
-        $query = "SELECT * FROM sessions ";
+        $query = "SELECT * FROM sessions ORDER BY s_id DESC; ";
         $statement = $this->connect()->prepare($query);
         $statement->execute();
         while($result = $statement->fetchAll(PDO::FETCH_ASSOC)){

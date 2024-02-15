@@ -44,8 +44,8 @@ $pdf->Cell(25,10,'CODES ',1,1,'C',true);
 // $pdf->Cell(25,10,'BRAND',1,1,'C',true);
 
 
-require_once"../../API/MODEL/productsModel.php"; 
-$products = new productsModel();
+require_once"../../API/DAO/PurchaseProductsDao.php"; 
+$purchaseDao = new PurchaseProductsDao();
 
 $num = 0;
 if($products->selectCategoryDrinks()):
@@ -101,4 +101,3 @@ $pdf->Output();
 
 
 ?>
- 

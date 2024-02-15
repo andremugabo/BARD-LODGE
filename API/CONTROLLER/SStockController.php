@@ -114,7 +114,7 @@ switch($action){
                                     //UPDATE SALES STOCK
                                     $SStockDaoObj->updateProductQty($SStockObj);
                                     //UPDATE GENERAL STOCK
-                                    $GStockDaoObj->updateProductQty($GStockObj);
+                                    $GStockDaoObj->updateProductOnlyQty($GStockObj);
                                     $receivedDao->createReceived($received);
                                     header("location:../../PAGES/STOCKS/sStock.php");
                                 }else{
@@ -131,7 +131,7 @@ switch($action){
                                     //UPDATE SALES STOCK
                                     $SStockDaoObj->updateProductQty($SStockObj);
                                     //UPDATE GENERAL STOCK
-                                    $GStockDaoObj->updateProductQty($GStockObj);
+                                    $GStockDaoObj->updateProductOnlyQty($GStockObj);
                                     $receivedDao->updateProductQty($received);
                                     header("location:../../PAGES/STOCKS/sStock.php");
                                 }
@@ -169,6 +169,43 @@ switch($action){
             }
             
             break;
+
+        case 'changeQ':
+
+            if(isset($_POST['changeQty'])){
+                if(!empty($_POST['p_id']) && !empty($_POST['c_qty'])){
+                   $SStockObj->setPId($_POST['p_id']);
+                   $SStockObj->setPQty($_POST['c_qty']);
+                   $SStockDaoObj->changeProductQty($SStockObj);
+
+
+                   $metricObj->setEId($_SESSION['logged']['E_ID']);
+                    $mDesc = " CHANGE THE PRODUCT QUANTITY IN SSTOCK";
+                    $metricObj->setMDesc($mDesc);
+                   
+                        //to review after sessions(Done)
+                        if(isset( $_SESSION['currentSession']))
+                        {
+                            $metricObj->setSId($_SESSION['currentSession']);
+
+                        }
+                        else
+                        {
+                            $metricObj->setSId(null);
+                        }
+                            $_SESSION['success_msg'] = "PRODUCT QUANTITY CHANGED SUCCESSFULLY";
+                            $result = $metricDaoObj->createMetric($metricObj);
+                            header("location:../../PAGES/STOCKS/sStock.php");
+
+                }else{
+                    $_SESSION['fail_msg']="FILL OUT ALL  TEXT FIELD !!";
+                    header("location:{$_SERVER['HTTP_REFERER']}"); 
+                }
+
+            }else{
+                header("location:{$_SERVER['HTTP_REFERER']}");
+            }
+            break;    
 
         
             

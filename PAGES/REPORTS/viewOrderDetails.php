@@ -1,7 +1,7 @@
 <?php  require_once '../../INCLUDES/header.php' ?>
 <div class="container-fluid section-title d-flex mb-2">
     <div class="s-title text-start col-6">
-        <h2 style="color:#0dcaf0;">Paid&nbsp;Order&nbsp;Details&nbsp;View</h2>
+        <h2 style="color:#0dcaf0;">Order&nbsp;Details&nbsp;View</h2>
     </div>
 
     <div class="s-btn text-end col-6">
@@ -14,7 +14,7 @@
         <button type="button" class="btn btn-sm btn-warning text-white m-1" data-bs-toggle="modal"
             data-bs-target="#employeeModal">Create&nbsp;Product</button>
         &nbsp; -->
-        <button type="button" class="btn btn-sm btn-info " onclick="window.location.href='order.php'">Back</button>
+        <button type="button" class="btn btn-sm btn-info " onclick="window.location.href='myOrder.php'">Back</button>
     </div>
 </div>
 <?php
@@ -22,9 +22,8 @@ $o_ref = $_GET['o_ref'];
 $orderDao = new OrdersDao();
 $orderObj = new Orders();
 $orderObj->setORef($o_ref);
-$oInfo = $orderDao->selectOrderByIdAndPaid($orderObj);
+$oInfo = $orderDao->selectOrderById($orderObj);
 // print_r($oInfo);
-// echo $o_ref;
 
 
 ?>
@@ -76,7 +75,7 @@ $oInfo = $orderDao->selectOrderByIdAndPaid($orderObj);
                                        $orderDaoObj = new OrdersDao();
                                        $orderObj = new Orders;
                                        $orderObj->setORef($_GET['o_ref']);
-                                       $orderInfo = $orderDaoObj->selectOrderByIdAndPaid($orderObj);
+                                       $orderInfo = $orderDaoObj->selectOrderById($orderObj);
                                     //    print_r($orderInfo);
                                     //    echo$orderInfo['O_ID'];
                                     //    echo $_GET['o_ref'];
@@ -171,7 +170,7 @@ $oInfo = $orderDao->selectOrderByIdAndPaid($orderObj);
                                     $orderDaoObj = new OrdersDao();
                                     $orderObj = new Orders;
                                     $orderObj->setORef($_GET['o_ref']);
-                                    $orderInfo = $orderDaoObj->selectOrderByIdAndPaid($orderObj);
+                                    $orderInfo = $orderDaoObj->selectOrderById($orderObj);
                                     // echo$orderInfo['O_ID'];
                                     $orderDetails->setOId($orderInfo['O_ID']);
                                     $selectedOrder = $orderDetailsDao->selectOrderDetailsByOId($orderDetails);

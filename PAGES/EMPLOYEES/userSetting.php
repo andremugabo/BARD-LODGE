@@ -52,8 +52,7 @@
                             <h5 class="card-title mb-0">Users info</h5>
                         </div>
                         <div class="card-body">
-                            <form action="../../../API/CONTROLER/usersControler.php?action=updateusername"
-                                method="POST">
+                            <form action="../../API/CONTROLLER/UsersController.php?action=updateUsername" method="POST">
                                 <div class="row">
                                     <div class="col-md-8">
                                         <div class="mb-3">
@@ -86,16 +85,15 @@
                         <div class="card-body">
                             <h5 class="card-title">Password</h5>
 
-                            <form action="../../../API/CONTROLER/usersControler.php?action=updatepassword"
-                                method="POST">
+                            <form action="../../API/CONTROLLER/UsersController.php?action=updatePassword" method="POST">
                                 <div class="mb-3">
                                     <label class="form-label" for="inputPasswordCurrent">Current password</label>
-                                    <input type="password" name="Currentpassword" class="form-control"
+                                    <input type="password" name="CurrentPassword" class="form-control"
                                         id="inputPasswordCurrent">
                                 </div>
                                 <div class="mb-3">
                                     <label class="form-label" for="inputPasswordNew">New password</label>
-                                    <input type="password" name="Newpassword" class="form-control" id="inputPasswordNew"
+                                    <input type="password" name="NewPassword" class="form-control" id="inputPasswordNew"
                                         required>
                                 </div>
                                 <div class="mb-3">

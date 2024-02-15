@@ -21,7 +21,7 @@ switch($action){
         $priceObj->setSPrice($_POST['sprice']);
         $priceObj->setUnityId($_POST['unity_id']);
         $feedback = $priceDaoObj->checkProductPriceExists($priceObj);
-        echo $feedback;
+        // echo $feedback;
 
         if($feedback == 0)
         {
@@ -64,7 +64,7 @@ switch($action){
             
              if($_POST['pprice'] > 0 && $_POST['pprice'] < $_POST['eprice'] && $_POST['sprice'] >= $_POST['eprice'] )
              {
-                echo "edit";
+                // echo "edit";
                 // echo $_POST['price_id']."  pid:";
                 // echo $_POST['p_id'];
 

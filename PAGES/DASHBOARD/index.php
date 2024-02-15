@@ -503,7 +503,7 @@
                         </div>
                     </div>
                 </div>
-                <h3 class="mt-1 mb-3 text-black">2.382</h3>
+                <h3 class="mt-1 mb-3 text-black" style="font-size: 15px;">View&nbsp;Reports</h3>
                 <div class="mb-0">
                     <span class="text-white"> <i class="mdi mdi-arrow-bottom-right"></i> GWC-MIS
                     </span>

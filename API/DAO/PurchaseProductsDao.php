@@ -63,6 +63,20 @@ class PurchaseProductsDao extends db{
         return $result;
     }
 
+    public function selectPurchaseBySId(PurchaseProducts $purchase){
+        $s_id = $purchase->getSId();
+        $query = "SELECT sessions.*,products.*,purchase.* FROM purchase JOIN sessions ON 
+        sessions.s_id = purchase.s_id JOIN products ON products.p_id = purchase.p_id  WHERE purchase.s_id = ?";
+        $statement = $this->connect()->prepare($query);
+        $statement->execute(array(
+            $s_id
+        ));
+        while($result = $statement->fetchAll(PDO::FETCH_ASSOC)){
+            return $result;
+        }
+    }
+
+
     public function selectPurchase(){
         $query = "SELECT sessions.*,products.*,purchase.* FROM purchase JOIN sessions ON 
         sessions.s_id = purchase.s_id JOIN products ON products.p_id = purchase.p_id";

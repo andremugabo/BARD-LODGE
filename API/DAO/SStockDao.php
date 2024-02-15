@@ -49,6 +49,18 @@ class SStockDao extends db{
             return $result;    
     }
 
+    public function changeProductQty(SStock $SStock){
+        $p_qty = $SStock->getPQty();
+        $p_id = $SStock->getPId();
+        $query = "UPDATE s_stock set p_qty = ?  WHERE s_stock.p_id = ?";
+        $statement = $this->connect()->prepare($query);
+        $result = $statement->execute(array(
+            $p_qty,
+            $p_id
+        ));
+            return $result;    
+    }
+
     public function updateVoidedProductQty(SStock $SStock){
         $p_qty = $SStock->getPQty();
         $p_id = $SStock->getPId();
@@ -111,6 +123,20 @@ class SStockDao extends db{
         ));
         $result = $statement->fetch();
         return $result;
+        
+    }
+
+
+    public function selectSStockBySid(){
+        // $s_id = $SStock->getSId();
+        $query = "SELECT * FROM s_stock ";
+        $statement = $this->connect()->prepare($query);
+        $statement->execute(array(
+            // $s_id
+        ));
+        while($result = $statement->fetchAll(PDO::FETCH_ASSOC)){
+            return $result;
+        }
         
     }
 

@@ -73,6 +73,19 @@ class ReceivedProductsDao extends db{
         }
     }
 
+    public function selectReceivedBySId(ReceivedProducts $Received){
+        $s_id = $Received->getSId();
+        $query = "SELECT sessions.*,products.*,received.* FROM received JOIN sessions ON 
+        sessions.s_id = received.s_id JOIN products ON products.p_id = received.p_id WHERE received.s_id = ?";
+        $statement = $this->connect()->prepare($query);
+        $statement->execute(array(
+            $s_id
+        ));
+        while($result = $statement->fetchAll(PDO::FETCH_ASSOC)){
+            return $result;
+        }
+    }
+
 
     public function selectReceivedByFilter($productByFilter){
         $query = "SELECT sessions.*,products.*,received.* FROM received JOIN sessions ON 

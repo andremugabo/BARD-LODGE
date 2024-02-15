@@ -50,7 +50,17 @@ class GStockDao extends db{
     }
 
 
-
+    public function changeProductQty(GStock $gstock){
+        $p_qty = $gstock->getPQty();
+        $p_id = $gstock->getPId();
+        $query = "UPDATE  g_stock SET p_qty = ? WHERE g_stock.p_id = ?";
+        $statement = $this->connect()->prepare($query);
+       $result = $statement->execute(array(
+            $p_qty,
+            $p_id
+        ));
+            return $result;    
+    }
 
 
 
@@ -64,6 +74,21 @@ class GStockDao extends db{
         $result = $statement->execute(array(
             $p_qty,
             $p_pprice,
+            $p_id
+          
+        ));
+        return $result;
+    }
+
+
+    public function updateProductOnlyQty(GStock $gstock){
+        $p_qty = $gstock->getPQty();
+        $p_id = $gstock->getPId();
+        
+        $query = "UPDATE g_stock SET p_qty = ? WHERE g_stock.p_id = ?";
+        $statement = $this->connect()->prepare($query);
+        $result = $statement->execute(array(
+            $p_qty,
             $p_id
           
         ));
@@ -108,7 +133,17 @@ class GStockDao extends db{
 
 
 
-
+    public function selectGeneralStockBySid(){
+        // $s_id = $gstock->getSId();
+        $query = "SELECT * FROM g_stock";
+        $statement = $this->connect()->prepare($query);
+        $statement->execute(array(
+            // $s_id
+        ));
+        while($result = $statement->fetchAll(PDO::FETCH_ASSOC)){
+            return $result;
+        }   
+    }
 
 
 

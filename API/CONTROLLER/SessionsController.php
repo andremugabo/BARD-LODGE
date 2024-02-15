@@ -1,14 +1,33 @@
 <?php
 session_start();
 require_once '../DAO/SessionsDao.php';
+require_once '../DAO/GStockDao.php';
+require_once '../DAO/SStockDao.php';
+require_once '../DAO/Closing_general_stockDao.php';
+require_once '../DAO/Closing_sales_reportDao.php';
+require_once '../DAO/Closing_sales_stockDao.php';
+require_once '../DAO/OrderDetailsDao.php';
 require_once '../DAO/MetricDao.php';
 
 
 $action = $_GET['action'];
 $sessionObj = new Sessions();
 $sessionDaoObj = new SessionsDao();
+$gStockDaoObj = new GStockDao();
+$gStockObj = new GStock();
+$SStockDaoObj = new SStockDao();
+$SStockObj = new SStock();
+$orderDetailsDao = new OrderDetailsDao();
+$orderDetails = new OrderDetails();
 $metricDaoObj = new MetricDao();
 $metricObj = new Metric();
+
+$cgStockObj = new Closing_general_stock();
+$cgStockDao = new Closing_general_stockDao();
+$csStockObj = new Closing_sales_stock();
+$csStockDao = new Closing_sales_stockDao();
+$csReportObj = new Closing_sales_report();
+$csReportDao = new Closing_sales_reportDao();
 
 
 switch($action){
@@ -62,7 +81,8 @@ switch($action){
                 $sessionDaoObj->createSession($sessionObj);
                 $metricDaoObj->createMetric($metricObj);
 
-                header("location:{$_SERVER['HTTP_REFERER']}");   
+                header('location:../../');
+                session_destroy();  
                 }
                 else
                 {
@@ -85,10 +105,120 @@ switch($action){
         }
         break;
     case 'close':
+        if(isset($_POST['closeSession'])){
+            if(!empty($_POST['s_ref'])){
+                $s_id = $_POST['s_id'];
+                $s_ref = $_POST['s_ref'];
+
+                /*=========================================================
+                                    GENERAL STOCK REPORT
+                ===========================================================*/ 
+                // set s_id for general stock
+                $gStockObj->setSId($s_id);
+                // get general stock by s_id 
+                $generalStock = $gStockDaoObj->selectGeneralStockBySid();
+                if($generalStock != null):
+                    foreach($generalStock as $items){
+                        print_r($items);
+                        // echo "<br>";
+                        $cgStockObj->setSRef($s_ref);
+                        $cgStockObj->setPId($items['P_ID']);
+                        $cgStockObj->setPQty($items['P_QTY']);
+                        $cgStockObj->setPPrice($items['P_PPRICE']);
+                        $cgStockDao->createCGStock($cgStockObj);
+
+
+
+                    }
+                endif;
+                // echo "<br>";
+                // echo "sales stock";
+                // echo "<br>";
+
+                /*===========================================================
+                                       SALES STOCK REPORT
+                =============================================================*/ 
+                // set s_id for sales stock
+                $SStockObj->setSId($s_id);
+                // get sales stock by s_id
+                $saleStock = $SStockDaoObj->selectSStockBySid();
+                if($saleStock != null):
+                    foreach($saleStock as $items){
+                        // print_r($items);
+                        // echo "<br>";
+                        $csStockObj->setSRef($s_ref);
+                        $csStockObj->setPId($items['P_ID']);
+                        $csStockObj->setPQty($items['P_QTY']);
+                        $csStockObj->setPPrice($items['P_PPRICE']);
+                        $csStockDao->createCSStock($csStockObj);
+
+                    }
+                endif;
+                // echo "<br>";
+                // echo "sales report";
+                // echo "<br>";
+                 /*===========================================================
+                                       SALES REPORT
+                =============================================================*/ 
+                //set s_id for sales report
+                $orderDetails->setSId($s_id);
+                //get sales report by s_id
+                $salesReport = $orderDetailsDao->selectProductUnityBySid($orderDetails);
+                if($salesReport != null):
+                    foreach($salesReport as $items){
+                       $orderDetails->setUnityId($items['unity_id']);
+                       $orderDetails->setPId($items['p_id']);
+                    //    get qty from order details
+                    $getQty = $orderDetailsDao->selectQtyOfProductByUnityBySid($orderDetails);
+                    if($getQty != null):
+                        foreach($getQty as $key){
+                            // print_r($key);
+                            $csReportObj->setSRef($s_ref);
+                            $csReportObj->setUnityId($key['unity_id']);
+                            $csReportObj->setPId($key['p_id']);
+                            $csReportObj->setPQty($key['total_quantity']);
+                            $csReportObj->setPPrice($key['p_price']);
+                            $csReportObj->setPSprice($key['s_price']);
+                            $csReportDao->createSReport($csReportObj);
+
+                        }
+                    endif;
+                    }
+                endif;
+
+                // Closing session 
+                $sessionObj->setSId($s_id);
+                $metricObj->setEId($_SESSION['logged']['E_ID']);
+                $mDesc = "SESSION IS CLOSED ";
+                $metricObj->setMDesc($mDesc);
+                // //to review after sessions(Done)
+                if(isset( $_SESSION['currentSession']))
+                {
+                    $metricObj->setSId($_SESSION['currentSession']);
+
+                }
+                else
+                {
+                    $metricObj->setSId(null);
+                }
+                $_SESSION['success_msg'] ="SESSION CLOSED SUCCESSFULLY!!!";
+                $metricDaoObj->createMetric($metricObj);
+                $sessionDaoObj->closeSession($sessionObj);
+                header('location:../../');
+                session_destroy();  
+
+
+                
+
+            }
+        }else{
+             header('location:../../');
+             session_destroy();  
+        }
+        
         break;
     default:
-        header('location:../../');
-        session_destroy();    
+         
         break;     
 
     }

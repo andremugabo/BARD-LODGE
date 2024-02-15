@@ -151,7 +151,42 @@ switch($action){
             }
             
             break;
+        case 'changeQ':
+            if(isset($_POST['changeQty'])){
+                if(!empty($_POST['p_id']) && !empty($_POST['change_qty'])){
+                   $gStockObj->setPId($_POST['p_id']);
+                   $gStockObj->setPQty($_POST['change_qty']);
+                   $gStockDaoObj->changeProductQty($gStockObj);
 
+
+                   $metricObj->setEId($_SESSION['logged']['E_ID']);
+                    $mDesc = " CHANGE THE PRODUCT QUANTITY IN GSTOCK";
+                    $metricObj->setMDesc($mDesc);
+                   
+                        //to review after sessions(Done)
+                        if(isset( $_SESSION['currentSession']))
+                        {
+                            $metricObj->setSId($_SESSION['currentSession']);
+
+                        }
+                        else
+                        {
+                            $metricObj->setSId(null);
+                        }
+                            $_SESSION['success_msg'] = "PRODUCT QUANTITY CHANGED SUCCESSFULLY";
+                            $result = $metricDaoObj->createMetric($metricObj);
+                            header("location:../../PAGES/STOCKS/gStock.php");
+
+                }else{
+                    $_SESSION['fail_msg']="FILL OUT ALL  TEXT FIELD !!";
+                    header("location:{$_SERVER['HTTP_REFERER']}"); 
+                }
+
+            }else{
+                header("location:{$_SERVER['HTTP_REFERER']}");
+            }
+
+            break;
         
             
 
