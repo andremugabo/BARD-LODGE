@@ -48,7 +48,7 @@ $pdf = new FPDF('P','mm',array(58,120));
 $pdf->SetMargins(4.175, 3.175, 4.175);
 
 $pdf->AddPage('P',array(58,120),0);
-$pdf->SetFont('Arial','I',3);
+$pdf->SetFont('Arial','I',5);
 
 
 $pdf->Cell(45,5,'GWC  / KITCHEN  ORDER NOTE',0,1,'C');
@@ -109,7 +109,7 @@ if($selectedOrder != null):
 	 $pdf->Cell(15,5,$total.'Frw',0,1,'C');
 }
 endif;
-	 $pdf->SetFillColor(255,204,229);
+	//  $pdf->SetFillColor(255,204,229);
 	 $pdf->Cell(19,5,'TOTAL',0,0,'L',true);
 	 $pdf->Cell(30,5,number_format($sum).' FRW' ,0,1,'R',true);
 
@@ -121,7 +121,7 @@ $pdf->Ln(5);
 $pdf->Cell(10,5,'Served By: '.$orderInfo['FIRSTNAME']." ".$orderInfo['LASTNAME'],0,1,'L');
 $pdf->Cell(35,5,'Printed :'.date('Y-m-d/h:i:s'),0,1,'L');
 $pdf->Cell(45,5,'THIS NOT OFFICIAL RECEIPT',0,1,'C');
-$pdf->Cell(45,5,'CODE MOMO: 000000 MURAKOZE',0,1,'C');
+$pdf->Cell(45,5,'CODE MOMO: ------- MURAKOZE',0,1,'C');
 $pdf->Cell(45,5,'Powered By:MA Coding-Lab',0,1,'C');
 
 $pdf->Output();
