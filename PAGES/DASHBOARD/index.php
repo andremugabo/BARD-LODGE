@@ -370,10 +370,10 @@
         </a>
     </div>
 
-    <?php //} ?>
 
 
 
+    <!-- 
     <div class="card-principal card bg-primary m-2">
         <a href="#" style="text-decoration:none;">
             <div class="card-body">
@@ -392,15 +392,14 @@
                 <div class="mb-0">
                     <span class="text-white"> <i class="mdi mdi-arrow-bottom-right"></i>GWC-MIS
                     </span>
-                    <!-- <span class="text-black">Since last week</span> -->
                 </div>
             </div>
         </a>
-    </div>
+    </div> -->
 
     <?php endif; ?>
 
-    <?php //if($employee_role =="ADMIN"){ ?>
+    <?php if($employee_role =="IT"){ ?>
 
     <div class="card-principal card bg-secondary m-2">
         <a href="#" style="text-decoration:none;">
@@ -426,7 +425,7 @@
         </a>
     </div>
 
-    <?php //} ?>
+    <?php } ?>
 
 
     <?php //if($employee_role =="ADMIN"){ ?>

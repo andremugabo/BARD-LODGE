@@ -87,6 +87,32 @@ class UsersDao extends db{
         return $result;
     }
 
+    public function updateUserName(Users $users)
+    {
+        $u_name = $users->getUName();
+        $e_id = $users->getEId();
+        $query = "UPDATE users SET users.u_name = ? WHERE users.e_id = ?";
+        $statement = $this->connect()->prepare($query);
+        $result =  $statement->execute(array(
+            $u_name,
+            $e_id
+        ));
+        return $result;
+    }
+
+    public function updatePassword(Users $users)
+    {
+        $u_password = $users->getUPassword();
+        $e_id = $users->getEId();
+        $query = "UPDATE users SET users.u_password = ? WHERE users.e_id = ?";
+        $statement = $this->connect()->prepare($query);
+        $result =  $statement->execute(array(
+            $u_password,
+            $e_id
+        ));
+        return $result;
+    }
+
 
 
 }

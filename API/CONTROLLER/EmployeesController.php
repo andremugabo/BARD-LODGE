@@ -15,68 +15,60 @@ $metricObj = new Metric();
 switch($action){
     case 'insert':
         
-        if(isset($_POST['addEmployee']))
-        {   
-            $employee_lname = strtoupper($_POST['lastname']); 
-            $employee_fname = ucfirst(($_POST['firstname'])); 
+        if (isset($_POST['addEmployee'])) {
+            // Sanitize input to prevent XSS and SQL injection
+            $employee_lname = strtoupper(filter_input(INPUT_POST, 'lastname', FILTER_SANITIZE_STRING));
+            $employee_fname = ucfirst(filter_input(INPUT_POST, 'firstname', FILTER_SANITIZE_STRING));
+            $employee_phone = filter_input(INPUT_POST, 'e_phone', FILTER_SANITIZE_STRING);
+            $employee_role = filter_input(INPUT_POST, 'e_role', FILTER_SANITIZE_STRING);
+            $employee_idnumber = filter_input(INPUT_POST, 'e_idnumber', FILTER_SANITIZE_STRING);
+            $employeeObj->setEPhone($employee_phone);
+            
+            // Check if employee already exists
+            $feedback = $employeeDaoObj->checkIfEmployeeExist($employeeObj);
+            if ($feedback > 0) {
+              $_SESSION['fail_msg'] = "EMPLOYEE WITH THE SAME PHONE NUMBER EXISTS";
+              header("location:" . $_SERVER['HTTP_REFERER']);
+              exit; // Stop further execution if employee already exists
+            }
+            
+            // Generate unique employee registration number
+            $recodedEmployee = $employeeDaoObj->countEmployee();
+            $count = $recodedEmployee + 1;
+            $e_regnumber = "GSLE-" . str_pad($count, 4, "0", STR_PAD_LEFT);
+          
+            // Set employee object properties
+            $employeeObj->setERegNumber($e_regnumber);
             $employeeObj->setLastname($employee_lname);
             $employeeObj->setFirstname($employee_fname);
-            $employeeObj->setEPhone($_POST['e_phone']);
-            $employeeObj->setERole($_POST['e_role']);
-            $employeeObj->setEIdNumber($_POST['e_idnumber']);
-            
-            $feedback = $employeeDaoObj->checkIfEmployeeExist($employeeObj);
-            echo $feedback;
-            if($feedback > 0)
-            {
-                $_SESSION['fail_msg']="EMPLOYEE WITH THE SAME PHONE NUMBER EXIST";
-                header("location:{$_SERVER['HTTP_REFERER']}");
+            $employeeObj->setEPhone($employee_phone);
+            $employeeObj->setERole($employee_role);
+            $employeeObj->setEIdNumber($employee_idnumber);
+          
+            // Create metric object
+            $metricObj->setEId($_SESSION['logged']['E_ID']);
+            $metricObj->setMDesc("CREATED A NEW EMPLOYEE NAMED {$employee_fname} {$employee_lname}");
+          
+            // Set session if available
+            if (isset($_SESSION['currentSession'])) {
+              $metricObj->setSId($_SESSION['currentSession']);
+            } else {
+              $metricObj->setSId(null);
             }
-            else
-            {
-                $recodedEmployee = $employeeDaoObj->countEmployee();
-                $count =  $recodedEmployee + 1;
-                    if ($count < 10) {
-                        $e_regnumber = "GSLE-"."000".$count;
-                    } elseif ($count >=10  && $count < 100 ) {
-                        $e_regnumber = "GSLE-"."00".$count;
-                    }elseif(($count >= 100) && ($count < 1000)) {
-                        $e_regnumber = "GSLE-"."0".$count;
-                    }else{
-                        $e_regnumber = "GSLE-".$count;
-                    }
-
-                $employeeObj->setERegNumber($e_regnumber);
-                // print_r($employeeObj);
-                //create metric 
-                //set user id for metric 
-                $metricObj->setEId($_SESSION['logged']['E_ID']);
-                $mDesc = " CREATED A NEW EMPLOYEE  NAMED ". $employee_fname." ".$employee_lname;
-                $metricObj->setMDesc($mDesc);
-                echo $mDesc." ".$e_regnumber;
-               //to review after sessions(Done)
-               if(isset( $_SESSION['currentSession']))
-               {
-                $metricObj->setSId($_SESSION['currentSession']);
-
-               }
-               else
-               {
-                   $metricObj->setSId(null);
-               }
-                $_SESSION['success_msg'] = $employee_fname." ".$employee_lname." REGISTERED SUCCESSFULLY!!!";
-                $result = $metricDaoObj->createMetric($metricObj);
-                $employeeDaoObj->createEmployee($employeeObj);
-                header("location:{$_SERVER['HTTP_REFERER']}");
-
-
-
+          
+            // Create new employee and metric
+            $result = $employeeDaoObj->createEmployee($employeeObj);
+            if ($result) {
+              $metricDaoObj->createMetric($metricObj);
+              $_SESSION['success_msg'] = "{$employee_fname} {$employee_lname} REGISTERED SUCCESSFULLY!!!";
+              header("location:" . $_SERVER['HTTP_REFERER']);
+              exit; // Stop further execution on success
+            } else {
+              // Handle createEmployee failure (log error, display message)
+              echo "Error creating employee!";
             }
+          }
 
-
-
-
-        }
         break;
     case 'edit':
         if(isset($_POST['editEmployee']))

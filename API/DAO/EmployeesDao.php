@@ -6,26 +6,33 @@ class EmployeesDao extends db
 {
 
     public function createEmployee(Employees $employee) {
+
+        // Extract employee data using getters
         $regNumber = $employee->getERegNumber();
         $firstname = $employee->getFirstname();
         $lastname = $employee->getLastname();
         $role = $employee->getERole();
         $phone = $employee->getEPhone();
         $idNumber = $employee->getEIdNumber();
-        
-
-        $query = "INSERT INTO employees (e_regNumber, firstname, lastname, e_role, e_phone, e_idNumber) VALUES (?,?,?,?,?,?)";
+    
+        // Prepare the query with named placeholders
+        $query = "INSERT INTO employees (e_regNumber, firstname, lastname, e_role, e_phone, e_idNumber) 
+                  VALUES (:regNumber, :firstname, :lastname, :role, :phone, :idNumber)";
+    
+        // Bind values to named placeholders for security and clarity
         $statement = $this->connect()->prepare($query);
-        $result  = $statement->execute(array(
-            $regNumber,
-            $firstname,
-            $lastname,
-            $role,
-            $phone,
-            $idNumber
-        ));
+        $statement->bindValue(':regNumber', $regNumber);
+        $statement->bindValue(':firstname', $firstname);
+        $statement->bindValue(':lastname', $lastname);
+        $statement->bindValue(':role', $role);
+        $statement->bindValue(':phone', $phone);
+        $statement->bindValue(':idNumber', $idNumber);
+    
+        // Execute the query and return the result
+        $result = $statement->execute();
         return $result;
     }
+    
 
     public function getEmployeeById(Employees $employee) {
         $e_id = $employee->getEId();

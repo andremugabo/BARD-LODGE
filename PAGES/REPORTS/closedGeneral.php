@@ -4,7 +4,7 @@
 
 <div class="container-fluid section-title d-flex">
     <div class="s-title text-start col-6">
-        <h2>Closed Sales Stock </h2>
+        <h2>Closed General Stock </h2>
     </div>
     <div class="s-btn text-end col-6">
         <!-- <button type="button" class="btn btn-warning" onclick="window.location.href='../../PDF/pdf_products.php'"><img src="../../../ASSETS/IMAGES/PDF.png" class="align-middle table-img" alt=""></button>
@@ -13,17 +13,17 @@
         <button type="button" class="btn btn-info" onclick="window.location.href='price.php'">Prices</button>
         <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#productModal"><img src="../../../ASSETS/IMAGES/Productp.png" class="align-middle title-img" alt=""></button> -->
         <button type="button" class="btn btn-sm btn-warning"
-            onclick="window.location.href='../PDF/pdf_closedSalesReport.php?s_ref=<?= $_GET['s_ref']?>'"><img
+            onclick="window.location.href='../PDF/pdf_closedGeneralReport.php?s_ref=<?=$_GET['s_ref']?>'"><img
                 src="../../ASSETS/SIMAGES/PDF 2_48px.png" class="align-middle" alt="" style="width: 20px;"></button>
         <button type="button" class="btn btn-sm btn-danger"
-            onclick="window.location.href='closedSalesStock.php'">BACK</button>
+            onclick="window.location.href='closedGstock.php'">BACK</button>
 
     </div>
 </div>
 <div class="col">
     <div class="card">
         <div class="card-header">
-            <caption>List of Products in Closed Stock</caption>
+            <caption>Closed General Stock</caption>
         </div>
         <div class="card-body overflow-auto">
             <table class="table align-middle mb-0 bg-white table-striped table-sm table-hover">
@@ -40,11 +40,11 @@
                 <tbody>
 
                     <?php
-                $closedSalesDao = new Closing_sales_stockDao();
-                $closedSalesObj = new Closing_sales_stock();
+                $closedGeneralDao = new Closing_General_stockDao();
+                $closedGeneralObj = new Closing_General_stock();
                 $s_ref = $_GET['s_ref'];
-                $closedSalesObj->setSRef($s_ref);
-                $closedStock =$closedSalesDao->selectSStockBySid($closedSalesObj);
+                $closedGeneralObj->setSRef($s_ref);
+                $closedStock =$closedGeneralDao->selectGStockBySid($closedGeneralObj);
                 // print_r($currentStock);
                 $num = 0;
                 $total = 0;

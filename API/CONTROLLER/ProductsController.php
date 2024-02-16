@@ -47,7 +47,6 @@ switch($action){
                 $metricObj->setEId($_SESSION['logged']['E_ID']);
                 $mDesc = " CREATED A NEW PRODUCT  NAMED ".$p_name;
                 $metricObj->setMDesc($mDesc);
-                echo $mDesc." ".$e_regnumber;
                 //to review after sessions(Done)
                 if(isset( $_SESSION['currentSession']))
                 {

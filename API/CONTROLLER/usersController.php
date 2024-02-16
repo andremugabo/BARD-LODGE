@@ -162,6 +162,81 @@ switch($action){
 
         }
         break; 
+        case 'updateUsername':
+            if(isset($_POST['updateUsername'])){
+                    if(!empty($_POST['username'])){
+                            $userObj->setEId($_SESSION['logged']['E_ID']);
+                            $userObj->setUName($_POST['username']);
+
+
+                             //set user id for metric 
+                        $metricObj->setEId($_SESSION['logged']['E_ID']);
+                        $mDesc = " USERNAME UPDATED SUCCESSFULLY";
+                        $metricObj->setMDesc($mDesc);
+                        //to review after sessions(Done)
+                        if(isset( $_SESSION['currentSession']))
+                        {
+                            $metricObj->setSId($_SESSION['currentSession']);
+
+                        }
+                        else
+                        {
+                            $metricObj->setSId(null);
+                        }
+                        $result = $metricDaoObj->createMetric($metricObj);
+                        $userDaoObj->updateUserName($userObj);
+                        $_SESSION['success_msg'] =" USERNAME UPDATED  SUCCESSFULLY!! ";
+                        header("location:{$_SERVER['HTTP_REFERER']}");
+
+                                }
+                        }else{
+                            header("location:{$_SERVER['HTTP_REFERER']}");
+                        }
+
+            break;
+
+         case 'updatePassword': 
+            if(isset($_POST['updatePassword'])){
+                if(!empty($_POST['CurrentPassword']) && !empty($_POST['NewPassword']) && !empty($_POST['ConfirmPassword'])){
+                       
+                    if($_POST['NewPassword'] === $_POST['ConfirmPassword']){
+
+                                $userObj->setEId($_SESSION['logged']['E_ID']);
+                                $userObj->setUPassword(md5($_POST['NewPassword']));
+
+
+                                //set user id for metric 
+                            $metricObj->setEId($_SESSION['logged']['E_ID']);
+                            $mDesc = " PASSWORD UPDATED SUCCESSFULLY";
+                            $metricObj->setMDesc($mDesc);
+                            //to review after sessions(Done)
+                            if(isset( $_SESSION['currentSession']))
+                            {
+                                $metricObj->setSId($_SESSION['currentSession']);
+
+                            }
+                            else
+                            {
+                                $metricObj->setSId(null);
+                            }
+                            $result = $metricDaoObj->createMetric($metricObj);
+                            $userDaoObj->updatePassword($userObj);
+                            $_SESSION['success_msg'] =" PASSWORD UPDATED  SUCCESSFULLY!! ";
+                            header("location:{$_SERVER['HTTP_REFERER']}");
+
+                                    }
+                            }else{
+                                header("location:{$_SERVER['HTTP_REFERER']}");
+                            }
+                    }else{
+                        $_SESSION['fail_msg']="PASSWORD DON'T MATCH !!!";
+                        header("location:{$_SERVER['HTTP_REFERER']}");
+                    }
+                    
+                    
+                        
+            
+            break;
         
         
         

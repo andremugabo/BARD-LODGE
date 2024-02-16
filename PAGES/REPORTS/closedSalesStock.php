@@ -57,9 +57,9 @@
                             <button type="button" class="btn btn-success btn-sm mb-1"
                                 onclick="window.location.href='closedSales.php?s_ref=<?=$item['S_REF']?>'">View&nbsp;Report</button>&nbsp;
 
-                            <button type="button" class="btn btn-warning btn-sm mb-1"
+                            <!-- <button type="button" class="btn btn-warning btn-sm mb-1"
                                 onclick="window.location.href='../PDF/pdf_closedSalesReport.php?s_ref=<?=$item['S_REF']?>'"><img
-                                    src="../../ASSETS/SIMAGES/PDF 2_48px.png" alt="pdf" style="width: 20px;"></button>
+                                    src="../../ASSETS/SIMAGES/PDF 2_48px.png" alt="pdf" style="width: 20px;"></button> -->
                         </td>
                     </tr>
 
