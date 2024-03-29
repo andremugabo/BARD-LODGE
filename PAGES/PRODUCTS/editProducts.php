@@ -71,6 +71,12 @@ $selectById = $productsDao->getProductsById($products);
                         <label for="floatingInput">Product</label>
                     </div>
 
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control rounded-4" name="p_package"
+                            value="<?=$selectById['PACKAGING']?>" placeholder="Enter Product package" required>
+                        <label for="floatingInput">Product package</label>
+                    </div>
+
                     <div class="mb-3">
                         <label for="role" class="col-form-label">Product&nbsp;Unity:</label>
                         <select class="form-select form-select mb-3" id="unity" name="unity_id"

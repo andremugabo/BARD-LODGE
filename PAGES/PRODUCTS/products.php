@@ -132,6 +132,7 @@ if (isset($_POST['filter'])) {
                         <th scope="col" style="text-align: center;">Unity</th>
                         <th scope="col" style="text-align: center;">Category</th>
                         <th scope="col" style="text-align: center;">Products</th>
+                        <th scope="col" style="text-align: center;">Packaging</th>
                         <th scope="col" style="text-align: center;">Action</th>
                     </tr>
                     </tr>
@@ -151,6 +152,7 @@ if (isset($_POST['filter'])) {
                         <td style="text-align: center;"><?=$item['UNITY_NAME']?></td>
                         <td style="text-align: center;"><?=$item['PC_NAME']?></td>
                         <td style="text-align: center;"><?=$item['P_NAME']?></td>
+                        <td style="text-align: center;"><?=$item['PACKAGING']?></td>
                         <td style="text-align: center;"><button type="button btn-sm" title="Edit Product Info"
                                 class="btn btn-primary table-btn"
                                 onclick="window.location.href='editProducts.php?edit=<?=$item['P_ID']?>'"><img
@@ -207,6 +209,12 @@ if (isset($_POST['filter'])) {
                             <option selected disabled value="">Choose&nbsp;Product&nbsp;Category</option>
 
                         </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="p_package" class="col-form-label">Product&nbsp;Package:</label>
+                        <input type="text" class="form-control" name="p_package" id="p_package"
+                            placeholder="ENTER PRODUCT PACKAGE" required>
                     </div>
 
                     <div class="mb-3">

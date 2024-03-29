@@ -1,7 +1,7 @@
 <?php  require_once '../../INCLUDES/header.php' ?>
 <div class="container-fluid section-title d-flex mb-2">
     <div class="s-title text-start col-6">
-        <h2 style="color:#0dcaf0;">Order&nbsp;Details&nbsp;View</h2>
+        <h2 style="color:#0dcaf0;">Order&nbsp;with&nbsp;Debt&nbsp;View</h2>
     </div>
 
     <div class="s-btn text-end col-6">
@@ -14,7 +14,7 @@
         <button type="button" class="btn btn-sm btn-warning text-white m-1" data-bs-toggle="modal"
             data-bs-target="#employeeModal">Create&nbsp;Product</button>
         &nbsp; -->
-        <button type="button" class="btn btn-sm btn-info " onclick="window.location.href='order.php'">Back</button>
+        <button type="button" class="btn btn-sm btn-info " onclick="window.location.href='debtReport.php'">Back</button>
     </div>
 </div>
 <?php

@@ -1,4 +1,5 @@
 <?php
+ob_start();
 session_start();
 require_once '../DAO/PricesDao.php';
 require_once '../DAO/MetricDao.php';

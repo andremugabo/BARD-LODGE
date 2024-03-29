@@ -126,8 +126,8 @@ switch($action){
             echo json_encode($productData);
         break;    
     default:
-        // header('location:../../');
-        // session_destroy();    
+        header('location:../../');
+        session_destroy();    
         break;      
 }
 

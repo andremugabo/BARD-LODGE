@@ -239,7 +239,7 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col mt-0">
-                        <h6 class="card-title text-black">G-STOCK</h6>
+                        <h6 class="card-title text-black">M-STOCK</h6>
                     </div>
 
                     <div class="col-auto">

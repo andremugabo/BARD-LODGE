@@ -45,11 +45,39 @@ $oInfo = $orderDao->selectOrderById($orderObj);
 <div class="oRefInput">
     <input type="text" value="<?=$o_ref?>" id="oRefInput" style="display:none;">
 </div>
+<!-- search -->
+<div class="col-lg-12">
+    <div class="card">
+        <div class="card-header">
+            <strong>Search&nbsp;By</strong> First&nbsp;Character
+        </div>
+        <div class="card-body card-block">
+            <form action="" method="post" class="form-horizontal" id="searchByCharacter">
+                <div class="row form-group">
+                    <div class="col col-md-12">
+                        <div class="input-group">
+                            <input type="text" id="characterProduct" name="input2-group2" placeholder="First Character"
+                                class="form-control">
+                            <div class="input-group-btn"><button type="submit" class="btn btn-primary">Submit</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="card-footer">
+
+        </div>
+    </div>
+</div>
+<!-- search -->
 <div class="content mt-3">
     <div class="animated fadeIn">
+
         <div class="row">
             <div class="col-lg-6">
                 <div class="row overflow-auto" id="productDetails">
+
                     <!-- PRODUCTS GOES HERE -->
 
                 </div>
@@ -149,8 +177,10 @@ $oInfo = $orderDao->selectOrderById($orderObj);
 
                             </table>
                             <div class="p-1 d-flex justify-content-between">
+                                <?php if($employee_role =="MD" || $employee_role == "MANAGER" || $employee_role == "IT" || $employee_role == "ACCOUNTANT" || $employee_role == "BARMAN"): ?>
                                 <a type="submit" target="_blank" name="printOrder" class="btn btn-info "
                                     href='../PDF/pdf_order.php?o_ref=<?=$_GET['o_ref']?>'>Print</a>
+                                <?php endif;?>
                                 <a type="submit" name="payBill" class="btn btn-danger "
                                     href='bill.php?o_ref=<?=$_GET['o_ref']?>'>Pay&nbsp;Bill</a>
                             </div>

@@ -60,6 +60,19 @@ if (productCategorySection) {
       });
   }
 }
+let theSearchedProduct = "";
+
+document
+  .getElementById("searchByCharacter")
+  .addEventListener("submit", function (event) {
+    event.preventDefault();
+    // window.alert("welcome" + document.querySelector("#characterProduct").value);
+    console.log(document.querySelector("#characterProduct").value);
+    theSearchedProduct = document.querySelector("#characterProduct").value;
+    theSearchedProduct;
+    console.log(theSearchedProduct);
+  });
+console.log(theSearchedProduct);
 
 // if (productDetails) {
 function resetProductSection() {
@@ -68,36 +81,67 @@ function resetProductSection() {
 
 function fetchProductByCategory(pc_id) {
   fetch(
-    "../../API/CONTROLLER/PricesController.php?action=fetchProduct&pc_id=" +
-      pc_id +
-      ""
+    `../../API/CONTROLLER/PricesController.php?action=fetchProduct&pc_id=${pc_id}`
   )
-    .then((Response) => Response.json())
+    .then((response) => response.json())
     .then(function (result) {
+      let found = false;
       for (let item of result) {
         for (let key of item) {
-          productDetails.innerHTML += `
-            <div class="col-md-4 mb-1 btn" onclick="resetModalSection(),fetchProductToOrder(${key.P_ID},${key.PRICE_ID}),displayModal()">
-            <div class="card" style="height:176px;">
-                <div class="card-header">
+          if (key.P_NAME.charAt(0).toLowerCase() === " ") {
+            // Display only the product whose name starts with 'A'
+            productDetails.innerHTML = `
+              <div class="col-md-4 mb-1 btn" onclick="resetModalSection(),fetchProductToOrder(${key.P_ID},${key.PRICE_ID}),displayModal()">
+                <div class="card" style="height:176px;">
+                  <div class="card-header">
                     <h6 class="card-title" style="font-size:12px;">PRODUCT</h6>
-                </div>
-                <div class="card-body">
+                  </div>
+                  <div class="card-body">
                     <div class="mx-auto d-block">
-                        <img class=" mx-auto d-block" src="../../ASSETS/PIMAGES/${key.PI_NAME}" alt="Products Image" style="width: 50px; height: 50px">
-                        <h6 class="text-sm-center mt-2 mb-1" style="font-size:8px;font-weight:bold;">${key.P_NAME}</h6>
-                        <div class="location text-sm-center" style="font-size:9px;font-weight:bold;">${key.SPRICE}&nbsp;Frw&nbsp;Per&nbsp;${key.UNITY_NAME}</div>
+                      <img class=" mx-auto d-block" src="../../ASSETS/PIMAGES/${key.PI_NAME}" alt="Products Image" style="width: 50px; height: 50px">
+                      <h6 class="text-sm-center mt-2 mb-1" style="font-size:8px;font-weight:bold;">${key.P_NAME}</h6>
+                      <div class="location text-sm-center" style="font-size:9px;font-weight:bold;">${key.SPRICE}&nbsp;Frw&nbsp;Per&nbsp;${key.UNITY_NAME}</div>
                     </div>
                     <hr>
+                  </div>
                 </div>
-            </div>
-            </div>
-                      `;
-          console.log(key);
+              </div>
+            `;
+            found = true; // Mark as found
+            break; // Exit the loop since we found the product
+          }
+        }
+        if (found) break; // Exit the outer loop as well
+      }
+
+      // If no product with name starting with 'A' found, display all products
+      if (!found) {
+        productDetails.innerHTML = "";
+        for (let item of result) {
+          for (let key of item) {
+            productDetails.innerHTML += `
+              <div class="col-md-4 mb-1 btn" onclick="resetModalSection(),fetchProductToOrder(${key.P_ID},${key.PRICE_ID}),displayModal()">
+                <div class="card" style="height:176px;">
+                  <div class="card-header">
+                    <h6 class="card-title" style="font-size:12px;">PRODUCT</h6>
+                  </div>
+                  <div class="card-body">
+                    <div class="mx-auto d-block">
+                      <img class=" mx-auto d-block" src="../../ASSETS/PIMAGES/${key.PI_NAME}" alt="Products Image" style="width: 50px; height: 50px">
+                      <h6 class="text-sm-center mt-2 mb-1" style="font-size:8px;font-weight:bold;">${key.P_NAME}</h6>
+                      <div class="location text-sm-center" style="font-size:9px;font-weight:bold;">${key.SPRICE}&nbsp;Frw&nbsp;Per&nbsp;${key.UNITY_NAME}</div>
+                    </div>
+                    <hr>
+                  </div>
+                </div>
+              </div>
+            `;
+          }
         }
       }
     });
 }
+
 // }
 
 function resetModalSection() {

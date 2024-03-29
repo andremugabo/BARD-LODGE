@@ -80,6 +80,13 @@ $selectById = $gStockDao->selectGStockById($gStock);
                     </div>
 
                     <div class="mb-3">
+                        <label for="p_name" class="col-form-label">Packaging:</label>
+                        <input type="text" class="form-control" name=""
+                            value="<?=$selectById['PACKAGING']." PCS  PER PACKAGE"?>" placeholder="ENTER QUANTITY"
+                            disabled>
+                    </div>
+
+                    <div class="mb-3">
                         <label for="role" class="col-form-label">Product&nbsp;Unity*:</label>
                         <select class="form-select form-select mb-3" id="unity" name="unity_id"
                             aria-label=".form-select-lg example" required>
@@ -98,10 +105,16 @@ $selectById = $gStockDao->selectGStockById($gStock);
                     </div>
 
                     <div class="mb-3">
+                        <label for="package" class="col-form-label">How Many in Terms of Packages:</label>
+                        <input type="text" class="form-control" name="package" id="package"
+                            placeholder="ENTER NEW QUANTITY IN TERMS OF PACKAGE" required>
+                    </div>
+
+                    <!-- <div class="mb-3">
                         <label for="p_name" class="col-form-label">New&nbsp;Quantity:</label>
                         <input type="text" class="form-control" name="qty" id="qty" placeholder="ENTER QUANTITY"
                             required>
-                    </div>
+                    </div> -->
 
 
 

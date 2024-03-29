@@ -224,16 +224,19 @@ switch($action){
                             $_SESSION['success_msg'] =" PASSWORD UPDATED  SUCCESSFULLY!! ";
                             header("location:{$_SERVER['HTTP_REFERER']}");
 
-                                    }
-                            }else{
-                                header("location:{$_SERVER['HTTP_REFERER']}");
-                            }
+                        
+                            
+                        }else{
+                            $_SESSION['fail_msg']="PASSWORD DON'T MATCH !!!";
+                            header("location:{$_SERVER['HTTP_REFERER']}");
+                        }
+                    
                     }else{
-                        $_SESSION['fail_msg']="PASSWORD DON'T MATCH !!!";
-                        header("location:{$_SERVER['HTTP_REFERER']}");
+                            $_SESSION['fail_msg']="FILL OUT ALL FIELD !!!";
+                            header("location:{$_SERVER['HTTP_REFERER']}");
+                        }
+
                     }
-                    
-                    
                         
             
             break;

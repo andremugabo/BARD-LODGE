@@ -7,16 +7,18 @@ class ProductsDao extends db{
     public function createProduct(Products $products) {
         $p_code = $products->getPCode();
         $pc_id = $products->getPcId();
+        $p_package = $products->getPPackage();
         $p_name = $products->getPName();
         $unity_id = $products->getUnityId();
 
 
-        $query = "INSERT INTO products (p_code,pc_id,p_name,unity_id) VALUES (?,?,?,?)";
+        $query = "INSERT INTO products (p_code,pc_id,p_name,PACKAGING,unity_id) VALUES (?,?,?,?,?)";
         $statement = $this->connect()->prepare($query);
         $result  = $statement->execute(array(
             $p_code,
-            $pc_id,            
-            $p_name,            
+            $pc_id, 
+            $p_name,           
+            $p_package,            
             $unity_id            
         ));
         return $result;
@@ -91,6 +93,18 @@ class ProductsDao extends db{
     }
 
 
+    public function selectProductsPackaging(Products $productObj){
+        $p_id = $productObj->getPId();
+        $query = "SELECT PACKAGING FROM products WHERE products.p_id = ?";
+        $statement = $this->connect()->prepare($query);
+        $statement->execute(array(
+            $p_id
+        ));
+        $result = $statement->fetch();
+            return $result;  
+
+    }
+
     public function selectProductsByFilter($productByFilter) {
         $query = "SELECT product_category.*,unity.*,products.* FROM products JOIN product_category 
         ON products.pc_id = product_category.pc_id  JOIN unity 
@@ -145,18 +159,16 @@ class ProductsDao extends db{
 
 
     public function updateProducts(Products $products) {
-        $pc_id = $products->getPcId();
-        $p_name = $products->getPName();
-        $unity_id = $products->getUnityId();
-        $p_id = $products->getPId();
+        $categoryId = $products->getPcId();
+        $productName = $products->getPName();
+        $packaging = $products->getPPackage();
+        $unityId = $products->getUnityId();
+        $productId = $products->getPId();
 
-        $query = "UPDATE products SET  pc_id = ?, p_name = ?, unity_id = ? WHERE products.P_ID = ?";
+        $query = "UPDATE products SET  pc_id = ?, p_name = ?, PACKAGING = ? , unity_id = ? WHERE products.P_ID = ?";
         $statement = $this->connect()->prepare($query);
         $result  = $statement->execute(array(
-            $pc_id,
-            $p_name,
-            $unity_id,
-            $p_id
+            $categoryId, $productName, $packaging, $unityId, $productId
         ));
         return $result;
     }

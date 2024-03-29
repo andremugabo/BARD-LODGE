@@ -110,8 +110,11 @@ $oInfo = $orderDao->selectOrderById($orderObj);
                                 </tbody>
                             </table>
                             <div class="p-1">
+                                <?php if($employee_role =="MD" || $employee_role == "MANAGER" || $employee_role == "IT" || $employee_role == "ACCOUNTANT" || $employee_role == "BARMAN"): ?>
                                 <a type="submit" target="_blank" name="PlaceOrder" class="btn btn-warning "
                                     href='../PDF/pdf_korder.php?o_ref=<?=$_GET['o_ref']?>'>Print</a>
+                                <?php endif;?>
+
                             </div>
                         </div>
 
@@ -213,8 +216,11 @@ $oInfo = $orderDao->selectOrderById($orderObj);
 
                             </table>
                             <div class="p-1">
+                                <?php if($employee_role =="MD" || $employee_role == "MANAGER" || $employee_role == "IT" || $employee_role == "ACCOUNTANT" || $employee_role == "BARMAN"): ?>
                                 <a type="submit" target="_blank" name="printOrder" class="btn btn-info "
                                     href='../PDF/pdf_order.php?o_ref=<?=$_GET['o_ref']?>'>Print</a>
+                                <?php endif;?>
+
                             </div>
 
                         </div>

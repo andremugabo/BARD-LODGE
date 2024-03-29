@@ -4,7 +4,7 @@ require_once(__DIR__.'/../MODEL/OrderDetails.php');
 
 
 class OrderDetailsDao extends db{
-    public function createOrderDetails(OrderDetails $details){
+    public function createOrderDetails(OrderDetails $details){ 
         $s_id = $details->getSId();
         $o_id = $details->getOId();
         $e_id = $details->getEId();

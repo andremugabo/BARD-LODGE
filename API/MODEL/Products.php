@@ -4,6 +4,7 @@ class Products {
     private $p_id;
     private $p_code;
     private $pc_id;
+    private $p_package;
     private $p_name;
     private $unity_id;
     private $p_status;
@@ -43,6 +44,14 @@ class Products {
     // Getter and Setter for p_name
     public function getPName() {
         return $this->p_name;
+    }
+
+    public function getPPackage() {
+        return $this->p_package;
+    }
+
+    public function setPPackage($p_package) {
+        $this->p_package= $p_package;
     }
 
     public function setPName($p_name) {

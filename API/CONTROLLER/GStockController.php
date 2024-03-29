@@ -1,6 +1,7 @@
 <?php
 session_start();
 require_once '../DAO/GStockDao.php';
+require_once '../DAO/ProductsDao.php';
 require_once '../DAO/PurchaseProductsDao.php';
 require_once '../DAO/PricesDao.php';
 require_once '../DAO/MetricDao.php';
@@ -8,6 +9,8 @@ require_once '../DAO/MetricDao.php';
 $action = $_GET['action'];
 $gStockDaoObj = new GStockDao();
 $gStockObj = new GStock();
+$productDao = new ProductsDao();
+$productObj = new Products();
 $purchaseDao = new PurchaseProductsDao();
 $purchase = new PurchaseProducts();
 $priceDao = new PricesDao();
@@ -20,7 +23,6 @@ switch($action){
         if(isset($_POST['addProductIS'])){
             if(!empty($_POST['p_id'])){
                 $gStockObj->setPId($_POST['p_id']);
-                
                 //to review
                 $gStockObj->setSId($_SESSION['currentSession']);
 
@@ -65,17 +67,20 @@ switch($action){
         case 'updateQ':
             if(isset($_POST['updateQty'])){
                 
-                if(!empty($_POST['p_id']) && !empty($_POST['qty'])){
-                    if($_POST['qty'] > 0){
+                if(!empty($_POST['p_id']) && !empty($_POST['package'])){
+                    if($_POST['package'] > 0){
                         $gStockObj->setPId($_POST['p_id']);
-                        // $gStockObj->setPQty($_POST['qty']);
+                        $productObj->setPId($_POST['p_id']);
+                        $package = $productDao->selectProductsPackaging($productObj);
+                        $detailedQty = $package['PACKAGING'] * $_POST['package'];
+                        // echo $detailedQty;
                         //insert 
                         $metricObj->setEId($_SESSION['logged']['E_ID']);
                         $mDesc = " PRODUCT QUANTITY UPDATED IN G STOCK  ";
                         $metricObj->setMDesc($mDesc);
                         //update product qty
                         $currentQty = $gStockDaoObj->selectProductQty($gStockObj);
-                        $newQuantity = $currentQty['p_qty'] + $_POST['qty'];
+                        $newQuantity = $currentQty['p_qty'] + $detailedQty;
                         $gStockObj->setPQty($newQuantity);
                         $price->setPId($_POST['p_id']);
                         $price->setUnityId($_POST['unity_id']);
@@ -102,7 +107,7 @@ switch($action){
                             // echo $feedback;
                             if($feedback === 0){
                                 //first time in purchase
-                            $purchase->setQtyPur($_POST['qty']);
+                            $purchase->setQtyPur($detailedQty);
                             $purchase->setPPrice($purchase_price['pprice']);
                             $_SESSION['success_msg'] ="PRODUCT QUANTITY UPDATED IN G STOCK SUCCESSFULLY!!!";
                             $metricDaoObj->createMetric($metricObj);
@@ -117,7 +122,7 @@ switch($action){
                                 // echo "update purchase";
                                 // echo "<br>";
                                 // print_r($currentQtyInPurchase);
-                                $newQtyInPurchase = $currentQtyInPurchase['qty_pur'] + $_POST['qty'];
+                                $newQtyInPurchase = $currentQtyInPurchase['qty_pur'] + $detailedQty; 
                                 // echo "<br>";
                                 // echo $newQtyInPurchase;
                                 $purchase->setQtyPur($newQtyInPurchase);

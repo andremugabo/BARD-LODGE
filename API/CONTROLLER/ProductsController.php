@@ -17,6 +17,7 @@ switch($action){
         $productObj->setPName($p_name);
         $productObj->setPcId($_POST['pc_id']);
         $productObj->setUnityId($_POST['unity_id']);
+        $productObj->setPPackage($_POST['p_package']);
         //check if product exist
         $feedback = $productDaoObj->checkIfProductExist($productObj);
         if($feedback >  0 )
@@ -79,12 +80,13 @@ switch($action){
         $productObj->setPId($_POST['p_id']);
         $productObj->setPcId($_POST['pc_id']);
         $productObj->setPName(strtoupper($_POST['p_name']));
+        $productObj->setPPackage($_POST['p_package']);
         $productObj->setUnityId($_POST['unity_id']);
 
         print_r($productObj);
 
         $metricObj->setEId($_SESSION['logged']['E_ID']);
-        $mDesc = " UPDATED INFORMATION OF ". $employee_fname." ".$employee_lname;
+        $mDesc = " UPDATED INFORMATION OF ". $_POST['p_name']." " ;
         $metricObj->setMDesc($mDesc);
         //to review after sessions(Done)
         if(isset( $_SESSION['currentSession']))

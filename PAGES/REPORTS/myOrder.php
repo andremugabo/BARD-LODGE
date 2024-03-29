@@ -31,6 +31,9 @@ if(isset($_POST['viewSales'])){
         <button type="button" class="btn btn-sm btn-success text-white m-1"
             onclick="window.location.href='individualReport.php'">Report&nbsp;Summary</button>
         &nbsp;
+        <button type="button" class="btn btn-sm btn-primary text-white m-1"
+            onclick="window.location.href='order_with_debt.php'">Order&nbsp;with&nbsp;Debt</button>
+        &nbsp;
         <button type="button" class="btn btn-sm btn-info text-white m-1"
             onclick="window.location.href='myOrder.php'">My&nbsp;Orders</button>
         &nbsp;

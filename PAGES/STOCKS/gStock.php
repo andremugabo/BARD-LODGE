@@ -17,7 +17,7 @@ if (isset($_POST['filter'])) {
 
 <div class="container-fluid section-title d-flex mb-2">
     <div class="s-title text-start col-6">
-        <h2>General&nbsp;Stock</h2>
+        <h2>Main&nbsp;Stock</h2>
     </div>
     <div class="s-btn text-end col-6">
         <!-- <button type="button" class="btn btn-sm btn-secondary m-1"

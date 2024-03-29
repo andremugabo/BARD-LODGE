@@ -5,7 +5,7 @@
 
 <div class="container-fluid section-title d-flex">
     <div class="s-title text-start col-3">
-        <h2>Daily&nbsp;Orders</h2>
+        <h2>Orders&nbsp;with&nbsp;Debt</h2>
     </div>
 
 
@@ -13,16 +13,15 @@
     <div class="s-btn text-end col-9">
         <!-- <button type="button" class="btn btn-success" onclick="window.location.href='category.php'">Category</button>
         <button type="button" class="btn btn-secondary" onclick="window.location.href='description.php'">Description</button> -->
-        <button type="button" class="btn btn-success btn-sm"
+        <!-- <button type="button" class="btn btn-success btn-sm"
             onclick="window.location.href='paidOrders.php'">Paid&nbsp;Orders</button>
         <?php if($employee_role =="MD" || $employee_role == "MANAGER" || $employee_role == "IT" || $employee_role == "ACCOUNTANT" || $employee_role == "BARMAN"): ?>
         <button type="button" class="btn btn-info btn-sm"
             onclick="window.location.href='allOrders.php'">All&nbsp;Daily&nbsp;Orders</button>
         <?php endif;?>
         <button type="button" class="btn btn-warning btn-sm" data-bs-toggle="modal"
-            data-bs-target="#orderModal">Create&nbsp;A&nbsp;New&nbsp;Order</button>
-        <button type="button" class="btn btn-sm btn-danger "
-            onclick="window.location.href='../DASHBOARD/'">Back</button>
+            data-bs-target="#orderModal">Create&nbsp;A&nbsp;New&nbsp;Order</button> -->
+        <button type="button" class="btn btn-sm btn-danger " onclick="window.location.href='report.php'">Back</button>
 
     </div>
 </div>
@@ -30,7 +29,7 @@
 <div class="col">
     <div class="card">
         <div class="card-header">
-            <strong class="card-title">List of Registered Daily Orders</strong>
+            <strong class="card-title">List of Registered Orders with Debt</strong>
         </div>
         <div class="card-body overflow-auto">
             <table class="table align-middle mb-0 bg-white table-striped table-sm table-hover">
@@ -42,6 +41,7 @@
                         <th scope="col" style="text-align: center;">Placed&nbsp;By</th>
                         <th scope="col" style="text-align: center;">Date</th>
                         <th scope="col" style="text-align: center;">Payment&nbsp;Status</th>
+                        <th scope="col" style="text-align: center;">Payment&nbsp;Mode</th>
                         <th scope="col" style="text-align: center;">Total&nbsp;Amount</th>
                         <th scope="col" style="text-align: center;">Action</th>
                     </tr>
@@ -52,10 +52,11 @@
                 $orderObj = new Orders();
                 $orderObj->setEId($employee_eid);
                 $orderObj->setSId($sessionInfo[0]['S_ID']);
-                $selectProduct =$orderDao->selectOrdersByEIdAndSId($orderObj);
+                $selectProduct =$orderDao->selectOrdersDebt();
                 $num = 0;
+                $sum = 0;
                 if ($selectProduct):
-                foreach ($selectProduct as $item) {  $num++;            
+                foreach ($selectProduct as $item) {  $num++; $sum = $sum + $item['O_AMOUNT'];           
                 ?>
 
                     <tr>
@@ -65,6 +66,7 @@
                         <td style="text-align: center;"><?=$item['FIRSTNAME']." ".$item['LASTNAME']?></td>
                         <td style="text-align: center;"><?=$item['O_DATE']?></td>
                         <td style="text-align: center;"><?=$item['O_PAYMENT']?></td>
+                        <td style="text-align: center;"><?=$item['payment_mode']?></td>
                         <td style="text-align: center;"><?=$item['O_AMOUNT']?></td>
                         <td style="text-align: center;">
                             <?php if($item['O_PAYMENT'] !== "PAID"):?>
@@ -72,14 +74,18 @@
                                 onclick="window.location.href='orderDetails.php?o_ref=<?=$item['O_REF']?>'">Add&nbsp;Items</button>&nbsp;
                             <?php endif ?>
                             <button type="button" class="btn btn-info btn-sm mb-1"
-                                onclick="window.location.href='viewOrderDetails.php?o_ref=<?=$item['O_REF']?>'">Details</button>
+                                onclick="window.location.href='viewOrderDebt.php?o_ref=<?=$item['O_REF']?>'">Details</button>
                         </td>
                     </tr>
 
                     <?php } endif; ?>
 
 
-
+                    <tr style='background:darkred; color: white;font-weight: bold;'>
+                        <td colspan="6" style="text-align: left;">TOTAL:</td>
+                        <td style="text-align: center;"><?=$sum?></td>
+                        <td style="text-align: center;"></td>
+                    </tr>
 
 
 

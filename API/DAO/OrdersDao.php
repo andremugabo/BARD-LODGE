@@ -425,6 +425,42 @@ class OrdersDao extends db{
     }
 
 
+
+
+    public function selectOrdersByEidAndDebt(Orders $order){
+        $e_id = $order->getEId();
+        $query = "SELECT employees.*,sessions.*,orders.* FROM orders JOIN employees 
+        ON employees.e_id = orders.e_id JOIN sessions 
+        ON sessions.s_id = orders.s_id  WHERE  orders.e_id = ? AND orders.payment_mode = 'DEBT'";
+
+        $statement = $this->connect()->prepare($query);
+        $statement->execute(array(
+            $e_id
+        ));
+
+        while($result = $statement->fetchAll(PDO::FETCH_ASSOC)){
+            return $result;
+        }
+      
+
+    }
+
+
+    public function selectOrdersDebt(){
+        $query = "SELECT employees.*,sessions.*,orders.* FROM orders JOIN employees 
+        ON employees.e_id = orders.e_id JOIN sessions 
+        ON sessions.s_id = orders.s_id  WHERE  orders.payment_mode = 'DEBT'";
+
+        $statement = $this->connect()->prepare($query);
+        $statement->execute();
+
+        while($result = $statement->fetchAll(PDO::FETCH_ASSOC)){
+            return $result;
+        }
+      
+
+    }
+
 }
 
 
