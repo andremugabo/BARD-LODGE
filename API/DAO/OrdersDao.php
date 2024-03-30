@@ -461,6 +461,18 @@ class OrdersDao extends db{
 
     }
 
+    public function updatePaymentMode(Orders $order){
+        // $payment_mode = $order->getPaymentMode();
+        $o_ref = $order->getORef();
+        $query = "UPDATE orders  SET payment_mode ='CASH'  WHERE orders.o_ref = ?";
+        $statement = $this->connect()->prepare($query);
+        $result = $statement->execute(array(
+        //    $payment_mode,
+           $o_ref 
+        ));
+        return $result;
+    }
+
 }
 
 

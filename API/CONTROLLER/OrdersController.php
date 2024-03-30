@@ -2,7 +2,7 @@
 session_start();
 require_once '../DAO/OrdersDao.php';
 require_once '../DAO/MetricDao.php';
-require_once './DAO/IncomeDetailsDao.php';
+require_once '../DAO/IncomeDetailsDao.php';
 
 $action = $_GET['action'];
 $orderDaoObj = new OrdersDao();
@@ -104,7 +104,44 @@ switch($action){
         break;
     case 'paymentMode':
         $o_ref = $_GET['o_ref'];
-        echo $o_ref;
+        $s_id = $_SESSION['currentSession'];
+        $orderObj->setORef($o_ref);
+        $getOrder = $orderDaoObj->selectOrderByIdAndPaid($orderObj);
+        print_r($getOrder);
+        if($getOrder['payment_mode']==="DEBT"){
+        $ind_name = $getOrder['payment_mode'];
+        $ind_details = "DEPT PAYED BY ".$getOrder['c_name']."ON ORDER WITH A REFERENCE ".$o_ref;
+        $ind_amount =$getOrder['O_AMOUNT'];  
+        $inObj->setSId($s_id);
+        $inObj->setIndName($ind_name);
+        $inObj->setIndDetails($ind_details);
+        $inObj->setIndAmount($ind_amount);
+        $inObjDao->createIncome($inObj);
+        $orderDaoObj->updatePaymentMode($orderObj);
+
+        $metricObj->setEId($_SESSION['logged']['E_ID']);
+                $mDesc = " DEBT PAID SUCCESSFULLY BY ".$getOrder['c_name'];
+                $metricObj->setMDesc($mDesc);
+                //to review after sessions(Done)
+                if(isset($_SESSION['currentSession']))
+                {
+                    $metricObj->setSId($_SESSION['currentSession']);
+    
+                }
+                else
+                {
+                    $metricObj->setSId(null);
+                }
+                $_SESSION['success_msg'] =" DEBT PAID SUCCESSFULLY BY ".$getOrder['c_name']." ON ORDER WITH A REFERENCE ".$o_ref;
+                $metricDaoObj->createMetric($metricObj);
+                header("location:../../PAGES/REPORTS/debtReport.php");
+
+        }else{
+            $_SESSION['fail_msg']="ERROR THIS ORDER DOES NOT HAVE A DEBT CHECK AGAIN PLEASE";
+            header("location:../../PAGES/REPORTS/debtReport.php");
+        }
+
+       
         break;    
             
     default:

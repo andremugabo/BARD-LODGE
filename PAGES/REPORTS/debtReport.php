@@ -41,6 +41,7 @@
                         <th scope="col" style="text-align: center;">Placed&nbsp;By</th>
                         <th scope="col" style="text-align: center;">Date</th>
                         <th scope="col" style="text-align: center;">Payment&nbsp;Status</th>
+                        <th scope="col" style="text-align: center;">Customer</th>
                         <th scope="col" style="text-align: center;">Payment&nbsp;Mode</th>
                         <th scope="col" style="text-align: center;">Total&nbsp;Amount</th>
                         <th scope="col" style="text-align: center;">Action</th>
@@ -66,6 +67,7 @@
                         <td style="text-align: center;"><?=$item['FIRSTNAME']." ".$item['LASTNAME']?></td>
                         <td style="text-align: center;"><?=$item['O_DATE']?></td>
                         <td style="text-align: center;"><?=$item['O_PAYMENT']?></td>
+                        <td style="text-align: center;"><?=$item['c_name']?></td>
                         <td style="text-align: center;"><?=$item['payment_mode']?></td>
                         <td style="text-align: center;"><?=$item['O_AMOUNT']?></td>
                         <td style="text-align: center;">
@@ -82,7 +84,7 @@
 
 
                     <tr style='background:darkred; color: white;font-weight: bold;'>
-                        <td colspan="6" style="text-align: left;">TOTAL:</td>
+                        <td colspan="7" style="text-align: left;">TOTAL:</td>
                         <td style="text-align: center;"><?=$sum?></td>
                         <td style="text-align: center;"></td>
                     </tr>
