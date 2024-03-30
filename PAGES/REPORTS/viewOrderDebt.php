@@ -215,11 +215,13 @@ $oInfo = $orderDao->selectOrderById($orderObj);
 
 
                             </table>
-                            <div class="p-1">
+                            <div class="p-1  d-flex justify-content-between">
                                 <?php if($employee_role =="MD" || $employee_role == "MANAGER" || $employee_role == "IT" || $employee_role == "ACCOUNTANT" || $employee_role == "BARMAN"): ?>
                                 <a type="submit" target="_blank" name="printOrder" class="btn btn-info "
                                     href='../PDF/pdf_order.php?o_ref=<?=$_GET['o_ref']?>'>Print</a>
                                 <?php endif;?>
+                                <a type="submit" name="payBill" class="btn btn-warning"
+                                    href='../../API/CONTROLLER/OrdersController.php?action=paymentMode&o_ref=<?=$_GET['o_ref']?>'>Change&nbsp;Payment&nbsp;Mode</a>
 
                             </div>
 

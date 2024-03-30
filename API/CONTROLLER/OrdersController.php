@@ -2,12 +2,15 @@
 session_start();
 require_once '../DAO/OrdersDao.php';
 require_once '../DAO/MetricDao.php';
+require_once './DAO/IncomeDetailsDao.php';
 
 $action = $_GET['action'];
 $orderDaoObj = new OrdersDao();
 $orderObj = new Orders;
 $metricDaoObj = new MetricDao();
 $metricObj = new Metric();
+$inObjDao = new IncomeDetailsDao();
+$inObj = new IncomeDetails();
 
 switch($action){
     case 'insert':
@@ -99,6 +102,10 @@ switch($action){
         }
         
         break;
+    case 'paymentMode':
+        $o_ref = $_GET['o_ref'];
+        echo $o_ref;
+        break;    
             
     default:
     header('location:../../');
