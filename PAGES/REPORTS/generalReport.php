@@ -112,7 +112,7 @@
     </div>
 
 
-    <div class="card-principal card border-dark shadow bg-danger m-2">
+    <!-- <div class="card-principal card border-dark shadow bg-danger m-2">
         <a href="creditsOrdersReport.php" style="text-decoration:none;">
             <div class="card-body">
                 <div class="row">
@@ -129,11 +129,10 @@
                 <div class="mb-0">
                     <span class="text-black"> <i class="mdi mdi-arrow-bottom-right"></i> GWC-MIS
                     </span>
-                    <!-- <span class="text-black">Since last week</span> -->
                 </div>
             </div>
         </a>
-    </div>
+    </div> -->
 
     <div class="card-principal card border-dark shadow bg-success m-2">
         <a href="gStock.php" style="text-decoration:none;">
@@ -230,6 +229,28 @@
         </a>
     </div>
 
+    <div class="card-principal card border-dark shadow bg-warning m-2">
+        <a href="globalStock.php" style="text-decoration:none;">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col mt-0">
+                        <h6 class="card-title text-white">General&nbsp;Stock</h6>
+                    </div>
+
+                    <div class="col-auto">
+                        <div class="stat text-white">
+                            <i class="align-middle text-black" data-feather="airplay"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="mb-0">
+                    <span class="text-white"> <i class="mdi mdi-arrow-bottom-right"></i> GWC-MIS
+                    </span>
+                    <!-- <span class="text-black">Since last week</span> -->
+                </div>
+            </div>
+        </a>
+    </div>
 
 
 

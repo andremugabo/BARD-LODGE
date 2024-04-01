@@ -110,7 +110,7 @@ switch($action){
         print_r($getOrder);
         if($getOrder['payment_mode']==="DEBT"){
         $ind_name = $getOrder['payment_mode'];
-        $ind_details = "DEPT PAYED BY ".$getOrder['c_name']."ON ORDER WITH A REFERENCE ".$o_ref;
+        $ind_details = "DEPT PAYED BY ".$getOrder['c_name']."  ON ORDER WITH A REFERENCE ".$o_ref;
         $ind_amount =$getOrder['O_AMOUNT'];  
         $inObj->setSId($s_id);
         $inObj->setIndName($ind_name);

@@ -40,8 +40,8 @@
                         <th scope="col" style="text-align: center;">Order&nbsp;Reference</th>
                         <th scope="col" style="text-align: center;">Placed&nbsp;By</th>
                         <th scope="col" style="text-align: center;">Date</th>
-                        <th scope="col" style="text-align: center;">Payment&nbsp;Status</th>
                         <th scope="col" style="text-align: center;">Customer</th>
+                        <th scope="col" style="text-align: center;">Phone</th>
                         <th scope="col" style="text-align: center;">Payment&nbsp;Mode</th>
                         <th scope="col" style="text-align: center;">Total&nbsp;Amount</th>
                         <th scope="col" style="text-align: center;">Action</th>
@@ -66,8 +66,8 @@
                         <td style="text-align: center;"><?=$item['O_REF']?></td>
                         <td style="text-align: center;"><?=$item['FIRSTNAME']." ".$item['LASTNAME']?></td>
                         <td style="text-align: center;"><?=$item['O_DATE']?></td>
-                        <td style="text-align: center;"><?=$item['O_PAYMENT']?></td>
                         <td style="text-align: center;"><?=$item['c_name']?></td>
+                        <td style="text-align: center;"><?=$item['c_phone']?></td>
                         <td style="text-align: center;"><?=$item['payment_mode']?></td>
                         <td style="text-align: center;"><?=$item['O_AMOUNT']?></td>
                         <td style="text-align: center;">

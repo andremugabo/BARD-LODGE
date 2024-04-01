@@ -473,6 +473,21 @@ class OrdersDao extends db{
         return $result;
     }
 
+    public function checkNotPaidOrderBySid(Orders $order){
+        $s_id = $order->getSId();
+        $query = "SELECT * FROM orders  WHERE  orders.s_id = ? AND o_payment = 'NOT PAID'";
+
+        $statement = $this->connect()->prepare($query);
+        $statement->execute(array(
+            $s_id
+        ));
+
+        $result = $statement->rowCount();
+        return $result;
+      
+
+    }
+
 }
 
 

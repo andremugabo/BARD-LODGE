@@ -4,7 +4,7 @@
 
 <div class="container-fluid section-title d-flex">
     <div class="s-title text-start col-6">
-        <h2>Current General Stock On <?=date("Y-M-d")?></h2>
+        <h2>Current Main Stock On <?=date("Y-M-d")?></h2>
     </div>
     <div class="s-btn text-end col-6">
         <!-- <button type="button" class="btn btn-warning" onclick="window.location.href='../../PDF/pdf_products.php'"><img src="../../../ASSETS/IMAGES/PDF.png" class="align-middle table-img" alt=""></button>

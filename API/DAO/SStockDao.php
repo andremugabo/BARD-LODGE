@@ -153,7 +153,18 @@ class SStockDao extends db{
 
 
 
-
+    public function selectSStockByPId(SStock $SStock){
+        $p_id = $SStock->getPId();
+        $query = "SELECT products.*,s_stock.* FROM s_stock  JOIN products ON products.p_id = s_stock.p_id WHERE s_stock.p_id = ?";
+        $statement = $this->connect()->prepare($query);
+        $statement->execute(array(
+            $p_id
+        ));
+        while($result = $statement->fetchAll(PDO::FETCH_ASSOC)){
+            return $result;
+        }
+        
+    }
 
 
 
