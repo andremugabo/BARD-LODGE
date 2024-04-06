@@ -4,7 +4,7 @@
 class db{
 	
 	private $host = "localhost";
-	private $user = "gwc";
+	private $user = "cjvnsqvtmy";
 	private $pswd = "GreenWorld@2024";
 	private $dbName = "cjvnsqvtmy";
 
