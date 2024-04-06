@@ -3,7 +3,7 @@
 
 class db{
 	
-	private $host = "159.65.182.253";
+	private $host = "root";
 	private $user = "cjvnsqvtmy";
 	private $pswd = "GreenWorld@2024";
 	private $dbName = "cjvnsqvtmy";
