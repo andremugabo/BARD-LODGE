@@ -3,10 +3,10 @@
 
 class db{
 	
-	private $host = "localhost";
-	private $user = "root";
-	private $pswd = "";
-	private $dbName = "bardrodge";
+	private $host = "https://phpstack-1245466-4458763.cloudwaysapps.com/";
+	private $user = "cjvnsqvtmy";
+	private $pswd = "GreenWorld@2024";
+	private $dbName = "cjvnsqvtmy";
 
 	public function connect()
 	{
