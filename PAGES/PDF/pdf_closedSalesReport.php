@@ -19,8 +19,8 @@ $pdf->Ln(20);
 $pdf->Cell(200,10,'GREEN WORLD CORNER',0,1,'L');
 $pdf->Cell(200,10,'CLOSED SALES STOCK',0,1,'L');
 $pdf->Cell(150,10,'Kigali, KG 730 ST ',0,1,'L');
-$pdf->Cell(35,10,'TIN:103477797',0,1,'L');
-$pdf->Cell(35,10,'Tel:(+250)788-322-151',0,1,'L');
+$pdf->Cell(35,10,'TIN:122270330',0,1,'L');
+$pdf->Cell(35,10,'Tel:(+250)782-512-600',0,1,'L');
 
 
 

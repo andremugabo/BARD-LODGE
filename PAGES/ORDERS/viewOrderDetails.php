@@ -113,6 +113,7 @@ $oInfo = $orderDao->selectOrderById($orderObj);
                                 <?php if($employee_role =="MD" || $employee_role == "MANAGER" || $employee_role == "IT" || $employee_role == "ACCOUNTANT" || $employee_role == "BARMAN"): ?>
                                 <a type="submit" target="_blank" name="PlaceOrder" class="btn btn-warning "
                                     href='../PDF/pdf_korder.php?o_ref=<?=$_GET['o_ref']?>'>Print</a>
+
                                 <?php endif;?>
 
                             </div>
@@ -215,10 +216,12 @@ $oInfo = $orderDao->selectOrderById($orderObj);
 
 
                             </table>
-                            <div class="p-1">
+                            <div class="p-1 d-flex justify-content-between">
                                 <?php if($employee_role =="MD" || $employee_role == "MANAGER" || $employee_role == "IT" || $employee_role == "ACCOUNTANT" || $employee_role == "BARMAN"): ?>
                                 <a type="submit" target="_blank" name="printOrder" class="btn btn-info "
                                     href='../PDF/pdf_order.php?o_ref=<?=$_GET['o_ref']?>'>Print</a>
+                                <a type="submit" name="payBill" class="btn btn-danger "
+                                    href='bill.php?o_ref=<?=$_GET['o_ref']?>'>Pay&nbsp;Bill</a>
                                 <?php endif;?>
 
                             </div>

@@ -19,8 +19,8 @@ $pdf->Ln(20);
 $pdf->Cell(200,10,'GREEN WORLD CORNER',0,1,'L');
 $pdf->Cell(200,10,'DAILY SALES REPORT',0,1,'L');
 $pdf->Cell(150,10,'Kigali, KG 730 ST ',0,1,'L');
-$pdf->Cell(35,10,'TIN:103477797',0,1,'L');
-$pdf->Cell(35,10,'Tel:(+250)788-322-151',0,1,'L');
+$pdf->Cell(35,10,'TIN:122270330',0,1,'L');
+$pdf->Cell(35,10,'Tel:(+250)788-652-595',0,1,'L');
 
 
 
@@ -68,7 +68,7 @@ if($dailySalesReport != null):
 	 $pdf->Cell(15,10,$items['UNITY_NAME'],1,0,'C');
 	 $pdf->Cell(10,10,$items['P_QTY'],1,0,'C');
 	 $pdf->Cell(35,10,number_format($items['P_PPRICE'])." Frw",1,0,'C');
-	 $pdf->Cell(35,10,number_format($items['P_PPRICE'])." Frw",1,0,'C');
+	 $pdf->Cell(35,10,number_format($items['P_SPRICE'])." Frw",1,0,'C');
 	 $pdf->Cell(35,10,number_format($profit)." Frw",1,1,'C');
 	 
 	 

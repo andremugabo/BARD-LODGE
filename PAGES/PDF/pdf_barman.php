@@ -46,7 +46,7 @@ $pdf->Cell(15,10,'TOTAL',1,1,'C',true);
 
 
 require_once"../../API/MODEL/productsModel.php"; 
-$products = new productsModel();
+// $products = new productsModel();
 
 $num = 0;
 if($products->selectCategoryDrinks()):
@@ -103,4 +103,3 @@ $pdf->Output();
 
 
 ?>
- 

@@ -59,8 +59,10 @@
                         <td style="text-align: center;"><?=$item['O_AMOUNT']?></td>
                         <td style="text-align: center;">
                             <?php if($item['O_PAYMENT'] !== "PAID"):?>
+                            <?php if($employee_role =="MD" || $employee_role == "MANAGER" || $employee_role == "IT" || $employee_role == "ACCOUNTANT" ):?>
                             <button type="button" class="btn btn-success btn-sm  mt-1"
                                 onclick="window.location.href='orderDetails.php?o_ref=<?=$item['O_REF']?>'">Add&nbsp;Items</button>&nbsp;
+                            <?php endif;?>
                             <?php endif ?>
                             <button type="button" class="btn btn-info btn-sm  mt-1"
                                 onclick="window.location.href='viewOrderDetails.php?o_ref=<?=$item['O_REF']?>'">Order&nbsp;Details</button>

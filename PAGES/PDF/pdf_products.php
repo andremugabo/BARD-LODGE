@@ -78,7 +78,7 @@ $pdf->Cell(26,10,'CODES ',1,1,'C',true);
 
 
 require_once"../../API/MODEL/productsModel.php"; 
-$products = new productsModel();
+// $products = new productsModel();
 
 $bnum = 0;
 if($products->selectCategoryFoods()):

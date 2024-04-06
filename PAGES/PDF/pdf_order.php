@@ -54,8 +54,8 @@ $pdf->SetFont('Arial','I',5);
 $pdf->Cell(45,5,'GWC / ORDER NOTE',0,1,'C');
 
 // $pdf->Ln(2);
-$pdf->Cell(45,5,'Tel:(+250) 788 322 151',0,1,'C');
-$pdf->Cell(45,5,'Tin:103477797',0,1,'C');
+$pdf->Cell(45,5,'Tel:(+250)788-652-595',0,1,'C');
+$pdf->Cell(45,5,'TIN:122270330',0,1,'C');
 $pdf->Cell(45,5,'Time: '. $orderInfo['O_DATE'],0,1,'C');
 $pdf->Cell(45,5,'Ref No :'.$o_reference,0,1,'C');
 

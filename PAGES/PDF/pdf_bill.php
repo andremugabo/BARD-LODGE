@@ -4,14 +4,14 @@ if (isset($_GET['ref'])) {
   $b_reference = $_GET['ref'];
 }
 require_once"../../API/MODEL/billsModel.php";
-$billDetails = new billsModel();
+// $billDetails = new billsModel();
 $values = $billDetails->selectBref($b_reference);
 // print_r($values);
 $waiter = $values['waiter'];
 
 require_once"../../API/MODEL/employeeModel.php";
 
-$employee = new employeeModel();
+// $employee = new employeeModel();
 $employee_id = $_SESSION['logged_user']['e_id'];
 $userName = $_SESSION['logged_user']['u_name'];
 
@@ -78,7 +78,7 @@ $pdf->Ln(2);
 
 
 require_once"../../API/MODEL/billDetailsModel.php";
-$billDetails = new billDetailsModel();
+// $billDetails = new billDetailsModel();
 $b_reference = $_GET['ref'];
 $num = 0;
 $total = 0;
@@ -117,4 +117,3 @@ $pdf->Output();
 
 
 ?>
- 

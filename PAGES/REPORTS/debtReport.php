@@ -56,7 +56,7 @@
                 $selectProduct =$orderDao->selectOrdersDebt();
                 $num = 0;
                 $sum = 0;
-                if ($selectProduct):
+                if ($selectProduct): 
                 foreach ($selectProduct as $item) {  $num++; $sum = $sum + $item['O_AMOUNT'];           
                 ?>
 

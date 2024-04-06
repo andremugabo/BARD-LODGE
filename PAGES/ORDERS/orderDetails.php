@@ -180,9 +180,10 @@ $oInfo = $orderDao->selectOrderById($orderObj);
                                 <?php if($employee_role =="MD" || $employee_role == "MANAGER" || $employee_role == "IT" || $employee_role == "ACCOUNTANT" || $employee_role == "BARMAN"): ?>
                                 <a type="submit" target="_blank" name="printOrder" class="btn btn-info "
                                     href='../PDF/pdf_order.php?o_ref=<?=$_GET['o_ref']?>'>Print</a>
-                                <?php endif;?>
+
                                 <a type="submit" name="payBill" class="btn btn-danger "
                                     href='bill.php?o_ref=<?=$_GET['o_ref']?>'>Pay&nbsp;Bill</a>
+                                <?php endif;?>
                             </div>
 
                         </div>
