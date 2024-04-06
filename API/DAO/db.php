@@ -3,8 +3,8 @@
 
 class db{
 	
-	private $host = "root";
-	private $user = "cjvnsqvtmy";
+	private $host = "localhost";
+	private $user = "gwc";
 	private $pswd = "GreenWorld@2024";
 	private $dbName = "cjvnsqvtmy";
 
