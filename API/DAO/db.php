@@ -3,7 +3,7 @@
 
 class db{
 	
-	private $host = "https://phpstack-1245466-4458763.cloudwaysapps.com/";
+	private $host = "159.65.182.253";
 	private $user = "cjvnsqvtmy";
 	private $pswd = "GreenWorld@2024";
 	private $dbName = "cjvnsqvtmy";
