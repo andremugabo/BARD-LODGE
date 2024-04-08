@@ -128,7 +128,7 @@ switch($action){
                     $generalStock = $gStockDaoObj->selectGeneralStockBySid();
                     if($generalStock != null):
                         foreach($generalStock as $items){
-                            print_r($items);
+                            
                             // echo "<br>";
                             $cgStockObj->setSRef($s_ref);
                             $cgStockObj->setPId($items['P_ID']);

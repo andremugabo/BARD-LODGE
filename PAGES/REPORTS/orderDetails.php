@@ -13,7 +13,8 @@
         <button type="button" class="btn btn-sm btn-warning text-white m-1" data-bs-toggle="modal"
             data-bs-target="#employeeModal">Create&nbsp;Product</button>
         &nbsp; -->
-        <button type="button" class="btn btn-sm btn-info " onclick="window.location.href='order.php'">Back</button>
+        <button type="button" class="btn btn-sm btn-info "
+            onclick="window.location.href='orderReport.php'">Back</button>
     </div>
 </div>
 <div class="card">

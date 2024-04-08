@@ -136,7 +136,7 @@ document.querySelector(".close_s").addEventListener("click", function() {
     document.querySelector(".closing_session").classList.remove("hide");
     setTimeout(() => {
         document.querySelector(".closing_session").classList.add('hide');
-    }, 2000);
+    }, 50000);
 });
 </script>
 <?php require_once '../../INCLUDES/footer.php' ?>
