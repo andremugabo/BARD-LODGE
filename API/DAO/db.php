@@ -4,9 +4,9 @@
 class db{
 	
 	private $host = "localhost";
-	private $user = "cjvnsqvtmy";
-	private $pswd = "GreenWorld@2024";
-	private $dbName = "cjvnsqvtmy";
+	private $user = "root";
+	private $pswd = "";
+	private $dbName = "bardrodge";
 
 	public function connect()
 	{
