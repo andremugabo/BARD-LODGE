@@ -104,7 +104,7 @@ if (isset($_POST['filter'])) {
                     onclick="window.location.href='price.php'">Price</button> -->
                 <button type="button" class="btn btn-outline-success btn-sm m-1"
                     onclick="window.location.href='received.php'">Received&nbsp;Products</button>
-                <?php if($employee_role =="MD" || $employee_role == "MANAGER" || $employee_role == "IT" || $employee_role == "ACCOUNTANT"):?>
+                <?php if($employee_role =="MD" || $employee_role == "MANAGER" || $employee_role == "IT" || $employee_role == "ACCOUNTANT" || $employee_role == "STORE KEEPER"):?>
                 <button type="button" class="btn btn-info btn-sm m-1" data-bs-toggle="modal"
                     data-bs-target="#employeeModal">Insert&nbsp;Product</button>
                 <?php endif;?>
@@ -131,7 +131,7 @@ if (isset($_POST['filter'])) {
                         <th scope="col" style="text-align: center;">Product</th>
                         <th scope="col" style="text-align: center;">Quantity</th>
                         <th scope="col" style="text-align: center;">Purchase Price</th>
-                        <?php if($employee_role =="MD" || $employee_role == "MANAGER" || $employee_role == "IT" || $employee_role == "ACCOUNTANT"):?>
+                        <?php if($employee_role =="MD" || $employee_role == "MANAGER" || $employee_role == "IT" || $employee_role == "ACCOUNTANT" || $employee_role = "STORE KEEPER"):?>
                         <th scope="col" style="text-align: center;">Action</th>
                         <?php endif;?>
                     </tr>
@@ -153,10 +153,12 @@ if (isset($_POST['filter'])) {
                         <td style="text-align: center;"><?=$item['P_NAME']?></td>
                         <td style="text-align: center;"><?=$item['P_QTY']?></td>
                         <td style="text-align: center;"><?=$item['P_PPRICE']?></td>
-                        <?php if($employee_role =="MD" || $employee_role == "MANAGER" || $employee_role == "IT" || $employee_role == "ACCOUNTANT"):?>
+                        <?php if($employee_role =="MD" || $employee_role == "MANAGER" || $employee_role == "IT" || $employee_role == "ACCOUNTANT" || $employee_role == "STORE KEEPER"):?>
                         <td style="text-align: center;"><button type="button" title="Edit Product Info"
                                 class="btn btn-primary btn-sm"
                                 onclick="window.location.href='sStockUpDateQuantity.php?edit=<?=$item['P_ID']?>'">Update</button>&nbsp;
+                            <?php endif;?>
+                            <?php if($employee_role == "MD" || $employee_role == "MANAGER" || $employee_role == "IT"): ?>
                             <button type="button" title="Edit Product Info" class="btn btn-danger btn-sm"
                                 onclick="window.location.href='sStockUpDateProduct.php?edit=<?=$item['P_ID']?>'">Product</button>
                         </td>
@@ -164,10 +166,7 @@ if (isset($_POST['filter'])) {
                     </tr>
 
 
-                    <?php 
-                            }
-                        endif;
-                     ?>
+                    <?php } endif;?>
                 </tbody>
             </table>
         </div>

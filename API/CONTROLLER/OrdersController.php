@@ -4,6 +4,7 @@ require_once '../DAO/OrdersDao.php';
 require_once '../DAO/MetricDao.php';
 require_once '../DAO/IncomeDetailsDao.php';
 
+
 $action = $_GET['action'];
 $orderDaoObj = new OrdersDao();
 $orderObj = new Orders;
@@ -11,6 +12,8 @@ $metricDaoObj = new MetricDao();
 $metricObj = new Metric();
 $inObjDao = new IncomeDetailsDao();
 $inObj = new IncomeDetails();
+
+
 
 switch($action){
     case 'insert':
@@ -142,7 +145,61 @@ switch($action){
         }
 
        
-        break;    
+        break;  
+    case 'special':
+        // if(isset($_POST['CreateOrder'])){
+        //     //get session id
+        //     $s_id = $_GET['s_id'];
+        //     $table = $_GET['table'];
+        //     $presentOrders = $orderDaoObj->countOrder();
+        //     $count = $presentOrders + 1;
+
+        //     if($count < 10){
+        //         $o_ref = "O-000".$count;
+        //     }else if($count >= 10 && $count < 100){
+        //         $o_ref = "O-00".$count;
+        //     }else if($count >= 100 && $count < 1000){
+        //         $o_ref = "O-0".$count;
+        //     }else{
+        //         $o_ref = "O-".$count;
+        //     }
+        //     $e_id = $_SESSION['logged']['E_ID'];
+        //     $orderObj->setORef($o_ref);
+        //     $orderObj->setEId($e_id);
+        //     $orderObj->setSId($s_id);
+        //     $orderObj->setOTable($table);
+        //     //create an order
+        //     $metricObj->setEId($_SESSION['logged']['E_ID']);
+        //     $mDesc = "SPECIAL ORDER CREATED SUCCESSFULLY ";
+        //     $metricObj->setMDesc($mDesc);
+        //     //to review after sessions(Done)
+        //     if(isset($_SESSION['currentSession']))
+        //     {
+        //         $metricObj->setSId($_SESSION['currentSession']);
+
+        //     }
+        //     else
+        //     {
+        //         $metricObj->setSId(null);
+        //     }
+        //     $_SESSION['success_msg'] =" SPECIAL ORDER $O_REF CREATED SUCCESSFULLY!!!";
+        //     $metricDaoObj->createMetric($metricObj);
+        //     $orderDaoObj->createSpecialOrders($orderObj);
+        //     header("location:../../PAGES/SPECIALEVENT/");
+
+
+
+
+
+
+
+
+
+
+        // }else{
+        //     header("location:../../PAGES//SPECIALEVENT/");
+        // }
+        break;      
             
     default:
     header('location:../../');

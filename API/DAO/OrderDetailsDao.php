@@ -251,7 +251,7 @@ class OrderDetailsDao extends db{
         orders.o_id = order_details.o_id JOIN product_type ON product_type.pt_id = order_details.pt_id  JOIN products
         ON products.p_id = order_details.p_id JOIN sessions ON sessions.s_id = orders.s_id  JOIN unity 
         ON unity.unity_id = order_details.unity_id 
-        WHERE order_details.e_id = ? AND order_details.s_id = ? AND order_details.p_id = ? AND order_details.unity_id = ?
+        WHERE order_details.e_id = ? AND order_details.s_id = ? AND order_details.p_id = ? AND order_details.unity_id = ? AND orders.o_table <> '1'
         ";
         $statement = $this->connect()->prepare($query);
         $statement->execute(array(
@@ -276,7 +276,7 @@ class OrderDetailsDao extends db{
         orders.o_id = order_details.o_id JOIN product_type ON product_type.pt_id = order_details.pt_id  JOIN products
         ON products.p_id = order_details.p_id JOIN sessions ON sessions.s_id = orders.s_id  JOIN unity 
         ON unity.unity_id = order_details.unity_id 
-        WHERE  order_details.s_id = ?  AND order_details.unity_id = ? AND order_details.p_id = ?
+        WHERE  order_details.s_id = ?  AND order_details.unity_id = ? AND order_details.p_id = ? AND orders.o_table <> '1'
         ";
         $statement = $this->connect()->prepare($query);
         $statement->execute(array(

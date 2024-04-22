@@ -1,7 +1,7 @@
 <?php  require_once '../../INCLUDES/header.php' ?>
 <div class="container-fluid section-title d-flex mb-2">
     <div class="s-title text-start col-6">
-        <h2 style="color:#0dcaf0;">Order&nbsp;Details&nbsp;View</h2>
+        <h2 style="color:#0dcaf0;">Special&nbsp;Details&nbsp;View</h2>
     </div>
 
     <div class="s-btn text-end col-6">
@@ -14,15 +14,15 @@
         <button type="button" class="btn btn-sm btn-warning text-white m-1" data-bs-toggle="modal"
             data-bs-target="#employeeModal">Create&nbsp;Product</button>
         &nbsp; -->
-        <button type="button" class="btn btn-sm btn-info " onclick="window.location.href='order.php'">Back</button>
+        <button type="button" class="btn btn-sm btn-info " onclick="window.location.href='index.php'">Back</button>
     </div>
 </div>
 <?php
 $o_ref = $_GET['o_ref'];
-$orderDao = new OrdersDao();
-$orderObj = new Orders();
-$orderObj->setORef($o_ref);
-$oInfo = $orderDao->selectOrderById($orderObj);
+$specialDao = new SpecialDao();
+$specialObj = new Special();
+$specialObj->setORef($o_ref);
+$oInfo = $specialDao->selectSpecialById($specialObj);
 // print_r($oInfo);
 
 
@@ -80,20 +80,20 @@ $oInfo = $orderDao->selectOrderById($orderObj);
                                 <tbody>
                                     <?php
 
-                                    $orderDetailsDao = new OrderDetailsDao();
-                                    $orderDetails = new OrderDetails();
-                                    $orderDaoObj = new OrdersDao();
-                                    $orderObj = new Orders;
-                                    $orderObj->setORef($_GET['o_ref']);
-                                    $orderInfo = $orderDaoObj->selectOrderById($orderObj);
-                                    // echo$orderInfo['O_ID'];
-                                    $orderDetails->setOId($orderInfo['O_ID']);
-                                    $selectedOrder = $orderDetailsDao->selectOrderDetailsByOId($orderDetails);
+                                    $specialDetailsDao = new SpecialDetailsDao();
+                                    $specialDetails = new SpecialDetails();
+                                    $specialDaoObj = new SpecialDao();
+                                    $specialObj = new Special();
+                                    $specialObj->setORef($_GET['o_ref']);
+                                    $specialInfo = $specialDaoObj->selectSpecialById($specialObj);
+                                    // echo$specialInfo['O_ID'];
+                                    $specialDetails->setOId($specialInfo['O_ID']);
+                                    $selectedSpecial = $specialDetailsDao->selectSpecialDetailsByOId($specialDetails);
                                     $num = 0;
                                     $total = 0;
                                     $sum = 0;
-                                    if ($selectedOrder != null):
-                                    foreach ($selectedOrder as $item) {  $num++;
+                                    if ($selectedSpecial != null):
+                                    foreach ($selectedSpecial as $item) {  $num++;
                                     $total = $item['S_PRICE']*$item['P_QTY'];
                                     $sum += $total;    
                                     
@@ -129,7 +129,7 @@ $oInfo = $orderDao->selectOrderById($orderObj);
                             </table>
                             <div class="p-1">
                                 <a type="submit" target="_blank" name="printOrder" class="btn btn-info "
-                                    href='../PDF/pdf_order.php?o_ref=<?=$_GET['o_ref']?>'>Print</a>
+                                    href='../PDF/pdf_special.php?o_ref=<?=$_GET['o_ref']?>'>Print</a>
                             </div>
 
                         </div>
@@ -153,7 +153,7 @@ $oInfo = $orderDao->selectOrderById($orderObj);
                                 </div>
                                 <hr>
                                 <form
-                                    action="../../API/CONTROLLER/OrdersController.php?action=pay&order=<?=$oInfo['O_ID']?>"
+                                    action="../../API/CONTROLLER/SpecialController.php?action=pay&special=<?=$oInfo['O_ID']?>"
                                     method="post">
                                     <div class="form-group text-center">
                                         <ul class="list-inline">
@@ -218,18 +218,16 @@ $oInfo = $orderDao->selectOrderById($orderObj);
                                             <label for="cc-number" class="control-label mb-1">CREDIT&nbsp;CARD</label>
                                             <input id="" name="c_name" type="text" value="0" class="form-control">
                                         </div>
-                                        <!-- <div class="form-group c_name">
+                                        <div class="form-group c_name">
                                             <label for="cc-number" class="control-label mb-1">DEBT(DETTE)</label>
                                             <input id="" name="c_name" type="text" value="0" class="form-control">
-                                        </div> -->
+                                        </div>
                                     </div>
 
-
-
                                     <div>
-                                        <button id="payment-button" name="placeOrder" type="submit"
+                                        <button id="payment-button" name="placeSpecial" type="submit"
                                             class="btn btn-lg btn-info w-50 m-5">
-                                            <span id="payment-button-amount">Place&nbsp;Order</span>
+                                            <span id="payment-button-amount">Place&nbsp;Special&nbsp;Order</span>
                                         </button>
                                     </div>
                                 </form>

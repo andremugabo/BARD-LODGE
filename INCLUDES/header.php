@@ -74,7 +74,20 @@ $countSession = $sessionDao->checkOpenSessions();
                             <?= $employee_names ?>
                         </h6>
                     </li>
-                    <li class="nav-item"><button class="btn " onclick="window.location.href='?logout=1'">Logout</button>
+                    <li class="nav-item notification_image">
+                        <?php if($employee_role =="MD" || $employee_role == "MANAGER" || $employee_role == "IT" || $employee_role == "ACCOUNTANT" || $employee_role == "BARMAN"): ?>
+                        <span class="btn" onclick="window.location.href='../ORDERS/notification.php'"><?php 
+                    $notificationDao = new NotificationDao();
+                    $notificationObj = new Notification();
+                    $s_id = $sessionInfo[0]['S_ID'];
+                    $notificationObj->setSId($s_id);
+                    $countNotification = $notificationDao->countNotification($notificationObj);
+                    echo $countNotification;
+                    
+                    ?></span>
+                        <?php endif; ?>
+                        <img src="../../ASSETS/SIMAGES/Comments.png" alt="notification"><button class="btn "
+                            onclick="window.location.href='?logout=1'">Logout</button>
                     </li>
                 </ul>
             </nav>

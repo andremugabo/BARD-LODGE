@@ -1,56 +1,43 @@
 <?php
 session_start();
-require_once '../DAO/OrderDetailsDao.php';
+require_once '../DAO/SpecialDetailsDao.php';
 require_once '../DAO/MetricDao.php';
 require_once '../DAO/ProductCategoryDao.php';
-require_once '../DAO/OrdersDao.php';
+require_once '../DAO/SpecialDao.php';
 require_once '../DAO/SStockDao.php';
-require_once '../DAO/NotificationDao.php';
-
-
 
 $action = $_GET['action'];
-$orderDetailsDao = new OrderDetailsDao();
-$orderDetails = new OrderDetails();
+$specialDetailsDao = new SpecialDetailsDao();
+$specialDetails = new SpecialDetails();
 $productCategoryDaoObj = new ProductCategoryDao();
 $productCategoryObj = new ProductCategory();
-$orderDaoObj = new OrdersDao();
-$orderObj = new Orders;
+$specialDaoObj = new SpecialDao();
+$specialObj = new Special();
 $SStockDaoObj = new SStockDao();
 $SStockObj = new SStock();
 $metricDaoObj = new MetricDao();
 $metricObj = new Metric();
-$notificationDao = new NotificationDao();
-$notificationObj = new Notification();
 $productData = [];
+
 
 
 switch($action){
     case 'insert':
-        if(isset($_POST['placeOrder'])){
+        if(isset($_POST['placeSpecial'])){
                 if(!empty($_POST['p_qty']) && $_POST['p_qty'] > 0){
-                    $notificationObj->setSId($_SESSION['currentSession']);
-                    $notificationObj->setORef($_GET['o_ref']);
-                    $notificationObj->setEId($_SESSION['logged']['E_ID']);
-                    $notificationObj->setPId($_POST['p_id']);
-                    $notificationObj->setPQty($_POST['p_qty']);
-                    $notificationObj->setUnityId($_POST['unity_id']);
-                    $notificationDao->createNotification($notificationObj);
-
-                    $orderDetails->setSId($_SESSION['currentSession']);
-                    $orderObj->setORef($_GET['o_ref']);
-                    $orderInfo = $orderDaoObj->selectOrderById($orderObj);
-                    $orderDetails->setOId($orderInfo['O_ID']);
-                    $orderDetails->setEId($_SESSION['logged']['E_ID']);
-                    $orderDetails->setPId($_POST['p_id']);
+                    $specialDetails->setSId($_SESSION['currentSession']);
+                    $specialObj->setORef($_GET['o_ref']);
+                    $specialInfo = $specialDaoObj->selectSpecialById($specialObj);
+                    $specialDetails->setOId($specialInfo['O_ID']);
+                    $specialDetails->setEId($_SESSION['logged']['E_ID']);
+                    $specialDetails->setPId($_POST['p_id']);
                     $productCategoryObj->setPcId($_POST['pc_id']);
                     $categoryInfo = $productCategoryDaoObj->selectProductCategoryByPcId($productCategoryObj);
-                    $orderDetails->setPtId($categoryInfo['PT_ID']);
-                    $orderDetails->setPQty($_POST['p_qty']);
-                    $orderDetails->setUnityId($_POST['unity_id']);
-                    $orderDetails->setPPrice($_POST['p_pprice']);
-                    $orderDetails->setSPrice($_POST['p_sprice']);
-
+                    $specialDetails->setPtId($categoryInfo['PT_ID']);
+                    $specialDetails->setPQty($_POST['p_qty']);
+                    $specialDetails->setUnityId($_POST['unity_id']);
+                    $specialDetails->setPPrice($_POST['p_pprice']);
+                    $specialDetails->setSPrice($_POST['p_sprice']);
                     //CREATE
 
                     $metricObj->setEId($_SESSION['logged']['E_ID']);
@@ -77,26 +64,26 @@ switch($action){
                            $SStockObj->setPQty($newQtyInSalesStock);
                            $SStockObj->setPId($_POST['p_id']);
 
-                           $orderDetails->setOId($orderInfo['O_ID']);
-                           $orderDetails->setPId($_POST['p_id']);
-                           $isProductExistInOrderDetails = $orderDetailsDao->checkProductOnOrderDetailsExists($orderDetails);
+                           $specialDetails->setOId($specialInfo['O_ID']);
+                           $specialDetails->setPId($_POST['p_id']);
+                           $isProductExistInSpecialDetails = $specialDetailsDao->checkProductOnSpecialDetailsExists($specialDetails);
                           
                            
-                           if($isProductExistInOrderDetails === 0){
+                           if($isProductExistInSpecialDetails === 0){
                                 //update product in sales stock
                                 $SStockDaoObj->updateProductQtyOnOrder($SStockObj);
                                 $result = $metricDaoObj->createMetric($metricObj);
-                                $orderDetailsDao->createOrderDetails($orderDetails);
+                                $specialDetailsDao->createSpecialDetails($specialDetails);
                                 header("location:{$_SERVER['HTTP_REFERER']}");
                            }else{
                                 //get quantity in order details
-                                $quantityInOrderDetails = $orderDetailsDao->selectProductQtyOrderDetails($orderDetails);
-                                print_r($quantityInOrderDetails['p_qty']);
-                                $newQtyInOrderDetails = $quantityInOrderDetails['p_qty'] + $_POST['p_qty'];
-                                $orderDetails->setPQty($newQtyInOrderDetails);
+                                $quantityInSpecialDetails = $specialDetailsDao->selectProductQtySpecialDetails($specialDetails);
+                                print_r($quantityInSpecialDetails['p_qty']);
+                                $newQtyInSpecialDetails = $quantityInSpecialDetails['p_qty'] + $_POST['p_qty'];
+                                $specialDetails->setPQty($newQtyInSpecialDetails);
                                 //update product in sales stock
                                 $SStockDaoObj->updateProductQtyOnOrder($SStockObj);
-                                $orderDetailsDao->updateQtyOnOrderDetails($orderDetails);
+                                $specialDetailsDao->updateQtyOnSpecialDetails($specialDetails);
                                 header("location:{$_SERVER['HTTP_REFERER']}");
                            }
 
@@ -123,17 +110,19 @@ switch($action){
                 }else{
                     $_SESSION['fail_msg']="FIRST ENTER THE QUANTITY OF THE PRODUCT GREATER THAN ZERO";
                     header("location:{$_SERVER['HTTP_REFERER']}");
+
                 }
         
         }else{
             header("location:{$_SERVER['HTTP_REFERER']}");
+
         }
         break;
-    case "fetchOrder":
-            $orderObj->setORef($_GET['o_ref']);
-            $orderInfo = $orderDaoObj->selectOrderById($orderObj);
-            $orderDetails->setOId($orderInfo['O_ID']);
-            $results = $orderDetailsDao->selectOrderDetailsByOId( $orderDetails);
+    case "fetchSpecial":
+            $specialObj->setORef($_GET['o_ref']);
+            $specialInfo = $specialDaoObj->selectSpecialById($specialObj);
+            $specialDetails->setOId($specialInfo['O_ID']);
+            $results = $specialDetailsDao->selectSpecialDetailsByOId( $specialDetails);
             array_push($productData,$results);
             echo json_encode($productData);
         break;    
@@ -144,4 +133,12 @@ switch($action){
 }
 
 header("content-type:application/json");
+
+
+
+
+
+
+
+
 ?>

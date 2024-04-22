@@ -113,6 +113,22 @@ class OrdersDao extends db{
         return $result;
     }
 
+    public function createSpecialOrders(Orders $order){
+        $o_ref = $order->getORef();
+        $e_id = $order->getEId();
+        $s_id = $order->getSId();
+        $o_table = $order->getOTable();
+        $query = "INSERT INTO orders(o_ref,e_id,s_id,o_table) VALUE(?,?,?,?)";
+        $statement = $this->connect()->prepare($query);
+        $result = $statement->execute(array(
+            $o_ref,
+            $e_id,
+            $s_id,
+            $o_table
+        ));
+        return $result;
+    }
+
 
     public function updatePayOrders(Orders $order){
        
@@ -176,6 +192,25 @@ class OrdersDao extends db{
 
     }
 
+    public function selectSpecialOrder(Orders $order){
+        $e_id = $order->getEId();
+        $s_id = $order->getSId();
+        $query = "SELECT employees.*,sessions.*,orders.* FROM orders JOIN employees 
+        ON employees.e_id = orders.e_id JOIN sessions 
+        ON sessions.s_id = orders.s_id  WHERE orders.e_id = ? AND orders.s_id = ? AND orders.o_table = '1'";
+
+        $statement = $this->connect()->prepare($query);
+        $statement->execute(array(
+            $e_id,
+            $s_id
+        ));
+
+        while($result = $statement->fetchAll(PDO::FETCH_ASSOC)){
+            return $result;
+        }
+      
+
+    }
 
     public function selectPaymentMode(Orders $order,$paymentMode){
         $e_id = $order->getEId();

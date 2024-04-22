@@ -279,7 +279,7 @@
 
 
 
-    <?php if($employee_role =="MD" || $employee_role == "MANAGER" || $employee_role == "IT" || $employee_role == "ACCOUNTANT" || $employee_role == "BARMAN"): ?>
+    <?php if($employee_role =="MD" || $employee_role == "MANAGER" || $employee_role == "IT" || $employee_role == "ACCOUNTANT" || $employee_role == "BARMAN" || $employee_role == "STORE KEEPER"): ?>
 
 
     <div class="card-principal card bg-warning m-2">
@@ -371,10 +371,41 @@
     </div>
 
 
+    <div class="card-principal card bg-dark m-2">
+        <a href="../SPECIALEVENT/" style="text-decoration:none;">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col mt-0">
+                        <h6 class="card-title text-white" style="font-weight:bold;font-size: 12px;">SPECIAL&nbsp;EVENT
+                        </h6>
+                    </div>
+
+                    <div class="col-auto">
+                        <div class="stat text-primary">
+                            <i class="align-middle text-black" data-feather="slack"></i>
+                        </div>
+                    </div>
+                </div>
+                <?php 
+								
+								//$types = new pTypeModel();
+								//$countType  = $types->countType();
+
+								?>
+                <h3 class="mt-1 mb-3 text-white" style="font-size: 15px;">Special&nbsp;Event(s)
+                </h3>
+                <div class="mb-0">
+                    <span class="text-white"> <i class="mdi mdi-arrow-bottom-right"></i>GWC-MIS
+                    </span>
+                    <!-- <span class="text-black fw-bold3">SM</span> -->
+                </div>
+            </div>
+        </a>
+    </div>
 
 
-    <!-- 
-    <div class="card-principal card bg-primary m-2">
+
+    <!-- <div class="card-principal card bg-primary m-2">
         <a href="#" style="text-decoration:none;">
             <div class="card-body">
                 <div class="row">
@@ -388,7 +419,7 @@
                         </div>
                     </div>
                 </div>
-                <h3 class="mt-1 mb-3  text-black">2.382</h3>
+                <h3 class="mt-1 mb-3  text-black" style="font-size: 15px;">2.382</h3>
                 <div class="mb-0">
                     <span class="text-white"> <i class="mdi mdi-arrow-bottom-right"></i>GWC-MIS
                     </span>
@@ -399,10 +430,9 @@
 
     <?php endif; ?>
 
-    <?php if($employee_role =="IT"){ ?>
-
+    <?php if($employee_role =="MD"  || $employee_role == "IT"): ?>
     <div class="card-principal card bg-secondary m-2">
-        <a href="#" style="text-decoration:none;">
+        <a href="../METRIC/" style="text-decoration:none;">
             <div class="card-body">
                 <div class="row">
                     <div class="col mt-0">
@@ -415,7 +445,20 @@
                         </div>
                     </div>
                 </div>
-                <h3 class="mt-1 mb-3 text-black">2.382</h3>
+                <h3 class="mt-1 mb-3 text-black" style="font-size: 12px;">
+                    <?php
+                        $metricDao = new MetricDao();
+                        $countItem = $metricDao->countMetric();
+                        if($countItem == 0)
+                        {
+                            echo "THERE IS NO ACTION YET";
+                        }
+                        else
+                        {
+                            echo $countItem." METRICS ";
+                        }
+                    ?>
+                </h3>
                 <div class="mb-0">
                     <span class="text-white"> <i class="mdi mdi-arrow-bottom-right"></i>GWC-MIS
                     </span>
@@ -425,7 +468,7 @@
         </a>
     </div>
 
-    <?php } ?>
+    <?php endif ?>
 
 
     <?php //if($employee_role =="ADMIN"){ ?>

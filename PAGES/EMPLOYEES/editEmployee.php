@@ -52,6 +52,7 @@ $selectById = $employeesDao->getEmployeeById($employees);
                             <option selected disabled value=""><?=$selectById['E_ROLE']?></option>
                             <option value="MANAGER">MANAGER</option>
                             <option value="ACCOUNTANT">ACCOUNTANT</option>
+                            <option value="STORE KEEPER">STORE KEEPER</option>
                             <option value="BARMAN">BARMAN</option>
                             <option value="CHEF">CHEF</option>
                             <option value="WAITER">WAITER</option>

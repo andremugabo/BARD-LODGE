@@ -331,10 +331,62 @@ footer.footer{
 	width: 100%;
 }
 
-
-
-
-
+.media {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: start;
+    align-items:center;
+}
+.media img{
+	margin: 5px;
+}
+.media h5{
+	font-size: 17px;
+}
+.media-body {
+    -ms-flex: 1;
+    flex: 1;
+	padding: 10px;
+}
+.badge_my{
+	display: inline-block;
+    padding: 0.35em 0.65em;
+    font-size: 0.30em;
+    font-weight: 700;
+    line-height: 1;
+    color: #000000;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    border-radius: 0.25rem;
+}
+.notification_image{
+	display: flex;
+	/* border:1px solid red; */
+	width: 300px;
+	justify-content: space-between;
+	position: relative;
+}
+.notification_image img{
+	width: 50px;
+	height: 40px;
+}
+.notification_image span{
+	position: absolute;
+	width: 20px;
+	height: 20px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	color: rgb(255, 255, 255);
+	font-weight: bold;
+	font-size: 15px;
+	left: 11px;
+	top:8px;
+}
+.notification_image span:hover {
+	color: red;
+}
 /*=================================
 		INDEX GENERAL END
 ===================================*/
@@ -383,8 +435,20 @@ footer.footer{
 	border-radius: 5px;
 	box-shadow: 1px 2px 3px ;
 }
-
-
+.card_metric{
+	display: grid;
+	grid-template-columns: 23% 23% 23% 23%;
+	grid-gap:20px
+	
+}
+.metric_card{
+	width: 100%;
+	max-height: 280px;
+}
+.real_card{
+	width: 100%;
+	height: 100%;
+}
 /* ================================
 		METRIC ENDS
 ==================================*/
@@ -493,6 +557,12 @@ footer.footer{
 			width: 100%;
 			/*margin-right: 10px;*/
 		}
+		.card_metric{
+			display: grid;
+			grid-template-columns: 30% 30% 30%;
+			grid-gap:30px
+			
+		}
 
 }
 
@@ -515,6 +585,12 @@ footer.footer{
 		.footer-size{
 			font-size: 8px;
 		} 
+		.card_metric{
+			display: grid;
+			grid-template-columns: 45% 45%;
+			grid-gap:30px
+			
+		}
 
 }
 
@@ -535,6 +611,12 @@ footer.footer{
 		.footer-size{
 			font-size: 8px;
 		} 
+		.card_metric{
+			display: grid;
+			grid-template-columns: 100%;
+			grid-gap:30px
+			
+		}
 
 }	
 .hide{

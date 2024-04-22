@@ -102,6 +102,7 @@
                             <option selected disabled value="">Choose&nbsp;Employee&nbsp;Role</option>
                             <option value="MANAGER">MANAGER</option>
                             <option value="ACCOUNTANT">ACCOUNTANT</option>
+                            <option value="STORE KEEPER">STORE KEEPER</option>
                             <option value="BARMAN">BARMAN</option>
                             <option value="CHEF">CHEF</option>
                             <option value="WAITER">WAITER</option>
