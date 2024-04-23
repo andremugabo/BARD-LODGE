@@ -5,17 +5,17 @@ require_once(__DIR__.'/../MODEL/Notification.php');
 class NotificationDao extends db{
     public function createNotification(Notification $notification){
         $s_id = $notification->getSId();
-        $n_id = $notification->getORef();
+        $o_ref = $notification->getORef();
         $e_id = $notification->getEId();
         $p_id = $notification->getPId();
         $p_qty = $notification->getPQty();
         $unity_id = $notification->getUnityId();
 
-        $query = "INSERT INTO notification_order(s_id,n_id,e_id,p_id,p_qty,unity_id) VALUE(?,?,?,?,?,?)";
+        $query = "INSERT INTO notification_order(s_id,o_ref,e_id,p_id,p_qty,unity_id) VALUE(?,?,?,?,?,?)";
         $statement = $this->connect()->prepare($query);
         $result = $statement->execute(array(
            $s_id,
-           $n_id,
+           $o_ref,
            $e_id,
            $p_id,
            $p_qty,
@@ -27,7 +27,7 @@ class NotificationDao extends db{
 
     public function countNotification(Notification $notification){
         $s_id = $notification->getSId();
-        $query = "SELECT * FROM notification_order WHERE s_id = ?";
+        $query = "SELECT * FROM notification_order WHERE s_id = ? AND status = '0'";
         $statement = $this->connect()->prepare($query);
         $statement->execute([
             $s_id

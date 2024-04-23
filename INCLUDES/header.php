@@ -75,7 +75,7 @@ $countSession = $sessionDao->checkOpenSessions();
                         </h6>
                     </li>
                     <li class="nav-item notification_image">
-                        <?php if($employee_role =="MD" || $employee_role == "MANAGER" || $employee_role == "IT" || $employee_role == "ACCOUNTANT" || $employee_role == "BARMAN"): ?>
+                        <?php if(($employee_role =="MD" || $employee_role == "MANAGER" || $employee_role == "IT" || $employee_role == "ACCOUNTANT" || $employee_role == "BARMAN") && $countSession !== 0): ?>
                         <span class="btn" onclick="window.location.href='../ORDERS/notification.php'"><?php 
                     $notificationDao = new NotificationDao();
                     $notificationObj = new Notification();

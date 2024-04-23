@@ -35,7 +35,6 @@ switch($action){
                     $notificationObj->setPId($_POST['p_id']);
                     $notificationObj->setPQty($_POST['p_qty']);
                     $notificationObj->setUnityId($_POST['unity_id']);
-                    $notificationDao->createNotification($notificationObj);
 
                     $orderDetails->setSId($_SESSION['currentSession']);
                     $orderObj->setORef($_GET['o_ref']);
@@ -81,6 +80,8 @@ switch($action){
                            $orderDetails->setPId($_POST['p_id']);
                            $isProductExistInOrderDetails = $orderDetailsDao->checkProductOnOrderDetailsExists($orderDetails);
                           
+                           $notificationDao->createNotification($notificationObj);
+
                            
                            if($isProductExistInOrderDetails === 0){
                                 //update product in sales stock
@@ -91,7 +92,7 @@ switch($action){
                            }else{
                                 //get quantity in order details
                                 $quantityInOrderDetails = $orderDetailsDao->selectProductQtyOrderDetails($orderDetails);
-                                print_r($quantityInOrderDetails['p_qty']);
+                                // print_r($quantityInOrderDetails['p_qty']);
                                 $newQtyInOrderDetails = $quantityInOrderDetails['p_qty'] + $_POST['p_qty'];
                                 $orderDetails->setPQty($newQtyInOrderDetails);
                                 //update product in sales stock
