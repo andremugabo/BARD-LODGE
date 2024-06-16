@@ -370,13 +370,14 @@
         </a>
     </div>
 
+    <?php if($employee_role =="IT" || $employee_role =="MANAGER" || $employee_role =="MD" || $employee_role =="STORE KEEPER"): ?>
 
     <div class="card-principal card bg-dark m-2">
         <a href="../SPECIALEVENT/" style="text-decoration:none;">
             <div class="card-body">
                 <div class="row">
                     <div class="col mt-0">
-                        <h6 class="card-title text-white" style="font-weight:bold;font-size: 12px;">SPECIAL&nbsp;EVENT
+                        <h6 class="card-title text-white" style="font-weight:bold;font-size: 12px;">SPECIAL&nbsp;ORDER
                         </h6>
                     </div>
 
@@ -392,7 +393,7 @@
 								//$countType  = $types->countType();
 
 								?>
-                <h3 class="mt-1 mb-3 text-white" style="font-size: 15px;">Special&nbsp;Event(s)
+                <h3 class="mt-1 mb-3 text-white" style="font-size: 15px;">Special&nbsp;Order(s)
                 </h3>
                 <div class="mb-0">
                     <span class="text-white"> <i class="mdi mdi-arrow-bottom-right"></i>GWC-MIS
@@ -403,10 +404,10 @@
         </a>
     </div>
 
-
-
-    <!-- <div class="card-principal card bg-primary m-2">
-        <a href="#" style="text-decoration:none;">
+    <?php endif; ?>
+    <?php if($employee_role =="IT" || $employee_role =="MANAGER" || $employee_role =="MD" || $employee_role =="STORE KEEPER"): ?>
+    <div class="card-principal card bg-primary m-2">
+        <a href="../EXPENSES/" style="text-decoration:none;">
             <div class="card-body">
                 <div class="row">
                     <div class="col mt-0">
@@ -415,18 +416,19 @@
 
                     <div class="col-auto">
                         <div class="stat text-black">
-                            <i class="align-middle text-black" data-feather="dollar-sign"></i>
+                            <i class="align-middle text-black" data-feather="droplet"></i>
                         </div>
                     </div>
                 </div>
-                <h3 class="mt-1 mb-3  text-black" style="font-size: 15px;">2.382</h3>
+                <h3 class="mt-1 mb-3  text-black" style="font-size: 15px;">Daily&nbsp;Expenses</h3>
                 <div class="mb-0">
                     <span class="text-white"> <i class="mdi mdi-arrow-bottom-right"></i>GWC-MIS
                     </span>
                 </div>
             </div>
         </a>
-    </div> -->
+    </div>
+    <?php endif; ?>
 
     <?php endif; ?>
 

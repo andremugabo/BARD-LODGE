@@ -1,7 +1,7 @@
 <?php  require_once '../../INCLUDES/header.php' ?>
 <div class="container-fluid section-title d-flex mb-2">
     <div class="s-title text-start col-6 specialEvent">
-        <h2 style="color:#0dcaf0;">Special&nbsp;Special&nbsp;Details</h2>
+        <h2 style="color:#0dcaf0;">Special&nbsp;Order&nbsp;Details</h2>
     </div>
     <div class="s-btn text-end col-6">
         <!-- <button type="button" class="btn btn-sm btn-secondary m-1"

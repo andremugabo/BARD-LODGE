@@ -406,7 +406,7 @@ class OrdersDao extends db{
         $s_id = $order->getSId();
         $query = "SELECT employees.*,sessions.*,orders.* FROM orders JOIN employees 
         ON employees.e_id = orders.e_id JOIN sessions 
-        ON sessions.s_id = orders.s_id  WHERE  orders.s_id = ? AND orders.o_payment = 'NOT PAID' ";
+        ON sessions.s_id = orders.s_id  WHERE  orders.s_id = ? AND orders.o_payment = 'NOT PAID' AND orders.o_status = '1'";
 
         $statement = $this->connect()->prepare($query);
         $statement->execute(array(
@@ -426,7 +426,7 @@ class OrdersDao extends db{
         $s_id = $order->getSId();
         $query = "SELECT employees.*,sessions.*,orders.* FROM orders JOIN employees 
         ON employees.e_id = orders.e_id JOIN sessions 
-        ON sessions.s_id = orders.s_id  WHERE  orders.s_id = ?";
+        ON sessions.s_id = orders.s_id  WHERE  orders.s_id = ? AND orders.o_status = '1'";
 
         $statement = $this->connect()->prepare($query);
         $statement->execute(array(
@@ -510,7 +510,7 @@ class OrdersDao extends db{
 
     public function checkNotPaidOrderBySid(Orders $order){
         $s_id = $order->getSId();
-        $query = "SELECT * FROM orders  WHERE  orders.s_id = ? AND o_payment = 'NOT PAID'";
+        $query = "SELECT * FROM orders  WHERE  orders.s_id = ? AND o_payment = 'NOT PAID' AND o_status = '1'";
 
         $statement = $this->connect()->prepare($query);
         $statement->execute(array(
@@ -521,6 +521,16 @@ class OrdersDao extends db{
         return $result;
       
 
+    }
+
+    public function disableOrder(Orders $order){
+        $o_ref = $order->getORef();
+        $query = "UPDATE orders  SET o_status = '0'  WHERE orders.o_ref = ?";
+        $statement = $this->connect()->prepare($query);
+        $result = $statement->execute(array(
+           $o_ref 
+        ));
+        return $result;
     }
 
 }

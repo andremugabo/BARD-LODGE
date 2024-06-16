@@ -63,6 +63,8 @@
                             <?php endif ?>
                             <button type="button" class="btn btn-info btn-sm mb-1"
                                 onclick="window.location.href='viewOrderDetailsReport.php?o_ref=<?=$item['O_REF']?>'">Details</button>
+                            <button type="button" class="btn btn-danger btn-sm mb-1"
+                                onclick="window.location.href='../../API/Controller/OrdersController.php?action=disable&o_ref=<?=$item['O_REF']?>'">Disable</button>
                         </td>
                     </tr>
 

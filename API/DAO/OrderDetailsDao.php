@@ -289,6 +289,15 @@ class OrderDetailsDao extends db{
         }  
     }
 
+    public function countOrderByORef($o_ref){
+        $query = "SELECT orders.*,order_details.* FROM order_details JOIN 
+        orders ON orders.o_id = order_details.o_id WHERE orders.o_ref = ? ";
+        $statement = $this->connect()->prepare($query);
+        $statement->execute([$o_ref]);
+        $result = $statement->rowCount();
+
+        return $result;
+    }
 
 
 

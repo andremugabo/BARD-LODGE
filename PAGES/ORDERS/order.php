@@ -13,6 +13,8 @@
     <div class="s-btn text-end col-9">
         <!-- <button type="button" class="btn btn-success" onclick="window.location.href='category.php'">Category</button>
         <button type="button" class="btn btn-secondary" onclick="window.location.href='description.php'">Description</button> -->
+        <button type="button" class="btn btn-sm btn-dark " onclick="window.location.href='billiard.php'">Pool</button>
+        <button type="button" class="btn btn-sm btn-secondary " onclick="window.location.href='Lodge'">Lodge</button>
         <button type="button" class="btn btn-success btn-sm"
             onclick="window.location.href='paidOrders.php'">Paid&nbsp;Orders</button>
         <?php if($employee_role =="MD" || $employee_role == "MANAGER" || $employee_role == "IT" || $employee_role == "ACCOUNTANT" || $employee_role == "BARMAN"): ?>

@@ -1,12 +1,14 @@
 <?php
 session_start();
 require_once '../DAO/OrdersDao.php';
+require_once '../DAO/OrderDetailsDao.php';
 require_once '../DAO/MetricDao.php';
 require_once '../DAO/IncomeDetailsDao.php';
 
 
 $action = $_GET['action'];
 $orderDaoObj = new OrdersDao();
+$orderDetailsDao = new OrderDetailsDao();
 $orderObj = new Orders;
 $metricDaoObj = new MetricDao();
 $metricObj = new Metric();
@@ -20,9 +22,7 @@ switch($action){
         if(isset($_POST['CreateOrder'])){
             //get session id
             $s_id = $_GET['s_id'];
-            echo $s_id;
             $presentOrders = $orderDaoObj->countOrder();
-            echo $presentOrders;
             $count = $presentOrders + 1;
 
             if($count < 10){
@@ -35,7 +35,6 @@ switch($action){
                 $o_ref = "O-".$count;
             }
             $e_id = $_SESSION['logged']['E_ID'];
-            echo $e_id;
             $orderObj->setORef($o_ref);
             $orderObj->setEId($e_id);
             $orderObj->setSId($s_id);
@@ -199,8 +198,34 @@ switch($action){
         // }else{
         //     header("location:../../PAGES//SPECIALEVENT/");
         // }
-        break;      
-            
+        break;  
+    case'disable':
+             $o_ref = $_GET['o_ref'];  
+             $orderObj->setORef($o_ref); 
+             $orderItems = $orderDetailsDao->countOrderByORef($o_ref);
+             if($orderItems === 0 ){
+                $metricObj->setEId($_SESSION['logged']['E_ID']);
+                $mDesc = " ORDER DISABLED SUCCESSFULLY ";
+                $metricObj->setMDesc($mDesc);
+                //to review after sessions(Done)
+                if(isset($_SESSION['currentSession']))
+                {
+                    $metricObj->setSId($_SESSION['currentSession']);
+    
+                }
+                else
+                {
+                    $metricObj->setSId(null);
+                }
+                $_SESSION['success_msg'] =" ORDER DISABLED SUCCESSFULLY!!!";
+                $metricDaoObj->createMetric($metricObj);
+                $orderDaoObj->disableOrder($orderObj);
+                header("location:{$_SERVER['HTTP_REFERER']}");
+             }else{
+                $_SESSION['fail_msg']="ERROR THIS ORDER CAN NOT BE DISABLED";
+                header("location:{$_SERVER['HTTP_REFERER']}");
+             }
+        break;
     default:
     header('location:../../');
     session_destroy();    

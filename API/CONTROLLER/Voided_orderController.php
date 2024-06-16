@@ -33,7 +33,7 @@ switch($action){
                 $newOrderQty = $_POST['p_qty'] - $_POST['new_qty'];
                 $sStockObj->setPId($_POST['p_id']);
                 $SStockCurrentQty = $sStockDao->selectProductQty($sStockObj);
-                print_r($SStockCurrentQty['p_qty']);
+                // print_r($SStockCurrentQty['p_qty']);
                 $newSStockQty = $_POST['new_qty'] + $SStockCurrentQty['p_qty'];
                 $voidObj->setOId($_POST['o_id']);
                 $voidObj->setEId($_POST['e_id']);
